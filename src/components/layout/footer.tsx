@@ -1,0 +1,86 @@
+
+import Link from 'next/link';
+import { Facebook, Instagram, Twitter } from 'lucide-react';
+import { Logo } from '@/components/logo';
+
+export function Footer() {
+  return (
+    <footer className="bg-muted/50 text-right">
+      <div className="container py-12 px-4 md:px-6">
+        <div className="grid gap-8 md:grid-cols-4">
+          <div className="space-y-4 md:col-span-1">
+            <div className="flex justify-end">
+             <Logo />
+            </div>
+            <p className="text-sm text-muted-foreground">
+              منصة موثوقة لجميع خدمات منزلك وعملك في السعودية.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 md:col-span-3 gap-8">
+            <div>
+              <h3 className="font-headline font-semibold mb-4">أهم الخدمات</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/services/air-conditioning-hvac" className="text-sm text-muted-foreground hover:text-foreground">خدمات التكييف</Link>
+                </li>
+                <li>
+                  <Link href="/services/plumbing-services" className="text-sm text-muted-foreground hover:text-foreground">السباكة</Link>
+                </li>
+                <li>
+                  <Link href="/services/electrical-services" className="text-sm text-muted-foreground hover:text-foreground">الكهرباء</Link>
+                </li>
+                 <li>
+                  <Link href="/services" className="text-sm text-muted-foreground hover:text-foreground">المزيد...</Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-headline font-semibold mb-4">عن الشركة</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/about" className="text-sm text-muted-foreground hover:text-foreground">من نحن</Link>
+                </li>
+                <li>
+                  <Link href="/blog" className="text-sm text-muted-foreground hover:text-foreground">المدونة</Link>
+                </li>
+                <li>
+                  <Link href="/contact" className="text-sm text-muted-foreground hover:text-foreground">تواصل معنا</Link>
+                </li>
+                <li>
+                  <Link href="/join-provider" className="text-sm text-muted-foreground hover:text-foreground">انضم كمزود خدمة</Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-headline font-semibold mb-4">قانوني</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/privacy" className="text-sm text-muted-foreground hover:text-foreground">سياسة الخصوصية</Link>
+                </li>
+                <li>
+                  <Link href="/terms" className="text-sm text-muted-foreground hover:text-foreground">شروط الاستخدام</Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div className="mt-8 border-t pt-8 flex flex-col sm:flex-row-reverse justify-between items-center gap-4">
+          <p className="text-sm text-muted-foreground">
+            © {new Date().getFullYear()} إنقاذ. جميع الحقوق محفوظة.
+          </p>
+          <div className="flex gap-4">
+            <Link href="/" className="text-muted-foreground hover:text-foreground">
+              <Twitter className="h-5 w-5" />
+            </Link>
+            <Link href="/" className="text-muted-foreground hover:text-foreground">
+              <Facebook className="h-5 w-5" />
+            </Link>
+            <Link href="/" className="text-muted-foreground hover:text-foreground">
+              <Instagram className="h-5 w-5" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}

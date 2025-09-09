@@ -1,0 +1,150 @@
+
+'use client'
+
+import React from 'react';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import { Home, ChevronLeft } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import { siteConfig } from '@/config/site';
+import { getAllServices, getCityBySlug, getServiceCategories } from '@/lib/services';
+
+type BreadcrumbSegment = {
+  label: string;
+  path: string;
+};
+
+
+const allServices = getAllServices();
+const allCities = getAllServices();
+const allCategories = getServiceCategories();
+
+// In a real-world app, you'd likely fetch real names from a database/CMS.
+const getLabelForSegment = (segment: string, fullPath: string) => {
+    try {
+      const decodedSegment = decodeURIComponent(segment);
+      
+      const city = getCityBySlug(decodedSegment);
+      if (city) {
+        return city.ar_name;
+      }
+      
+      const service = allServices.find(s => s.slug === decodedSegment);
+      if (service) {
+        return service.ar_name;
+      }
+
+      const pathSegments = fullPath.split('/').filter(Boolean);
+      if (pathSegments.length > 1 && pathSegments[0] === 'services') {
+         // Handle category pages: /services/category/[slug]
+        if (pathSegments[1] === 'category') {
+          const category = allCategories.find(c => c.slug === decodedSegment);
+          if (category) return category.ar_name;
+        }
+
+         const serviceSlug = pathSegments[1];
+         const mainService = allServices.find(s => s.slug === serviceSlug);
+         if (mainService) {
+            const subService = mainService.sub_services.find(sub => sub.slug === decodedSegment);
+             if (subService) {
+                return subService.ar_name;
+             }
+         }
+      }
+
+      // Fallback for simple pages like 'about', 'contact', etc.
+      const staticLabels: { [key: string]: string } = {
+          'about': 'من نحن',
+          'contact': 'تواصل معنا',
+          'join-provider': 'انضم كمزود خدمة',
+          'services': 'الخدمات',
+          'blog': 'المدونة',
+          'search': 'نتائج البحث',
+          'privacy': 'سياسة الخصوصية',
+          'terms': 'شروط الاستخدام',
+          'category': 'الفئات'
+      };
+
+      return staticLabels[decodedSegment] || decodedSegment.replace(/-/g, ' ');
+
+    } catch (e) {
+      // Fallback for malformed URI
+      return segment.replace(/-/g, ' ');
+    }
+};
+
+
+export function Breadcrumb() {
+  const pathname = usePathname();
+  const segments = pathname.split('/').filter(Boolean);
+
+  // Don't show breadcrumbs on the homepage
+  if (segments.length === 0) {
+    return null;
+  }
+
+  const breadcrumbSegments: BreadcrumbSegment[] = segments.map((segment, index) => {
+    const path = '/' + segments.slice(0, index + 1).join('/');
+    const label = getLabelForSegment(segment, path);
+    return { label, path };
+  });
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'الرئيسية',
+        item: siteConfig.url,
+      },
+      ...breadcrumbSegments.map((segment, index) => ({
+        '@type': 'ListItem',
+        position: index + 2,
+        name: segment.label,
+        item: `${siteConfig.url}${segment.path}`,
+      })),
+    ],
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <nav aria-label="Breadcrumb" className="bg-muted/50">
+        <div className="container flex items-center gap-2 px-4 py-2 text-sm text-muted-foreground">
+          <Button variant="ghost" size="icon-sm" className="h-7 w-7" asChild>
+            <Link href="/" aria-label="Home">
+              <Home className="h-4 w-4" />
+            </Link>
+          </Button>
+          <ChevronLeft className="h-4 w-4" />
+          
+          {breadcrumbSegments.map((segment, index) => {
+            const isLast = index === segments.length - 1;
+            
+            return (
+              <div key={segment.path} className="flex items-center gap-2">
+                <Link
+                  href={segment.path}
+                  className={cn(
+                    'hover:text-foreground',
+                    isLast ? 'font-medium text-foreground' : ''
+                  )}
+                  aria-current={isLast ? 'page' : undefined}
+                >
+                  {segment.label}
+                </Link>
+                {!isLast && <ChevronLeft className="h-4 w-4" />}
+              </div>
+            );
+          })}
+        </div>
+      </nav>
+    </>
+  );
+}
