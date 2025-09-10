@@ -1,0 +1,140 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getServiceCategories, getAllServices } from '../../../lib/services';
+import { getSEOProps, generateCanonicalUrl } from '../../../lib/seo';
+import { ServiceGrid } from '../../../components/service-grid';
+import { Breadcrumb } from '../../../components/semantic/breadcrumb';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../components/ui/card';
+import { Badge } from '../../../components/ui/badge';
+
+export async function getStaticPaths() {
+  const categories = getServiceCategories();
+  return categories.map((category) => ({
+    params: { slug: category.slug },
+    props: { category },
+  }));
+}
+
+const { category } = Astro.props;
+
+if (!category) {
+  return Astro.redirect('/404');
+}
+
+const services = getAllServices().filter(service => service.category === category.id);
+
+const seoProps = {
+  title: `${category.ar_name} | إنقاذ`,
+  description: `اكتشف جميع خدمات ${category.ar_name} المتاحة في منصة إنقاذ. احصل على أفضل الخدمات المنزلية في السعودية`,
+  keywords: [category.ar_name, 'خدمات منزلية', 'السعودية', 'إنقاذ'],
+  canonical: generateCanonicalUrl(`/services/category/${category.slug}`)
+};
+---
+
+<Layout {...seoProps}>
+  <div class="container py-12 px-4 md:px-6">
+    <div class="max-w-6xl mx-auto">
+      <!-- Breadcrumb -->
+      <Breadcrumb client:load />
+      
+      <!-- Category Header -->
+      <div class="text-center mb-12">
+        <Badge class="font-headline bg-primary/10 text-primary hover:bg-primary/20 mb-4">
+          {category.ar_name}
+        </Badge>
+        <h1 class="font-headline text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl mb-4">
+          {category.ar_name}
+        </h1>
+        <p class="max-w-3xl mx-auto text-foreground/80 md:text-xl/relaxed">
+          اكتشف جميع خدمات {category.ar_name} المتاحة في منصة إنقاذ
+        </p>
+      </div>
+
+      <!-- Category Info -->
+      <Card class="mb-12">
+        <CardHeader>
+          <CardTitle class="font-headline text-2xl">عن {category.ar_name}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div class="prose prose-lg max-w-none">
+            <p class="text-foreground/80 leading-relaxed">
+              {category.ar_name} تشمل مجموعة متنوعة من الخدمات المنزلية المتخصصة التي تهدف إلى تلبية احتياجاتك الأساسية. 
+              نقدم لك أفضل مزودي الخدمات المعتمدين في جميع أنحاء المملكة العربية السعودية.
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+
+      <!-- Services Count -->
+      <div class="text-center mb-8">
+        <h2 class="font-headline text-2xl font-semibold mb-2">
+          {services.length} خدمة متاحة
+        </h2>
+        <p class="text-foreground/80">
+          اختر من بين {services.length} خدمة مختلفة في فئة {category.ar_name}
+        </p>
+      </div>
+
+      <!-- Services Grid -->
+      {services.length > 0 ? (
+        <ServiceGrid services={services} />
+      ) : (
+        <Card>
+          <CardContent class="pt-6 text-center">
+            <h3 class="font-headline text-xl font-semibold mb-2">لا توجد خدمات متاحة</h3>
+            <p class="text-muted-foreground mb-4">
+              لا توجد خدمات متاحة في هذه الفئة حالياً
+            </p>
+            <a
+              href="/services"
+              class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
+            >
+              عرض جميع الخدمات
+            </a>
+          </CardContent>
+        </Card>
+      )}
+
+      <!-- Related Categories -->
+      <div class="mt-12">
+        <h2 class="font-headline text-2xl font-bold text-center mb-8">
+          فئات أخرى قد تهمك
+        </h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {getServiceCategories()
+            .filter(cat => cat.slug !== category.slug)
+            .map((relatedCategory) => (
+              <Card class="group hover:shadow-xl transition-all duration-300">
+                <CardContent class="pt-6 text-center">
+                  <h3 class="font-headline text-lg font-semibold group-hover:text-primary transition-colors mb-2">
+                    <a href={`/services/category/${relatedCategory.slug}`} class="hover:underline">
+                      {relatedCategory.ar_name}
+                    </a>
+                  </h3>
+                  <p class="text-sm text-muted-foreground">
+                    {getAllServices().filter(s => s.category === relatedCategory.id).length} خدمة
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <Card class="mt-12 bg-primary/5 border-primary/20">
+        <CardContent class="pt-6 text-center">
+          <h3 class="font-headline text-lg font-semibold mb-2">هل تحتاج إلى مساعدة؟</h3>
+          <p class="text-sm text-muted-foreground mb-4">
+            تواصل معنا للحصول على أفضل خدمات {category.ar_name} في السعودية
+          </p>
+          <a
+            href="/contact"
+            class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
+          >
+            تواصل معنا
+          </a>
+        </CardContent>
+      </Card>
+    </div>
+  </div>
+</Layout>

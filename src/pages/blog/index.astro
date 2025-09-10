@@ -1,0 +1,81 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getAllPosts } from '../../lib/blog';
+import { getSEOProps, generateCanonicalUrl } from '../../lib/seo';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card';
+import { Badge } from '../../components/ui/badge';
+import { Calendar, User, Tag } from 'lucide-react';
+
+const posts = getAllPosts();
+
+const seoProps = getSEOProps('blog', {
+  title: 'المدونة | إنقاذ',
+  description: 'اكتشف أحدث المقالات والنصائح حول الخدمات المنزلية والصيانة في السعودية',
+  keywords: ['مدونة', 'مقالات', 'نصائح', 'خدمات منزلية', 'صيانة', 'السعودية'],
+  canonical: generateCanonicalUrl('/blog')
+});
+---
+
+<Layout {...seoProps}>
+  <div class="container py-12 px-4 md:px-6">
+    <div class="max-w-6xl mx-auto">
+      <!-- Blog Header -->
+      <div class="text-center mb-12">
+        <h1 class="font-headline text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl mb-4">
+          المدونة
+        </h1>
+        <p class="max-w-3xl mx-auto text-foreground/80 md:text-xl/relaxed">
+          اكتشف أحدث المقالات والنصائح حول الخدمات المنزلية والصيانة في السعودية
+        </p>
+      </div>
+
+      <!-- Blog Posts Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {posts.map((post) => (
+          <Card class="group hover:shadow-xl transition-all duration-300">
+            <CardHeader>
+              <div class="flex items-center gap-2 text-sm text-muted-foreground mb-2">
+                <Calendar class="h-4 w-4" />
+                <span>{new Date(post.frontmatter.date).toLocaleDateString('ar-SA')}</span>
+                <User class="h-4 w-4 ml-2" />
+                <span>{post.frontmatter.author}</span>
+              </div>
+              <CardTitle class="font-headline text-xl group-hover:text-primary transition-colors">
+                <a href={`/blog/${post.slug}`} class="hover:underline">
+                  {post.frontmatter.title}
+                </a>
+              </CardTitle>
+              <CardDescription>
+                {post.frontmatter.summary}
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div class="flex flex-wrap gap-2 mb-4">
+                {post.frontmatter.tags.map((tag) => (
+                  <Badge variant="secondary" class="text-xs">
+                    <Tag class="h-3 w-3 mr-1" />
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+              <a 
+                href={`/blog/${post.slug}`}
+                class="inline-flex items-center text-sm font-medium text-primary hover:underline"
+              >
+                اقرأ المزيد →
+              </a>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      <!-- Empty State -->
+      {posts.length === 0 && (
+        <div class="text-center py-12">
+          <h3 class="font-headline text-xl font-semibold mb-2">لا توجد مقالات بعد</h3>
+          <p class="text-muted-foreground">سنقوم بإضافة مقالات جديدة قريباً</p>
+        </div>
+      )}
+    </div>
+  </div>
+</Layout>

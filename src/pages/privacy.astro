@@ -1,0 +1,177 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getSEOProps, generateCanonicalUrl } from '../lib/seo';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+
+const seoProps = getSEOProps('privacy', {
+  title: 'سياسة الخصوصية | إنقاذ',
+  description: 'سياسة الخصوصية لمنصة إنقاذ - نحمي خصوصيتك وبياناتك الشخصية',
+  keywords: ['سياسة الخصوصية', 'حماية البيانات', 'الخصوصية', 'إنقاذ'],
+  canonical: generateCanonicalUrl('/privacy')
+});
+---
+
+<Layout {...seoProps}>
+  <div class="container py-12 px-4 md:px-6">
+    <div class="max-w-4xl mx-auto">
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <h1 class="font-headline text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl mb-4">
+          سياسة الخصوصية
+        </h1>
+        <p class="max-w-3xl mx-auto text-foreground/80 md:text-xl/relaxed">
+          نحمي خصوصيتك وبياناتك الشخصية وفقاً لأعلى المعايير
+        </p>
+      </div>
+
+      <!-- Content -->
+      <div class="space-y-8">
+        <Card>
+          <CardHeader>
+            <CardTitle class="font-headline text-xl">1. مقدمة</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p class="text-foreground/80 leading-relaxed">
+              نحن في منصة إنقاذ نلتزم بحماية خصوصيتك وبياناتك الشخصية. هذه السياسة توضح كيفية جمعنا واستخدامنا وحمايتنا لمعلوماتك الشخصية عند استخدام خدماتنا.
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle class="font-headline text-xl">2. المعلومات التي نجمعها</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div class="space-y-4">
+              <h3 class="font-headline text-lg font-semibold">المعلومات الشخصية</h3>
+              <ul class="list-disc list-inside space-y-2 text-foreground/80">
+                <li>الاسم الكامل</li>
+                <li>رقم الهاتف</li>
+                <li>البريد الإلكتروني</li>
+                <li>العنوان</li>
+                <li>معلومات الدفع</li>
+              </ul>
+              
+              <h3 class="font-headline text-lg font-semibold">المعلومات التقنية</h3>
+              <ul class="list-disc list-inside space-y-2 text-foreground/80">
+                <li>عنوان IP</li>
+                <li>نوع المتصفح</li>
+                <li>نظام التشغيل</li>
+                <li>الصفحات المزارة</li>
+                <li>وقت الزيارة</li>
+              </ul>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle class="font-headline text-xl">3. كيفية استخدام المعلومات</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p class="text-foreground/80 leading-relaxed mb-4">
+              نستخدم معلوماتك الشخصية للأغراض التالية:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-foreground/80">
+              <li>تقديم الخدمات المطلوبة</li>
+              <li>معالجة الطلبات والدفعات</li>
+              <li>التواصل معك حول خدماتنا</li>
+              <li>تحسين تجربة المستخدم</li>
+              <li>الامتثال للقوانين واللوائح</li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle class="font-headline text-xl">4. مشاركة المعلومات</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p class="text-foreground/80 leading-relaxed mb-4">
+              نحن لا نبيع أو نؤجر معلوماتك الشخصية لأطراف ثالثة. قد نشارك معلوماتك في الحالات التالية:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-foreground/80">
+              <li>مع مزودي الخدمات الموثوقين</li>
+              <li>عندما يكون ذلك مطلوباً قانونياً</li>
+              <li>لحماية حقوقنا ومصالحنا</li>
+              <li>مع موافقتك الصريحة</li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle class="font-headline text-xl">5. حماية البيانات</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p class="text-foreground/80 leading-relaxed">
+              نستخدم أحدث التقنيات والأساليب لحماية معلوماتك الشخصية من الوصول غير المصرح به أو التعديل أو الكشف أو التدمير. جميع البيانات الحساسة مشفرة باستخدام بروتوكولات أمان متقدمة.
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle class="font-headline text-xl">6. ملفات تعريف الارتباط</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p class="text-foreground/80 leading-relaxed">
+              نستخدم ملفات تعريف الارتباط (Cookies) لتحسين تجربة المستخدم وتتبع استخدام الموقع. يمكنك تعطيل ملفات تعريف الارتباط من خلال إعدادات المتصفح، ولكن قد يؤثر ذلك على وظائف الموقع.
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle class="font-headline text-xl">7. حقوقك</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p class="text-foreground/80 leading-relaxed mb-4">
+              لديك الحقوق التالية فيما يتعلق بمعلوماتك الشخصية:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-foreground/80">
+              <li>الوصول إلى معلوماتك الشخصية</li>
+              <li>تصحيح المعلومات غير الصحيحة</li>
+              <li>حذف معلوماتك الشخصية</li>
+              <li>تقييد معالجة معلوماتك</li>
+              <li>نقل بياناتك</li>
+              <li>الاعتراض على معالجة معلوماتك</li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle class="font-headline text-xl">8. التحديثات على السياسة</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p class="text-foreground/80 leading-relaxed">
+              قد نقوم بتحديث هذه السياسة من وقت لآخر. سنقوم بإشعارك بأي تغييرات مهمة عبر البريد الإلكتروني أو من خلال إشعار على الموقع. ننصحك بمراجعة هذه السياسة بانتظام.
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle class="font-headline text-xl">9. التواصل معنا</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p class="text-foreground/80 leading-relaxed">
+              إذا كان لديك أي أسئلة حول سياسة الخصوصية هذه أو تريد ممارسة أي من حقوقك، يرجى التواصل معنا عبر:
+            </p>
+            <div class="mt-4 space-y-2">
+              <p><strong>البريد الإلكتروني:</strong> privacy@enqaz.org</p>
+              <p><strong>الهاتف:</strong> 920000000</p>
+              <p><strong>العنوان:</strong> المملكة العربية السعودية</p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      <!-- Last Updated -->
+      <div class="text-center mt-12 text-sm text-muted-foreground">
+        <p>آخر تحديث: {new Date().toLocaleDateString('ar-SA')}</p>
+      </div>
+    </div>
+  </div>
+</Layout>

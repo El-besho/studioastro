@@ -1,0 +1,253 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getSEOProps, generateCanonicalUrl } from '../lib/seo';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
+import { Check, Star, Users, Shield, TrendingUp, Phone, Mail, MapPin } from 'lucide-react';
+
+const seoProps = getSEOProps('join-provider', {
+  title: 'انضم كمزود خدمة | إنقاذ',
+  description: 'انضم إلى منصة إنقاذ كمزود خدمة واحصل على عملاء جدد في السعودية',
+  keywords: ['انضم كمزود خدمة', 'مزودي خدمات', 'عملاء جدد', 'السعودية', 'منصة خدمات'],
+  canonical: generateCanonicalUrl('/join-provider')
+});
+---
+
+<Layout {...seoProps}>
+  <div class="container py-12 px-4 md:px-6">
+    <div class="max-w-6xl mx-auto">
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <h1 class="font-headline text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl mb-4">
+          انضم كمزود خدمة
+        </h1>
+        <p class="max-w-3xl mx-auto text-foreground/80 md:text-xl/relaxed">
+          انضم إلى منصة إنقاذ واحصل على عملاء جدد في جميع أنحاء السعودية
+        </p>
+      </div>
+
+      <!-- Benefits Section -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <Card class="text-center">
+          <CardHeader>
+            <div class="flex items-center justify-center h-16 w-16 bg-primary/10 rounded-full text-primary mx-auto mb-4">
+              <Users class="h-8 w-8" />
+            </div>
+            <CardTitle class="font-headline text-xl">عملاء جدد</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p class="text-muted-foreground">
+              احصل على عملاء جدد من خلال منصتنا الموثوقة
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card class="text-center">
+          <CardHeader>
+            <div class="flex items-center justify-center h-16 w-16 bg-primary/10 rounded-full text-primary mx-auto mb-4">
+              <TrendingUp class="h-8 w-8" />
+            </div>
+            <CardTitle class="font-headline text-xl">زيادة الأرباح</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p class="text-muted-foreground">
+              زد من دخلك من خلال المزيد من الطلبات
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card class="text-center">
+          <CardHeader>
+            <div class="flex items-center justify-center h-16 w-16 bg-primary/10 rounded-full text-primary mx-auto mb-4">
+              <Shield class="h-8 w-8" />
+            </div>
+            <CardTitle class="font-headline text-xl">حماية وضمان</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p class="text-muted-foreground">
+              نضمن لك الحصول على أجرك في الوقت المحدد
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+
+      <!-- Requirements Section -->
+      <Card class="mb-12">
+        <CardHeader>
+          <CardTitle class="font-headline text-2xl">متطلبات الانضمام</CardTitle>
+          <CardDescription>
+            تأكد من استيفاء المتطلبات التالية قبل التقديم
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-4">
+              <h3 class="font-headline text-lg font-semibold">المتطلبات الأساسية</h3>
+              <ul class="space-y-3">
+                <li class="flex items-center gap-3">
+                  <Check class="h-5 w-5 text-primary flex-shrink-0" />
+                  <span>سجل تجاري ساري المفعول</span>
+                </li>
+                <li class="flex items-center gap-3">
+                  <Check class="h-5 w-5 text-primary flex-shrink-0" />
+                  <span>شهادة مهنية في مجال الخدمة</span>
+                </li>
+                <li class="flex items-center gap-3">
+                  <Check class="h-5 w-5 text-primary flex-shrink-0" />
+                  <span>خبرة لا تقل عن سنتين</span>
+                </li>
+                <li class="flex items-center gap-3">
+                  <Check class="h-5 w-5 text-primary flex-shrink-0" />
+                  <span>تأمين على العمل</span>
+                </li>
+              </ul>
+            </div>
+            <div class="space-y-4">
+              <h3 class="font-headline text-lg font-semibold">المتطلبات التقنية</h3>
+              <ul class="space-y-3">
+                <li class="flex items-center gap-3">
+                  <Check class="h-5 w-5 text-primary flex-shrink-0" />
+                  <span>أدوات ومعدات مناسبة</span>
+                </li>
+                <li class="flex items-center gap-3">
+                  <Check class="h-5 w-5 text-primary flex-shrink-0" />
+                  <span>وسيلة نقل مناسبة</span>
+                </li>
+                <li class="flex items-center gap-3">
+                  <Check class="h-5 w-5 text-primary flex-shrink-0" />
+                  <span>هاتف ذكي مع إنترنت</span>
+                </li>
+                <li class="flex items-center gap-3">
+                  <Check class="h-5 w-5 text-primary flex-shrink-0" />
+                  <span>التزام بالمواعيد</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      <!-- Application Form -->
+      <Card class="mb-12">
+        <CardHeader>
+          <CardTitle class="font-headline text-2xl">تقديم طلب الانضمام</CardTitle>
+          <CardDescription>
+            املأ النموذج التالي وسنتواصل معك خلال 24 ساعة
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-sm font-medium mb-2">الاسم الكامل</label>
+                <input 
+                  type="text" 
+                  class="w-full p-3 border rounded-md bg-background"
+                  placeholder="أدخل اسمك الكامل"
+                  required
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-2">رقم الهاتف</label>
+                <input 
+                  type="tel" 
+                  class="w-full p-3 border rounded-md bg-background"
+                  placeholder="05xxxxxxxx"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-sm font-medium mb-2">البريد الإلكتروني</label>
+                <input 
+                  type="email" 
+                  class="w-full p-3 border rounded-md bg-background"
+                  placeholder="example@email.com"
+                  required
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-2">المدينة</label>
+                <select class="w-full p-3 border rounded-md bg-background" required>
+                  <option value="">اختر المدينة</option>
+                  <option value="riyadh">الرياض</option>
+                  <option value="jeddah">جدة</option>
+                  <option value="dammam">الدمام</option>
+                  <option value="makkah">مكة المكرمة</option>
+                  <option value="medina">المدينة المنورة</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-2">نوع الخدمة</label>
+              <select class="w-full p-3 border rounded-md bg-background" required>
+                <option value="">اختر نوع الخدمة</option>
+                <option value="plumbing">سباكة</option>
+                <option value="electrical">كهرباء</option>
+                <option value="cleaning">تنظيف</option>
+                <option value="ac">تكييف</option>
+                <option value="maintenance">صيانة</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-2">سنوات الخبرة</label>
+              <select class="w-full p-3 border rounded-md bg-background" required>
+                <option value="">اختر سنوات الخبرة</option>
+                <option value="1-2">1-2 سنوات</option>
+                <option value="3-5">3-5 سنوات</option>
+                <option value="6-10">6-10 سنوات</option>
+                <option value="10+">أكثر من 10 سنوات</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-2">رسالة إضافية</label>
+              <textarea 
+                class="w-full p-3 border rounded-md bg-background h-24"
+                placeholder="أخبرنا المزيد عن خبرتك وخدماتك..."
+              ></textarea>
+            </div>
+
+            <Button type="submit" class="w-full" size="lg">
+              <Mail class="h-4 w-4 mr-2" />
+              إرسال الطلب
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
+
+      <!-- Contact Info -->
+      <Card class="bg-primary/5 border-primary/20">
+        <CardHeader>
+          <CardTitle class="font-headline text-xl">هل لديك أسئلة؟</CardTitle>
+          <CardDescription>
+            تواصل معنا للحصول على المزيد من المعلومات
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="flex items-center gap-3">
+              <Phone class="h-5 w-5 text-primary" />
+              <div>
+                <p class="font-medium">الهاتف</p>
+                <p class="text-sm text-muted-foreground">920000000</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <Mail class="h-5 w-5 text-primary" />
+              <div>
+                <p class="font-medium">البريد الإلكتروني</p>
+                <p class="text-sm text-muted-foreground">providers@enqaz.org</p>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  </div>
+</Layout>

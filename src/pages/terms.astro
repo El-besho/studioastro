@@ -1,0 +1,205 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getSEOProps, generateCanonicalUrl } from '../lib/seo';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+
+const seoProps = getSEOProps('terms', {
+  title: 'شروط الاستخدام | إنقاذ',
+  description: 'شروط وأحكام استخدام منصة إنقاذ للخدمات المنزلية',
+  keywords: ['شروط الاستخدام', 'أحكام الاستخدام', 'شروط الخدمة', 'إنقاذ'],
+  canonical: generateCanonicalUrl('/terms')
+});
+---
+
+<Layout {...seoProps}>
+  <div class="container py-12 px-4 md:px-6">
+    <div class="max-w-4xl mx-auto">
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <h1 class="font-headline text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl mb-4">
+          شروط الاستخدام
+        </h1>
+        <p class="max-w-3xl mx-auto text-foreground/80 md:text-xl/relaxed">
+          شروط وأحكام استخدام منصة إنقاذ للخدمات المنزلية
+        </p>
+      </div>
+
+      <!-- Content -->
+      <div class="space-y-8">
+        <Card>
+          <CardHeader>
+            <CardTitle class="font-headline text-xl">1. القبول والشروط</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p class="text-foreground/80 leading-relaxed">
+              بوصولك واستخدامك لمنصة إنقاذ، فإنك توافق على الالتزام بشروط وأحكام الاستخدام هذه. إذا كنت لا توافق على أي من هذه الشروط، يرجى عدم استخدام خدماتنا.
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle class="font-headline text-xl">2. وصف الخدمة</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p class="text-foreground/80 leading-relaxed">
+              منصة إنقاذ هي منصة رقمية تربط بين العملاء ومزودي الخدمات المنزلية في المملكة العربية السعودية. نحن نسهل عملية العثور على مزودي الخدمات المناسبين وترتيب المواعيد.
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle class="font-headline text-xl">3. استخدام الخدمة</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div class="space-y-4">
+              <h3 class="font-headline text-lg font-semibold">الاستخدام المسموح</h3>
+              <ul class="list-disc list-inside space-y-2 text-foreground/80">
+                <li>البحث عن مزودي الخدمات المناسبين</li>
+                <li>طلب الخدمات المنزلية</li>
+                <li>التواصل مع مزودي الخدمات</li>
+                <li>تقييم الخدمات المقدمة</li>
+              </ul>
+              
+              <h3 class="font-headline text-lg font-semibold">الاستخدام المحظور</h3>
+              <ul class="list-disc list-inside space-y-2 text-foreground/80">
+                <li>استخدام الخدمة لأغراض غير قانونية</li>
+                <li>التلاعب أو إساءة استخدام النظام</li>
+                <li>انتهاك حقوق الملكية الفكرية</li>
+                <li>إرسال محتوى ضار أو مسيء</li>
+                <li>انتحال شخصية أخرى</li>
+              </ul>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle class="font-headline text-xl">4. حساب المستخدم</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p class="text-foreground/80 leading-relaxed mb-4">
+              لاستخدام بعض خدماتنا، قد تحتاج إلى إنشاء حساب. أنت مسؤول عن:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-foreground/80">
+              <li>توفير معلومات دقيقة ومحدثة</li>
+              <li>الحفاظ على سرية كلمة المرور</li>
+              <li>جميع الأنشطة التي تحدث في حسابك</li>
+              <li>إشعارنا فوراً بأي استخدام غير مصرح به</li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle class="font-headline text-xl">5. الدفع والفوترة</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div class="space-y-4">
+              <p class="text-foreground/80 leading-relaxed">
+                جميع المدفوعات تتم من خلال طرق دفع آمنة ومعتمدة. الأسعار المعروضة تشمل ضريبة القيمة المضافة.
+              </p>
+              <ul class="list-disc list-inside space-y-2 text-foreground/80">
+                <li>الأسعار قابلة للتغيير دون إشعار مسبق</li>
+                <li>جميع المدفوعات غير قابلة للاسترداد إلا في حالات محددة</li>
+                <li>أنت مسؤول عن جميع الرسوم والضرائب</li>
+                <li>نحتفظ بالحق في رفض أو إلغاء أي معاملة</li>
+              </ul>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle class="font-headline text-xl">6. إلغاء الخدمة</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p class="text-foreground/80 leading-relaxed mb-4">
+              يمكن إلغاء الخدمة في الحالات التالية:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-foreground/80">
+              <li>قبل 24 ساعة من موعد الخدمة - بدون رسوم</li>
+              <li>خلال 24 ساعة من موعد الخدمة - رسوم إلغاء 25%</li>
+              <li>في يوم الخدمة - رسوم إلغاء 50%</li>
+              <li>بعد بدء الخدمة - لا يمكن الإلغاء</li>
+            </ul>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle class="font-headline text-xl">7. المسؤولية والضمان</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div class="space-y-4">
+              <p class="text-foreground/80 leading-relaxed">
+                نحن نعمل كوسيط بين العملاء ومزودي الخدمات. نحن لا نقدم الخدمات مباشرة ولا نتحمل مسؤولية جودة الخدمات المقدمة.
+              </p>
+              <ul class="list-disc list-inside space-y-2 text-foreground/80">
+                <li>نحن غير مسؤولين عن أي أضرار ناتجة عن استخدام الخدمة</li>
+                <li>نحن لا نضمن توفر مزودي الخدمات في جميع الأوقات</li>
+                <li>أنت تستخدم الخدمة على مسؤوليتك الخاصة</li>
+                <li>نحن نحتفظ بالحق في رفض أو إيقاف أي حساب</li>
+              </ul>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle class="font-headline text-xl">8. الملكية الفكرية</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p class="text-foreground/80 leading-relaxed">
+              جميع المحتويات الموجودة على منصة إنقاذ، بما في ذلك النصوص والصور والشعارات والتصاميم، محمية بحقوق الطبع والنشر. لا يجوز نسخ أو توزيع أو تعديل أي من هذه المحتويات دون إذن كتابي منا.
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle class="font-headline text-xl">9. التعديلات على الشروط</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p class="text-foreground/80 leading-relaxed">
+              نحتفظ بالحق في تعديل هذه الشروط في أي وقت. سيتم إشعارك بأي تغييرات مهمة عبر البريد الإلكتروني أو من خلال إشعار على الموقع. استمرارك في استخدام الخدمة بعد التعديلات يعني موافقتك على الشروط الجديدة.
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle class="font-headline text-xl">10. القانون المطبق</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p class="text-foreground/80 leading-relaxed">
+              تخضع هذه الشروط للقوانين واللوائح المعمول بها في المملكة العربية السعودية. أي نزاعات تنشأ من استخدام هذه الخدمة ستخضع للاختصاص الحصري للمحاكم السعودية.
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle class="font-headline text-xl">11. التواصل معنا</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p class="text-foreground/80 leading-relaxed">
+              إذا كان لديك أي أسئلة حول شروط الاستخدام هذه، يرجى التواصل معنا عبر:
+            </p>
+            <div class="mt-4 space-y-2">
+              <p><strong>البريد الإلكتروني:</strong> legal@enqaz.org</p>
+              <p><strong>الهاتف:</strong> 920000000</p>
+              <p><strong>العنوان:</strong> المملكة العربية السعودية</p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      <!-- Last Updated -->
+      <div class="text-center mt-12 text-sm text-muted-foreground">
+        <p>آخر تحديث: {new Date().toLocaleDateString('ar-SA')}</p>
+      </div>
+    </div>
+  </div>
+</Layout>

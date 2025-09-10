@@ -1,0 +1,141 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getPostBySlug, getAllPosts } from '../../lib/blog';
+import { getSEOProps, generateCanonicalUrl } from '../../lib/seo';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card';
+import { Badge } from '../../components/ui/badge';
+import { Calendar, User, Tag, ArrowLeft } from 'lucide-react';
+import { Breadcrumb } from '../../components/semantic/breadcrumb';
+
+export async function getStaticPaths() {
+  const posts = getAllPosts();
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+
+if (!post) {
+  return Astro.redirect('/404');
+}
+
+const seoProps = {
+  title: `${post.frontmatter.title} | إنقاذ`,
+  description: post.frontmatter.summary,
+  keywords: [...post.frontmatter.tags, 'مدونة', 'مقالات', 'نصائح', 'خدمات منزلية'],
+  canonical: generateCanonicalUrl(`/blog/${post.slug}`)
+};
+---
+
+<Layout {...seoProps}>
+  <div class="container py-12 px-4 md:px-6">
+    <div class="max-w-4xl mx-auto">
+      <!-- Breadcrumb -->
+      <Breadcrumb client:load />
+      
+      <!-- Back Button -->
+      <div class="mb-6">
+        <a 
+          href="/blog" 
+          class="inline-flex items-center text-sm font-medium text-primary hover:underline"
+        >
+          <ArrowLeft class="h-4 w-4 mr-2" />
+          العودة إلى المدونة
+        </a>
+      </div>
+
+      <!-- Article Header -->
+      <div class="text-center mb-12">
+        <div class="flex items-center justify-center gap-4 text-sm text-muted-foreground mb-4">
+          <div class="flex items-center gap-2">
+            <Calendar class="h-4 w-4" />
+            <span>{new Date(post.frontmatter.date).toLocaleDateString('ar-SA')}</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <User class="h-4 w-4" />
+            <span>{post.frontmatter.author}</span>
+          </div>
+        </div>
+        
+        <h1 class="font-headline text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl mb-6">
+          {post.frontmatter.title}
+        </h1>
+        
+        <p class="max-w-3xl mx-auto text-foreground/80 md:text-xl/relaxed mb-6">
+          {post.frontmatter.summary}
+        </p>
+
+        <div class="flex flex-wrap justify-center gap-2">
+          {post.frontmatter.tags.map((tag) => (
+            <Badge variant="secondary">
+              <Tag class="h-3 w-3 mr-1" />
+              {tag}
+            </Badge>
+          ))}
+        </div>
+      </div>
+
+      <!-- Article Content -->
+      <Card class="mb-12">
+        <CardContent class="pt-8">
+          <div class="prose prose-lg max-w-none prose-headings:font-headline prose-headings:text-foreground prose-p:text-foreground/80 prose-a:text-primary prose-strong:text-foreground">
+            <div set:html={post.content} />
+          </div>
+        </CardContent>
+      </Card>
+
+      <!-- Related Posts -->
+      {post.related && post.related.length > 0 && (
+        <div class="mb-12">
+          <h2 class="font-headline text-2xl font-bold mb-6">مقالات ذات صلة</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {post.related.map((relatedPost) => (
+              <Card class="group hover:shadow-xl transition-all duration-300">
+                <CardHeader>
+                  <CardTitle class="font-headline text-lg group-hover:text-primary transition-colors">
+                    <a href={`/blog/${relatedPost.slug}`} class="hover:underline">
+                      {relatedPost.frontmatter.title}
+                    </a>
+                  </CardTitle>
+                  <CardDescription>
+                    {relatedPost.frontmatter.summary}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div class="flex items-center gap-2 text-sm text-muted-foreground mb-2">
+                    <Calendar class="h-4 w-4" />
+                    <span>{new Date(relatedPost.frontmatter.date).toLocaleDateString('ar-SA')}</span>
+                  </div>
+                  <a 
+                    href={`/blog/${relatedPost.slug}`}
+                    class="inline-flex items-center text-sm font-medium text-primary hover:underline"
+                  >
+                    اقرأ المزيد →
+                  </a>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <!-- CTA -->
+      <Card class="bg-primary/5 border-primary/20">
+        <CardContent class="pt-6 text-center">
+          <h3 class="font-headline text-lg font-semibold mb-2">هل تحتاج إلى مساعدة؟</h3>
+          <p class="text-sm text-muted-foreground mb-4">
+            تواصل معنا للحصول على أفضل الخدمات المنزلية في السعودية
+          </p>
+          <a
+            href="/contact"
+            class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
+          >
+            تواصل معنا
+          </a>
+        </CardContent>
+      </Card>
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,154 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getSEOProps, generateCanonicalUrl } from '../lib/seo';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
+import { Search, Filter, MapPin } from 'lucide-react';
+import { getAllServices } from '../lib/services';
+import { getAllCities } from '../lib/services';
+
+const services = getAllServices();
+const cities = getAllCities();
+
+const seoProps = getSEOProps('search', {
+  title: 'نتائج البحث | إنقاذ',
+  description: 'ابحث عن أفضل الخدمات المنزلية في مدينتك',
+  keywords: ['بحث', 'خدمات منزلية', 'السعودية', 'نتائج البحث'],
+  canonical: generateCanonicalUrl('/search')
+});
+---
+
+<Layout {...seoProps}>
+  <div class="container py-12 px-4 md:px-6">
+    <div class="max-w-6xl mx-auto">
+      <!-- Search Header -->
+      <div class="text-center mb-12">
+        <h1 class="font-headline text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl mb-4">
+          نتائج البحث
+        </h1>
+        <p class="max-w-3xl mx-auto text-foreground/80 md:text-xl/relaxed">
+          ابحث عن أفضل الخدمات المنزلية في مدينتك
+        </p>
+      </div>
+
+      <!-- Search Form -->
+      <Card class="mb-8">
+        <CardHeader>
+          <CardTitle class="font-headline text-xl">البحث المتقدم</CardTitle>
+          <CardDescription>
+            استخدم الفلاتر للعثور على الخدمة المناسبة لك
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Service Filter -->
+            <div>
+              <label class="block text-sm font-medium mb-2">نوع الخدمة</label>
+              <select class="w-full p-3 border rounded-md bg-background">
+                <option value="">جميع الخدمات</option>
+                {services.map((service) => (
+                  <option value={service.slug}>{service.ar_name}</option>
+                ))}
+              </select>
+            </div>
+
+            <!-- City Filter -->
+            <div>
+              <label class="block text-sm font-medium mb-2">المدينة</label>
+              <select class="w-full p-3 border rounded-md bg-background">
+                <option value="">جميع المدن</option>
+                {cities.map((city) => (
+                  <option value={city.slug}>{city.ar_name}</option>
+                ))}
+              </select>
+            </div>
+
+            <!-- Search Button -->
+            <div class="flex items-end">
+              <button class="w-full bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-3 rounded-md font-medium transition-colors">
+                <Search class="h-4 w-4 inline mr-2" />
+                بحث
+              </button>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      <!-- Search Results -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {services.slice(0, 9).map((service) => (
+          <Card class="group hover:shadow-xl transition-all duration-300">
+            <CardHeader>
+              <div class="flex items-center gap-2 mb-2">
+                <Badge variant="outline">{service.category}</Badge>
+                {service.emergency_available && (
+                  <Badge variant="destructive">طوارئ</Badge>
+                )}
+              </div>
+              <CardTitle class="font-headline text-lg group-hover:text-primary transition-colors">
+                <a href={`/services/${service.slug}`} class="hover:underline">
+                  {service.ar_name}
+                </a>
+              </CardTitle>
+              <CardDescription>
+                {service.seo.summary.substring(0, 100)}...
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div class="space-y-2 mb-4">
+                <div class="flex items-center gap-2 text-sm text-muted-foreground">
+                  <MapPin class="h-4 w-4" />
+                  <span>متوفر في {cities.length} مدينة</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Filter class="h-4 w-4" />
+                  <span>{service.sub_services.length} خدمة فرعية</span>
+                </div>
+              </div>
+              <a 
+                href={`/services/${service.slug}`}
+                class="inline-flex items-center text-sm font-medium text-primary hover:underline"
+              >
+                عرض التفاصيل →
+              </a>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      <!-- No Results State -->
+      <div class="text-center py-12 hidden" id="no-results">
+        <Search class="h-16 w-16 mx-auto text-muted-foreground mb-4" />
+        <h3 class="font-headline text-xl font-semibold mb-2">لا توجد نتائج</h3>
+        <p class="text-muted-foreground mb-4">
+          جرب البحث بكلمات مختلفة أو استخدم الفلاتر
+        </p>
+        <button class="bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-md font-medium transition-colors">
+          إعادة تعيين البحث
+        </button>
+      </div>
+
+      <!-- Popular Searches -->
+      <Card class="mt-12">
+        <CardHeader>
+          <CardTitle class="font-headline text-xl">البحث الشائع</CardTitle>
+          <CardDescription>
+            الخدمات الأكثر طلباً من عملائنا
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div class="flex flex-wrap gap-2">
+            {['صيانة مكيفات', 'سباكة', 'كهرباء', 'تنظيف', 'نقل أثاث', 'أمن وسلامة'].map((term) => (
+              <Badge 
+                variant="secondary" 
+                class="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors"
+              >
+                {term}
+              </Badge>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  </div>
+</Layout>
