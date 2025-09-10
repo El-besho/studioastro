@@ -75,18 +75,27 @@ export function ServiceCard({
     : service.seo.summary;
 
   return (
-    <a href={link} className="block h-full">
-      <Card className={cn('text-center group hover:shadow-xl hover:-translate-y-1 transition-transform duration-300 h-full flex flex-col', className)}>
+    <a 
+      href={link} 
+      className="block h-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg"
+      aria-label={`عرض خدمات ${title}`}
+    >
+      <Card className={cn(
+        'text-center group hover:shadow-xl hover:-translate-y-1 transition-all duration-300 h-full flex flex-col',
+        'border-2 hover:border-primary/20 focus-within:border-primary/40',
+        'bg-gradient-to-b from-background to-muted/20',
+        className
+      )}>
         <CardContent className="flex flex-col items-center justify-start p-6 gap-4 text-center flex-grow">
-          <div className="flex items-center justify-center h-16 w-16 p-4 bg-primary/10 rounded-full text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
+          <div className="flex items-center justify-center h-16 w-16 p-4 bg-primary/10 rounded-full text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 group-hover:scale-110">
             <Icon className="w-8 h-8" />
           </div>
           <div className="w-full flex-grow">
-            <h2 className="font-headline text-lg font-semibold">
+            <h2 className="font-headline text-lg font-semibold group-hover:text-primary transition-colors duration-200">
               {title}
             </h2>
             {showDescription && (
-                 <p className="text-sm text-muted-foreground line-clamp-2 mt-1">
+                 <p className="text-sm text-muted-foreground line-clamp-2 mt-1 group-hover:text-foreground/80 transition-colors duration-200">
                     {description}
                  </p>
             )}

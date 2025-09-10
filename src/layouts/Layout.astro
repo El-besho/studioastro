@@ -7,6 +7,7 @@ import Footer from '../components/Footer.astro';
 import { Breadcrumb } from '../components/semantic/breadcrumb';
 import { Toaster } from '../components/ui/toaster';
 import { SEO } from 'astro-seo';
+import { SkipLink } from '../components/ui/skip-link';
 import '../styles/globals.css';
 
 export interface Props {
@@ -112,6 +113,7 @@ const orgJsonLd = {
     'min-h-screen bg-background font-body antialiased',
     'font-[--font-cairo] font-[--font-noto-sans-arabic] font-[--font-code]'
   )}>
+    <SkipLink href="#main-content">تخطي إلى المحتوى الرئيسي</SkipLink>
     <Header />
     <Breadcrumb />
     <main><slot /></main>

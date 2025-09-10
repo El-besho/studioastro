@@ -12,7 +12,7 @@ import { getAllCities, getCityBySlug, getServiceBySlug } from '../lib/services';
 import HeaderClient from './HeaderClient.tsx';
 ---
 
-<header class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+<header class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
   <div class="container flex h-16 items-center">
     <!-- Mobile Menu -->
     <div class="md:hidden">
@@ -21,13 +21,14 @@ import HeaderClient from './HeaderClient.tsx';
 
     <!-- Desktop Navigation -->
     <div class="flex-1 flex justify-center md:justify-start">
-      <nav class="hidden items-center gap-6 text-sm md:flex">
+      <nav class="hidden items-center gap-6 text-sm md:flex" role="navigation" aria-label="الملاحة الرئيسية">
         <Logo />
         {navLinks.map((link) => (
           <a
             key={link.href}
             href={link.href}
-            class="font-headline font-medium text-foreground/70 transition-colors hover:text-foreground"
+            class="font-headline font-medium text-foreground/70 transition-colors hover:text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-2 py-1"
+            aria-label={link.label}
           >
             {link.label}
           </a>

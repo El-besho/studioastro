@@ -82,33 +82,46 @@ export default function HeaderClient() {
       {/* Mobile Menu */}
       <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
         <SheetTrigger asChild>
-          <Button variant="outline" size="icon">
+          <Button 
+            variant="outline" 
+            size="icon"
+            className="hover:bg-primary/10 hover:border-primary/20 transition-colors"
+            aria-label="فتح قائمة التنقل"
+          >
             <Menu className="h-6 w-6" />
             <span className="sr-only">فتح قائمة التنقل</span>
           </Button>
         </SheetTrigger>
-        <SheetContent side="right" className="p-0 flex flex-col">
-          <SheetHeader className="border-b p-4">
-            <div>Logo</div>
+        <SheetContent side="right" className="p-0 flex flex-col w-full sm:w-80">
+          <SheetHeader className="border-b p-4 bg-gradient-to-r from-primary/5 to-primary/10">
+            <div className="flex items-center gap-2">
+              <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center">
+                <span className="text-primary-foreground font-bold text-sm">إن</span>
+              </div>
+              <span className="font-headline text-lg font-bold">إنقاذ</span>
+            </div>
           </SheetHeader>
           <div className="p-4 flex-grow">
-            <nav className="flex flex-col gap-4">
+            <nav className="flex flex-col gap-2" role="navigation" aria-label="قائمة التنقل المحمولة">
               {navLinks.map((link) => (
                 <a 
                   key={link.href} 
                   href={link.href} 
-                  className="flex items-center gap-3 text-lg font-medium text-foreground/80 hover:text-foreground" 
+                  className="flex items-center gap-3 text-lg font-medium text-foreground/80 hover:text-foreground hover:bg-primary/5 rounded-lg p-3 transition-all duration-200" 
                   onClick={() => setIsMobileMenuOpen(false)}
+                  aria-label={link.label}
                 >
-                  <link.icon className="h-5 w-5 ml-2" />
+                  <link.icon className="h-5 w-5 ml-2 text-primary" />
                   {link.label}
                 </a>
               ))}
             </nav>
           </div>
-          <SheetFooter className="p-4 border-t">
+          <SheetFooter className="p-4 border-t bg-muted/30">
             <Button className="w-full font-headline" size="lg" asChild>
-              <a href="/services" onClick={() => setIsMobileMenuOpen(false)}>اطلب عرض سعر مجاني</a>
+              <a href="/services" onClick={() => setIsMobileMenuOpen(false)}>
+                اطلب عرض سعر مجاني
+              </a>
             </Button>
           </SheetFooter>
         </SheetContent>

@@ -76,19 +76,24 @@ const stats = [
 
 <div class="flex flex-col min-h-[100dvh]">
   <!-- Hero Section -->
-  <section class="relative w-full pt-24 pb-12 md:pt-32 md:pb-24 lg:pt-40 lg:pb-32">
-    <div class="container px-4 md:px-6">
-      <div class="flex flex-col items-center space-y-4 text-center">
-        <div class="space-y-2">
-          <h1 class="font-headline text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl/none">
+  <section id="main-content" class="relative w-full pt-24 pb-12 md:pt-32 md:pb-24 lg:pt-40 lg:pb-32 overflow-hidden">
+    <!-- Background decoration -->
+    <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5"></div>
+    <div class="absolute top-20 right-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-20 left-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl"></div>
+    
+    <div class="container px-4 md:px-6 relative z-10">
+      <div class="flex flex-col items-center space-y-6 text-center">
+        <div class="space-y-4 animate-fade-in-up">
+          <h1 class="font-headline text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl/none bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
             أفضل الخدمات لمنزلك وعملك في السعودية
           </h1>
-          <p class="mx-auto max-w-[700px] text-foreground/80 md:text-xl">
+          <p class="mx-auto max-w-[700px] text-foreground/80 md:text-xl leading-relaxed">
             من التكييف والسباكة إلى الصيانة العامة، احصل على عروض أسعار
             مجانية من أفضل المحترفين المعتمدين.
           </p>
         </div>
-        <div class="w-full max-w-2xl">
+        <div class="w-full max-w-2xl animate-fade-in-up animation-delay-200">
           <SearchForm client:load />
         </div>
       </div>
@@ -99,7 +104,7 @@ const stats = [
   <section id="services" class="w-full py-12 md:py-24 bg-muted/50">
     <div class="container px-4 md:px-6">
       <div class="flex flex-col items-center justify-center space-y-4 text-center">
-        <div class="space-y-2">
+        <div class="space-y-2 animate-fade-in-up">
           <Badge class="font-headline bg-primary/10 text-primary hover:bg-primary/20">
             خدماتنا المتاحة
           </Badge>
@@ -115,8 +120,8 @@ const stats = [
       <div class="py-12">
         <ServiceGrid services={services} />
       </div>
-       <div class="text-center">
-        <Button variant="outline" asChild>
+       <div class="text-center animate-fade-in-up animation-delay-400">
+        <Button variant="outline" asChild class="btn-hover-lift">
           <a href="/services">عرض جميع الخدمات ({allServicesCount}+)</a>
         </Button>
       </div>
@@ -127,7 +132,7 @@ const stats = [
   <section id="how-it-works" class="w-full py-12 md:py-24">
     <div class="container px-4 md:px-6">
       <div class="flex flex-col items-center justify-center space-y-4 text-center">
-        <div class="space-y-3">
+        <div class="space-y-3 animate-fade-in-up">
           <Badge class="font-headline bg-primary/10 text-primary hover:bg-primary/20">
             كيف نعمل
           </Badge>
@@ -142,9 +147,9 @@ const stats = [
       <div class="mx-auto max-w-2xl py-12 prose prose-lg dark:prose-invert">
             <ol class="timeline">
                 {howItWorksSteps.map((step, index) => (
-                     <li key={index} data-step={index + 1}>
+                     <li key={index} data-step={index + 1} class="animate-fade-in-up" style={`animation-delay: ${index * 0.2}s; opacity: 0;`}>
                         <div class='flex items-center gap-4 mb-2'>
-                            <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-muted text-primary">
+                            <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-muted text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
                                 <step.icon class="w-6 h-6" />
                             </div>
                             <h3 class="font-bold text-lg font-headline m-0">{step.title}</h3>
