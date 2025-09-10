@@ -11,7 +11,6 @@ interface PricingCardProps {
   isPopular?: boolean;
   emergencyAvailable?: boolean;
   seasonalMultiplier?: number;
-  onSelect: () => void;
 }
 
 export function PricingCard({
@@ -21,8 +20,7 @@ export function PricingCard({
   features,
   isPopular = false,
   emergencyAvailable = false,
-  seasonalMultiplier = 1,
-  onSelect
+  seasonalMultiplier = 1
 }: PricingCardProps) {
   const basePrice = priceRange[0];
   const maxPrice = priceRange[1];
@@ -77,11 +75,13 @@ export function PricingCard({
         )}
         
         <Button 
-          onClick={onSelect}
+          asChild
           className="w-full"
           variant={isPopular ? "default" : "outline"}
         >
-          اختر هذه الخدمة
+          <a href="/contact">
+            اختر هذه الخدمة
+          </a>
         </Button>
       </CardContent>
     </Card>
