@@ -2,7 +2,7 @@
 'use client';
 
 import { WithContext, ItemList } from "schema-dts";
-import Link from "next/link";
+// import Link from "next/link"; // Removed for Astro compatibility
 import { siteConfig } from "../config/site";
 import { CategorizedQueries, QueryIntent, TaggedQuery } from '../types/queries';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";

@@ -34,7 +34,7 @@ import {
 } from 'lucide-react';
 
 import { CityList } from './city-list';
-import { LeadForm } from './lead-form';
+// import { LeadForm } from './lead-form'; // Removed - component deleted
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { ServiceHierarchy, CityProfile, SubService } from '../types/services';
@@ -223,7 +223,21 @@ function SubServicePage({ service, subService, trendingQueries }: SubServicePage
         </div>
 
         <aside className="md:col-span-1 sticky top-24 self-start">
-          <LeadForm serviceName={subService.ar_name} />
+          <Card className="w-full text-right">
+            <CardHeader>
+              <CardTitle className="font-headline text-2xl">
+                اطلب خدمة {subService.ar_name}
+              </CardTitle>
+              <CardDescription>
+                احصل على عرض سعر مجاني وبدون التزام
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button className="w-full font-headline" size="lg" asChild>
+                <a href="/contact">اطلب عرض سعر مجاني</a>
+              </Button>
+            </CardContent>
+          </Card>
         </aside>
       </div>
     </main>
@@ -457,7 +471,21 @@ function ServiceLocationPage({ service, city, trendingQueries }: ServiceLocation
 
         </div>
         <aside className="md:col-span-1 sticky top-24 self-start">
-          <LeadForm serviceName={service.ar_name} cityName={city.ar_name} />
+          <Card className="w-full text-right">
+            <CardHeader>
+              <CardTitle className="font-headline text-2xl">
+                اطلب خدمة {service.ar_name} في {city.ar_name}
+              </CardTitle>
+              <CardDescription>
+                احصل على عرض سعر مجاني وبدون التزام
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button className="w-full font-headline" size="lg" asChild>
+                <a href="/contact">اطلب عرض سعر مجاني</a>
+              </Button>
+            </CardContent>
+          </Card>
         </aside>
       </div>
     </main>
