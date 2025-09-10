@@ -100,7 +100,7 @@ export function Header() {
                     <div className="p-4 flex-grow">
                         <nav className="flex flex-col gap-4">
                         {navLinks.map((link) => (
-                            <Link key={link.href} href={link.href} className="flex items-center gap-3 text-lg font-medium text-foreground/80 hover:text-foreground" onClick={() => setIsMobileMenuOpen(false)}>
+                            <a key={link.href} href={link.href} className="flex items-center gap-3 text-lg font-medium text-foreground/80 hover:text-foreground" onClick={() => setIsMobileMenuOpen(false)}>
                                 <link.icon className="h-5 w-5 ml-2" />
                                 {link.label}
                             </a>
@@ -120,7 +120,7 @@ export function Header() {
             <nav className="hidden items-center gap-6 text-sm md:flex">
                 <Logo />
                 {navLinks.map((link) => (
-                <Link
+                <a
                     key={link.href}
                     href={link.href}
                     className="font-headline font-medium text-foreground/70 transition-colors hover:text-foreground"

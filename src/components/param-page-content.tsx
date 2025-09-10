@@ -325,7 +325,7 @@ function ServiceLocationPage({ service, city, trendingQueries }: ServiceLocation
                 {service.sub_services.map((sub) => (
                   <li key={sub.id} className="flex items-center gap-3">
                     <Check className="h-5 w-5 text-primary flex-shrink-0" />
-                    <Link
+                    <a
                       href={`/services/${service.slug}/${sub.slug}`}
                       className="hover:underline"
                     >

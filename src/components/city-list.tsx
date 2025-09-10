@@ -34,7 +34,7 @@ export function CityList({
                 asChild
                 className="p-0 h-auto font-body"
               >
-                <Link
+                <a
                   href={link}
                   className="flex items-center gap-2"
                 >

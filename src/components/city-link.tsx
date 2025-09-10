@@ -18,7 +18,7 @@ export function CityLink({ city, service, children, className }: CityLinkProps) 
       asChild
       className={`p-0 h-auto font-body ${className}`}
     >
-      <Link
+      <a
         href={`/services/${service.slug}/${city.slug}`}
         className="flex items-center gap-2"
       >
