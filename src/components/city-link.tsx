@@ -1,4 +1,4 @@
-import Link from 'next/link';
+
 import { MapPin } from 'lucide-react';
 import { Button } from './ui/button';
 import { CityProfile } from '../types/services';
@@ -24,7 +24,7 @@ export function CityLink({ city, service, children, className }: CityLinkProps) 
       >
         <MapPin className="h-4 w-4 text-muted-foreground" />
         {children || `خدمات ${service.ar_name} في ${city.ar_name}`}
-      </Link>
+      </a>
     </Button>
   );
 }

@@ -32,7 +32,7 @@ import {
   Calendar,
   CheckCircle,
 } from 'lucide-react';
-import Link from 'next/link';
+
 import { CityList } from './city-list';
 import { LeadForm } from './lead-form';
 import { Button } from './ui/button';
@@ -119,10 +119,10 @@ function SubServicePage({ service, subService, trendingQueries }: SubServicePage
     <main className="container py-12 md:py-24 text-right">
        <div className="mb-4">
         <Button variant="ghost" asChild>
-          <Link href={`/services/${service.slug}`}>
+          <a href={`/services/${service.slug}`}>
             <ArrowLeft className="ml-2 h-4 w-4" />
             العودة إلى {service.ar_name}
-          </Link>
+          </a>
         </Button>
       </div>
 
@@ -300,10 +300,10 @@ function ServiceLocationPage({ service, city, trendingQueries }: ServiceLocation
     <main className="container py-12 md:py-24 text-right">
       <div className="mb-4">
         <Button variant="ghost" asChild>
-          <Link href={`/services/${service.slug}`}>
+          <a href={`/services/${service.slug}`}>
             <ArrowLeft className="ml-2 h-4 w-4" />
             العودة إلى {service.ar_name}
-          </Link>
+          </a>
         </Button>
       </div>
 
@@ -330,7 +330,7 @@ function ServiceLocationPage({ service, city, trendingQueries }: ServiceLocation
                       className="hover:underline"
                     >
                       {sub.ar_name}
-                    </Link>
+                    </a>
                   </li>
                 ))}
               </ul>

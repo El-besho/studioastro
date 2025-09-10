@@ -1,6 +1,6 @@
 
 import { CityProfile, ServiceHierarchy, SubService } from '../types/services';
-import Link from 'next/link';
+
 import { Button } from './ui/button';
 import { MapPin } from 'lucide-react';
 
@@ -40,7 +40,7 @@ export function CityList({
                 >
                   <MapPin className="h-4 w-4 text-muted-foreground" />
                   {text}
-                </Link>
+                </a>
               </Button>
             </li>
           )

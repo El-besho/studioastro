@@ -1,5 +1,5 @@
 
-import Link from 'next/link';
+
 import { Facebook, Instagram, Twitter } from 'lucide-react';
 import { Logo } from './logo';
 
@@ -21,16 +21,16 @@ export function Footer() {
               <h3 className="font-headline font-semibold mb-4">أهم الخدمات</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/services/air-conditioning-hvac" className="text-sm text-muted-foreground hover:text-foreground">خدمات التكييف</Link>
+                  <a href="/services/air-conditioning-hvac" className="text-sm text-muted-foreground hover:text-foreground">خدمات التكييف</a>
                 </li>
                 <li>
-                  <Link href="/services/plumbing-services" className="text-sm text-muted-foreground hover:text-foreground">السباكة</Link>
+                  <a href="/services/plumbing-services" className="text-sm text-muted-foreground hover:text-foreground">السباكة</a>
                 </li>
                 <li>
-                  <Link href="/services/electrical-services" className="text-sm text-muted-foreground hover:text-foreground">الكهرباء</Link>
+                  <a href="/services/electrical-services" className="text-sm text-muted-foreground hover:text-foreground">الكهرباء</a>
                 </li>
                  <li>
-                  <Link href="/services" className="text-sm text-muted-foreground hover:text-foreground">المزيد...</Link>
+                  <a href="/services" className="text-sm text-muted-foreground hover:text-foreground">المزيد...</a>
                 </li>
               </ul>
             </div>
@@ -38,16 +38,16 @@ export function Footer() {
               <h3 className="font-headline font-semibold mb-4">عن الشركة</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/about" className="text-sm text-muted-foreground hover:text-foreground">من نحن</Link>
+                  <a href="/about" className="text-sm text-muted-foreground hover:text-foreground">من نحن</a>
                 </li>
                 <li>
-                  <Link href="/blog" className="text-sm text-muted-foreground hover:text-foreground">المدونة</Link>
+                  <a href="/blog" className="text-sm text-muted-foreground hover:text-foreground">المدونة</a>
                 </li>
                 <li>
-                  <Link href="/contact" className="text-sm text-muted-foreground hover:text-foreground">تواصل معنا</Link>
+                  <a href="/contact" className="text-sm text-muted-foreground hover:text-foreground">تواصل معنا</a>
                 </li>
                 <li>
-                  <Link href="/join-provider" className="text-sm text-muted-foreground hover:text-foreground">انضم كمزود خدمة</Link>
+                  <a href="/join-provider" className="text-sm text-muted-foreground hover:text-foreground">انضم كمزود خدمة</a>
                 </li>
               </ul>
             </div>
@@ -55,10 +55,10 @@ export function Footer() {
               <h3 className="font-headline font-semibold mb-4">قانوني</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/privacy" className="text-sm text-muted-foreground hover:text-foreground">سياسة الخصوصية</Link>
+                  <a href="/privacy" className="text-sm text-muted-foreground hover:text-foreground">سياسة الخصوصية</a>
                 </li>
                 <li>
-                  <Link href="/terms" className="text-sm text-muted-foreground hover:text-foreground">شروط الاستخدام</Link>
+                  <a href="/terms" className="text-sm text-muted-foreground hover:text-foreground">شروط الاستخدام</a>
                 </li>
               </ul>
             </div>
@@ -69,15 +69,15 @@ export function Footer() {
             © {new Date().getFullYear()} إنقاذ. جميع الحقوق محفوظة.
           </p>
           <div className="flex gap-4">
-            <Link href="/" className="text-muted-foreground hover:text-foreground">
+            <a href="/" className="text-muted-foreground hover:text-foreground">
               <Twitter className="h-5 w-5" />
-            </Link>
-            <Link href="/" className="text-muted-foreground hover:text-foreground">
+            </a>
+            <a href="/" className="text-muted-foreground hover:text-foreground">
               <Facebook className="h-5 w-5" />
-            </Link>
-            <Link href="/" className="text-muted-foreground hover:text-foreground">
+            </a>
+            <a href="/" className="text-muted-foreground hover:text-foreground">
               <Instagram className="h-5 w-5" />
-            </Link>
+            </a>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 
 'use client';
 
-import Link from 'next/link';
+
 import { Button } from './ui/button';
 import {
   Menu,
@@ -103,13 +103,13 @@ export function Header() {
                             <Link key={link.href} href={link.href} className="flex items-center gap-3 text-lg font-medium text-foreground/80 hover:text-foreground" onClick={() => setIsMobileMenuOpen(false)}>
                                 <link.icon className="h-5 w-5 ml-2" />
                                 {link.label}
-                            </Link>
+                            </a>
                         ))}
                         </nav>
                     </div>
                     <SheetFooter className="p-4 border-t">
                     <Button className="w-full font-headline" size="lg" asChild>
-                        <Link href="/services" onClick={() => setIsMobileMenuOpen(false)}>اطلب عرض سعر مجاني</Link>
+                        <a href="/services" onClick={() => setIsMobileMenuOpen(false)}>اطلب عرض سعر مجاني</a>
                     </Button>
                     </SheetFooter>
                 </SheetContent>
@@ -126,7 +126,7 @@ export function Header() {
                     className="font-headline font-medium text-foreground/70 transition-colors hover:text-foreground"
                 >
                     {link.label}
-                </Link>
+                </a>
                 ))}
             </nav>
              <div className="md:hidden">
@@ -146,7 +146,7 @@ export function Header() {
                 <DropdownMenuContent align="end">
                     {cities.map((city) => (
                     <DropdownMenuItem key={city.slug} asChild>
-                        <Link href={getCityLink(city.slug)}>{city.ar_name}</Link>
+                        <a href={getCityLink(city.slug)}>{city.ar_name}</a>
                     </DropdownMenuItem>
                     ))}
                 </DropdownMenuContent>

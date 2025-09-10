@@ -102,7 +102,7 @@ export function TrendingQueries({ queries, title }: TrendingQueriesProps) {
                             className="p-3 text-sm text-center font-medium bg-muted/50 border rounded-lg hover:bg-accent/10 hover:border-primary/20 hover:text-primary transition-colors duration-200"
                         >
                             {q.query}
-                        </Link>
+                        </a>
                         ))}
                     </motion.div>
                  </AnimatePresence>

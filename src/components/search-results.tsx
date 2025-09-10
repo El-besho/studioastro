@@ -1,5 +1,5 @@
 
-import Link from 'next/link';
+
 import { Button } from './ui/button';
 import { ArrowLeft } from 'lucide-react';
 import { ServiceHierarchy, CityProfile } from '../types/services';
@@ -18,10 +18,10 @@ export function SearchResults({ results }: SearchResultsProps) {
           لم نتمكن من العثور على أي خدمات تطابق بحثك. حاول تعديل مصطلحات البحث أو تصفح خدماتنا.
         </p>
         <Button asChild>
-          <Link href="/services">
+          <a href="/services">
             تصفح جميع الخدمات
             <ArrowLeft className="mr-2 h-4 w-4" />
-          </Link>
+          </a>
         </Button>
       </div>
     );
