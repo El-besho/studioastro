@@ -7,6 +7,10 @@ import { Breadcrumb } from '../../components/semantic/breadcrumb';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card';
 import { Badge } from '../../components/ui/badge';
 import { Check } from 'lucide-react';
+import { FAQ } from '../../components/service/FAQ';
+import { ServiceFeatures } from '../../components/service/ServiceFeatures';
+import { ProcessSteps } from '../../components/service/ProcessSteps';
+import { SubServiceGrid } from '../../components/service/SubServiceGrid';
 
 export async function getStaticPaths() {
   const services = getAllServices();
@@ -49,68 +53,47 @@ const seoProps = {
         </p>
       </div>
 
-      <!-- Service Details -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-        <!-- Main Content -->
-        <div class="lg:col-span-2">
-          <Card>
-            <CardHeader>
-              <CardTitle class="font-headline text-2xl">خدمات {service.ar_name}</CardTitle>
-              <CardDescription>
-                نقدم مجموعة شاملة من خدمات {service.ar_name} بأعلى معايير الجودة
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div class="prose prose-lg max-w-none">
-                <p class="text-foreground/80 leading-relaxed">
-                  {service.seo.summary}
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+      <!-- Service Overview -->
+      <Card class="mb-12">
+        <CardHeader>
+          <CardTitle class="font-headline text-2xl">خدمات {service.ar_name}</CardTitle>
+          <CardDescription>
+            نقدم مجموعة شاملة من خدمات {service.ar_name} بأعلى معايير الجودة
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div class="prose prose-lg max-w-none">
+            <p class="text-foreground/80 leading-relaxed">
+              {service.seo.summary}
+            </p>
+          </div>
+        </CardContent>
+      </Card>
 
-        <!-- Sidebar -->
-        <div class="space-y-6">
-          <!-- Sub Services -->
-          <Card>
-            <CardHeader>
-              <CardTitle class="font-headline text-lg">الخدمات الفرعية</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ul class="space-y-3">
-                {service.sub_services.map((sub) => (
-                  <li key={sub.id} class="flex items-center gap-3">
-                    <Check class="h-5 w-5 text-primary flex-shrink-0" />
-                    <a
-                      href={`/services/${service.slug}/${sub.slug}`}
-                      class="hover:underline hover:text-primary transition-colors"
-                    >
-                      {sub.ar_name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
+      <!-- Service Features -->
+      <ServiceFeatures service={service} client:load />
 
-          <!-- CTA -->
-          <Card class="bg-primary/5 border-primary/20">
-            <CardContent class="pt-6">
-              <h3 class="font-headline text-lg font-semibold mb-2">احصل على عرض سعر مجاني</h3>
-              <p class="text-sm text-muted-foreground mb-4">
-                تواصل معنا للحصول على أفضل عروض الأسعار
-              </p>
-              <a
-                href="/contact"
-                class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full"
-              >
-                اطلب عرض سعر
-              </a>
-            </CardContent>
-          </Card>
-        </div>
+      <!-- Sub Services Grid -->
+      <div class="mb-12">
+        <SubServiceGrid 
+          subServices={service.sub_services} 
+          serviceSlug={service.slug}
+          serviceName={service.ar_name}
+          client:load 
+        />
       </div>
+
+      <!-- Process Steps -->
+      <div class="mb-12">
+        <ProcessSteps client:load />
+      </div>
+
+      <!-- FAQ Section -->
+      {service.seo.faq && service.seo.faq.length > 0 && (
+        <div class="mb-12">
+          <FAQ faqs={service.seo.faq} client:load />
+        </div>
+      )}
 
       <!-- Related Services -->
       <div class="text-center mb-8">

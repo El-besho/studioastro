@@ -7,6 +7,9 @@ import { Breadcrumb } from '../../../components/semantic/breadcrumb';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../components/ui/card';
 import { Badge } from '../../../components/ui/badge';
 import { Check, Star, Clock, Shield } from 'lucide-react';
+import { FAQ } from '../../../components/service/FAQ';
+import { PricingCard } from '../../../components/service/PricingCard';
+import { ProcessSteps } from '../../../components/service/ProcessSteps';
 
 export async function getStaticPaths() {
   const services = getAllServices();
@@ -68,123 +71,83 @@ const seoProps = {
         </p>
       </div>
 
-      <!-- Service Details -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-        <!-- Main Content -->
-        <div class="lg:col-span-2 space-y-6">
-          <!-- Service Overview -->
-          <Card>
-            <CardHeader>
-              <CardTitle class="font-headline text-2xl">نظرة عامة على الخدمة</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div class="prose prose-lg max-w-none">
-                <p class="text-foreground/80 leading-relaxed mb-4">
-                  نقدم خدمات {subService.ar_name} المتخصصة بأعلى معايير الجودة والاحترافية. 
-                  فريقنا من المحترفين المعتمدين جاهز لتقديم أفضل الحلول لاحتياجاتك.
-                </p>
-                <p class="text-foreground/80 leading-relaxed">
-                  {subService.description || `خدمات ${subService.ar_name} تشمل جميع المتطلبات الأساسية والاحترافية لضمان رضاكم التام.`}
-                </p>
-              </div>
-            </CardContent>
-          </Card>
+      <!-- Service Overview -->
+      <Card class="mb-12">
+        <CardHeader>
+          <CardTitle class="font-headline text-2xl">نظرة عامة على الخدمة</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div class="prose prose-lg max-w-none">
+            <p class="text-foreground/80 leading-relaxed mb-4">
+              نقدم خدمات {subService.ar_name} المتخصصة بأعلى معايير الجودة والاحترافية. 
+              فريقنا من المحترفين المعتمدين جاهز لتقديم أفضل الحلول لاحتياجاتك.
+            </p>
+            <p class="text-foreground/80 leading-relaxed">
+              {subService.seo.summary}
+            </p>
+          </div>
+        </CardContent>
+      </Card>
 
-          <!-- Features -->
-          <Card>
-            <CardHeader>
-              <CardTitle class="font-headline text-xl">مميزات الخدمة</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="flex items-center gap-3">
-                  <div class="flex items-center justify-center h-10 w-10 rounded-lg bg-primary/10 text-primary">
-                    <Star class="h-5 w-5" />
-                  </div>
-                  <div>
-                    <h4 class="font-semibold">جودة عالية</h4>
-                    <p class="text-sm text-muted-foreground">أعلى معايير الجودة</p>
-                  </div>
-                </div>
-                <div class="flex items-center gap-3">
-                  <div class="flex items-center justify-center h-10 w-10 rounded-lg bg-primary/10 text-primary">
-                    <Clock class="h-5 w-5" />
-                  </div>
-                  <div>
-                    <h4 class="font-semibold">سرعة في التنفيذ</h4>
-                    <p class="text-sm text-muted-foreground">تنفيذ سريع ومضمون</p>
-                  </div>
-                </div>
-                <div class="flex items-center gap-3">
-                  <div class="flex items-center justify-center h-10 w-10 rounded-lg bg-primary/10 text-primary">
-                    <Shield class="h-5 w-5" />
-                  </div>
-                  <div>
-                    <h4 class="font-semibold">ضمان الجودة</h4>
-                    <p class="text-sm text-muted-foreground">ضمان شامل على الخدمة</p>
-                  </div>
-                </div>
-                <div class="flex items-center gap-3">
-                  <div class="flex items-center justify-center h-10 w-10 rounded-lg bg-primary/10 text-primary">
-                    <Check class="h-5 w-5" />
-                  </div>
-                  <div>
-                    <h4 class="font-semibold">محترفين معتمدين</h4>
-                    <p class="text-sm text-muted-foreground">فريق من الخبراء</p>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        <!-- Sidebar -->
-        <div class="space-y-6">
-          <!-- CTA -->
-          <Card class="bg-primary/5 border-primary/20">
-            <CardContent class="pt-6">
-              <h3 class="font-headline text-lg font-semibold mb-2">احصل على عرض سعر مجاني</h3>
-              <p class="text-sm text-muted-foreground mb-4">
-                تواصل معنا للحصول على أفضل عروض الأسعار لخدمات {subService.ar_name}
-              </p>
-              <a
-                href="/contact"
-                class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full mb-3"
-              >
-                اطلب عرض سعر
-              </a>
-              <a
-                href="/services"
-                class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 w-full"
-              >
-                عرض جميع الخدمات
-              </a>
-            </CardContent>
-          </Card>
-
-          <!-- Related Services -->
-          <Card>
-            <CardHeader>
-              <CardTitle class="font-headline text-lg">خدمات أخرى في {service.ar_name}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ul class="space-y-3">
-                {service.sub_services.filter(s => s.slug !== subService.slug).slice(0, 5).map((sub) => (
-                  <li key={sub.id} class="flex items-center gap-3">
-                    <Check class="h-4 w-4 text-primary flex-shrink-0" />
-                    <a
-                      href={`/services/${service.slug}/${sub.slug}`}
-                      class="text-sm hover:underline hover:text-primary transition-colors"
-                    >
-                      {sub.ar_name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
-        </div>
+      <!-- Pricing Card -->
+      <div class="mb-12">
+        <PricingCard
+          title={subService.ar_name}
+          priceRange={subService.avg_price_range}
+          duration={2}
+          features={[
+            "فنيون معتمدون ومتخصصون",
+            "أدوات ومعدات متطورة",
+            "ضمان شامل على الخدمة",
+            "دعم فني 24/7",
+            "أسعار تنافسية"
+          ]}
+          isPopular={subService.urgency === 'emergency'}
+          emergencyAvailable={subService.urgency === 'emergency'}
+          seasonalMultiplier={subService.seasonal_multiplier}
+          onSelect={() => window.location.href = '/contact'}
+          client:load
+        />
       </div>
+
+      <!-- Process Steps -->
+      <div class="mb-12">
+        <ProcessSteps client:load />
+      </div>
+
+      <!-- FAQ Section -->
+      {subService.seo.faq && subService.seo.faq.length > 0 && (
+        <div class="mb-12">
+          <FAQ faqs={subService.seo.faq} client:load />
+        </div>
+      )}
+
+      <!-- Related Services -->
+      <Card class="mb-12">
+        <CardHeader>
+          <CardTitle class="font-headline text-xl">خدمات أخرى في {service.ar_name}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {service.sub_services.filter(s => s.slug !== subService.slug).map((sub) => (
+              <div key={sub.id} class="flex items-center gap-3 p-3 rounded-lg border hover:bg-muted/50 transition-colors">
+                <Check class="h-5 w-5 text-primary flex-shrink-0" />
+                <div>
+                  <a
+                    href={`/services/${service.slug}/${sub.slug}`}
+                    class="font-medium hover:underline hover:text-primary transition-colors"
+                  >
+                    {sub.ar_name}
+                  </a>
+                  <p class="text-sm text-muted-foreground">
+                    {sub.avg_price_range[0]} - {sub.avg_price_range[1]} ريال
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
 
       <!-- Related Services -->
       <div class="text-center mb-8">
