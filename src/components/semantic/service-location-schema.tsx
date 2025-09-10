@@ -2,8 +2,8 @@
 'use client';
 
 import { WithContext, Service, Question, ListItem } from 'schema-dts';
-import { siteConfig } from '@/config/site';
-import { ServiceHierarchy, CityProfile } from '@/types/services';
+import { siteConfig } from '../config/site';
+import { ServiceHierarchy, CityProfile } from '../types/services';
 
 interface ServiceLocationSchemaProps {
   service: ServiceHierarchy & { slug: string };

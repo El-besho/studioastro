@@ -1,0 +1,222 @@
+---
+import { Button } from './ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from './ui/card';
+import { Input } from './ui/input';
+import {
+  CheckCircle,
+  FileText,
+  Hammer,
+  MapPin,
+  Search,
+  Star,
+  ShieldCheck,
+  Users,
+  MessageSquare,
+} from 'lucide-react';
+import { Badge } from './ui/badge';
+import { ServiceGrid } from './service-grid';
+import SearchForm from './SearchForm.tsx';
+import TestimonialsSection from './TestimonialsSection.astro';
+
+export interface Props {
+  services: any[];
+  allServicesCount: number;
+}
+
+const { services, allServicesCount } = Astro.props;
+
+
+const howItWorksSteps = [
+    {
+        icon: MessageSquare,
+        title: "اطلب الخدمة",
+        description: "حدد الخدمة التي تحتاجها وموقعك. كلما زادت التفاصيل التي تقدمها، كانت العروض التي تحصل عليها أفضل."
+    },
+    {
+        icon: FileText,
+        title: "استلم العروض",
+        description: "في غضون دقائق، ستبدأ في تلقي عروض أسعار تنافسية من محترفين معتمدين ومتاحين في منطقتك."
+    },
+    {
+        icon: CheckCircle,
+        title: "اختر الأفضل",
+        description: "قارن بين عروض الأسعار، واقرأ تقييمات العملاء السابقين، واختر المحترف الذي يناسب احتياجاتك وميزانيتك."
+    }
+]
+
+const stats = [
+    {
+        icon: Users,
+        value: "10,000+",
+        label: "عميل راضٍ"
+    },
+    {
+        icon: ShieldCheck,
+        value: "1,200+",
+        label: "محترف معتمد"
+    },
+    {
+        icon: Hammer,
+        value: "25,000+",
+        label: "خدمة مكتملة"
+    },
+    {
+        icon: MapPin,
+        value: "20+",
+        label: "مدينة مغطاة"
+    }
+]
+---
+
+<div class="flex flex-col min-h-[100dvh]">
+  <!-- Hero Section -->
+  <section class="relative w-full pt-24 pb-12 md:pt-32 md:pb-24 lg:pt-40 lg:pb-32">
+    <div class="container px-4 md:px-6">
+      <div class="flex flex-col items-center space-y-4 text-center">
+        <div class="space-y-2">
+          <h1 class="font-headline text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl/none">
+            أفضل الخدمات لمنزلك وعملك في السعودية
+          </h1>
+          <p class="mx-auto max-w-[700px] text-foreground/80 md:text-xl">
+            من التكييف والسباكة إلى الصيانة العامة، احصل على عروض أسعار
+            مجانية من أفضل المحترفين المعتمدين.
+          </p>
+        </div>
+        <div class="w-full max-w-2xl">
+          <SearchForm client:load />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="w-full py-12 md:py-24 bg-muted/50">
+    <div class="container px-4 md:px-6">
+      <div class="flex flex-col items-center justify-center space-y-4 text-center">
+        <div class="space-y-2">
+          <Badge class="font-headline bg-primary/10 text-primary hover:bg-primary/20">
+            خدماتنا المتاحة
+          </Badge>
+          <h2 class="font-headline text-3xl font-bold tracking-tighter sm:text-5xl">
+            خدماتنا الأساسية
+          </h2>
+          <p class="max-w-[900px] text-foreground/80 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+            اكتشف مجموعة واسعة من الخدمات المنزلية التي يقدمها أفضل
+            المحترفين في المملكة.
+          </p>
+        </div>
+      </div>
+      <div class="py-12">
+        <ServiceGrid services={services} />
+      </div>
+       <div class="text-center">
+        <Button variant="outline" asChild>
+          <a href="/services">عرض جميع الخدمات ({allServicesCount}+)</a>
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section id="how-it-works" class="w-full py-12 md:py-24">
+    <div class="container px-4 md:px-6">
+      <div class="flex flex-col items-center justify-center space-y-4 text-center">
+        <div class="space-y-3">
+          <Badge class="font-headline bg-primary/10 text-primary hover:bg-primary/20">
+            كيف نعمل
+          </Badge>
+          <h2 class="font-headline text-3xl font-bold tracking-tighter md:text-4xl/tight">
+            احصل على الخدمة في 3 خطوات بسيطة
+          </h2>
+          <p class="mx-auto max-w-[600px] text-foreground/80 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+            طلب الخدمة أصبح أسهل وأسرع من أي وقت مضى.
+          </p>
+        </div>
+      </div>
+      <div class="mx-auto max-w-2xl py-12 prose prose-lg dark:prose-invert">
+            <ol class="timeline">
+                {howItWorksSteps.map((step, index) => (
+                     <li key={index} data-step={index + 1}>
+                        <div class='flex items-center gap-4 mb-2'>
+                            <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-muted text-primary">
+                                <step.icon class="w-6 h-6" />
+                            </div>
+                            <h3 class="font-bold text-lg font-headline m-0">{step.title}</h3>
+                        </div>
+                        <p class="text-muted-foreground">{step.description}</p>
+                    </li>
+                ))}
+            </ol>
+       </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section id="stats" class="w-full py-12 md:py-24 bg-muted/50">
+    <div class="container px-4 md:px-6">
+       <div class="flex flex-col items-center justify-center space-y-4 text-center">
+        <div class="space-y-3">
+          <Badge class="font-headline bg-primary/10 text-primary hover:bg-primary/20">
+            لماذا تختارنا؟
+          </Badge>
+          <h2 class="font-headline text-3xl font-bold tracking-tighter md:text-4xl/tight">
+            أرقامنا تتحدث عنا
+          </h2>
+          <p class="mx-auto max-w-[600px] text-foreground/80 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+            نحن نفخر ببناء شبكة واسعة من الثقة والاحترافية في جميع أنحاء المملكة.
+          </p>
+        </div>
+      </div>
+      <div class="mx-auto grid max-w-5xl items-start gap-8 sm:grid-cols-2 md:grid-cols-4 md:gap-12 py-12">
+        {stats.map((stat, index) => (
+            <div key={index} class="grid gap-2 text-center">
+            <div class="flex justify-center">
+              <div class="flex items-center justify-center rounded-full bg-primary/10 text-primary h-20 w-20 mb-4">
+                <stat.icon class="h-10 w-10" />
+              </div>
+            </div>
+            <h3 class="font-headline text-3xl font-bold">{stat.value}</h3>
+            <p class="text-muted-foreground">{stat.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <TestimonialsSection />
+
+  <!-- CTA Section -->
+  <section class="w-full py-12 md-py-24 lg:py-32">
+    <div class="container grid items-center justify-center gap-4 px-4 text-center md:px-6">
+      <div class="space-y-3">
+        <h2 class="font-headline text-3xl font-bold tracking-tighter md:text-4xl/tight">
+          هل أنت جاهز لطلب خدمتك الأولى؟
+        </h2>
+        <p class="mx-auto max-w-[600px] text-foreground/80 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+          احصل على عروض أسعار مجانية من أفضل المحترفين في مدينتك. العملية
+          سريعة، مجانية، وبدون أي التزام.
+        </p>
+      </div>
+      <div class="mx-auto w-full max-w-sm space-y-2">
+        <Button
+          type="submit"
+          size="lg"
+          class="w-full font-headline"
+          asChild
+        >
+          <a href="/services">اطلب عرض سعر مجاني</a>
+        </Button>
+        <p class="text-xs text-muted-foreground">
+          بياناتك في أمان تام معنا.
+        </p>
+      </div>
+    </div>
+  </section>
+</div>

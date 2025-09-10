@@ -1,8 +1,8 @@
 
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+import { Button } from './ui/button';
 import { ArrowLeft } from 'lucide-react';
-import { ServiceHierarchy, CityProfile } from '@/types/services';
+import { ServiceHierarchy, CityProfile } from '../types/services';
 import { ServiceCard } from './service-card';
 
 interface SearchResultsProps {

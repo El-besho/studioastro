@@ -2,9 +2,9 @@
 'use client';
 
 import { WithContext, Service, Offer, Question } from 'schema-dts';
-import { siteConfig } from '@/config/site';
-import { ServiceHierarchy, SubService } from '@/types/services';
-import { getAllCities } from '@/lib/services';
+import { siteConfig } from '../config/site';
+import { ServiceHierarchy, SubService } from '../types/services';
+import { getAllCities } from '../lib/services';
 
 interface SubServiceSchemaProps {
   service: ServiceHierarchy & { slug: string };

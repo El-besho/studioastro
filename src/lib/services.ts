@@ -1,47 +1,47 @@
 
-import { airConditioningHvac } from '@/content/services/air-conditioning-hvac';
-import { plumbingServices } from '@/content/services/plumbing-services';
-import { electricalServices } from '@/content/services/electrical-services';
-import { cleaningServices } from '@/content/services/cleaning-services';
-import { homeMaintenanceRepair } from '@/content/services/home-maintenance-repair';
-import { pestControl } from '@/content/services/pest-control';
-import { landscapingGardening } from '@/content/services/landscaping-gardening';
-import { securityServices } from '@/content/services/security-services';
-import { paintingDecor } from '@/content/services/painting-decor';
-import { constructionRenovation } from '@/content/services/construction-renovation';
-import { movingRelocation } from '@/content/services/moving-relocation';
-import { automotiveServices } from '@/content/services/automotive-services';
-import { itTechServices } from '@/content/services/it-tech-services';
-import { eventPlanning } from '@/content/services/event-planning';
-import { swimmingPoolServices } from '@/content/services/swimming-pool-services';
-import { washingMachineMaintenance } from '@/content/services/washing-machine-maintenance';
-import { refrigeratorMaintenance } from '@/content/services/refrigerator-maintenance';
-import { marbleTilingServices } from '@/content/services/marble-tiling-services';
+import { airConditioningHvac } from '../content/services/air-conditioning-hvac';
+import { plumbingServices } from '../content/services/plumbing-services';
+import { electricalServices } from '../content/services/electrical-services';
+import { cleaningServices } from '../content/services/cleaning-services';
+import { homeMaintenanceRepair } from '../content/services/home-maintenance-repair';
+import { pestControl } from '../content/services/pest-control';
+import { landscapingGardening } from '../content/services/landscaping-gardening';
+import { securityServices } from '../content/services/security-services';
+import { paintingDecor } from '../content/services/painting-decor';
+import { constructionRenovation } from '../content/services/construction-renovation';
+import { movingRelocation } from '../content/services/moving-relocation';
+import { automotiveServices } from '../content/services/automotive-services';
+import { itTechServices } from '../content/services/it-tech-services';
+import { eventPlanning } from '../content/services/event-planning';
+import { swimmingPoolServices } from '../content/services/swimming-pool-services';
+import { washingMachineMaintenance } from '../content/services/washing-machine-maintenance';
+import { refrigeratorMaintenance } from '../content/services/refrigerator-maintenance';
+import { marbleTilingServices } from '../content/services/marble-tiling-services';
 
 
-import { riyadh } from '@/content/cities/riyadh';
-import { jeddah } from '@/content/cities/jeddah';
-import { makkah } from '@/content/cities/makkah';
-import { medina } from '@/content/cities/medina';
-import { dammam } from '@/content/cities/dammam';
-import { khobar } from '@/content/cities/khobar';
-import { dhahran } from '@/content/cities/dhahran';
-import { alAhsa } from '@/content/cities/al-ahsa';
-import { taif } from '@/content/cities/taif';
-import { buraidah } from '@/content/cities/buraidah';
-import { tabuk } from '@/content/cities/tabuk';
-import { abha } from '@/content/cities/abha';
-import { khamisMushait } from '@/content/cities/khamis-mushait';
-import { jizan } from '@/content/cities/jizan';
-import { najran } from '@/content/cities/najran';
-import { yanbu } from '@/content/cities/yanbu';
-import { jubail } from '@/content/cities/jubail';
-import { hail } from '@/content/cities/hail';
-import { sakaka } from '@/content/cities/sakaka';
-import { arar } from '@/content/cities/arar';
+import { riyadh } from '../content/cities/riyadh';
+import { jeddah } from '../content/cities/jeddah';
+import { makkah } from '../content/cities/makkah';
+import { medina } from '../content/cities/medina';
+import { dammam } from '../content/cities/dammam';
+import { khobar } from '../content/cities/khobar';
+import { dhahran } from '../content/cities/dhahran';
+import { alAhsa } from '../content/cities/al-ahsa';
+import { taif } from '../content/cities/taif';
+import { buraidah } from '../content/cities/buraidah';
+import { tabuk } from '../content/cities/tabuk';
+import { abha } from '../content/cities/abha';
+import { khamisMushait } from '../content/cities/khamis-mushait';
+import { jizan } from '../content/cities/jizan';
+import { najran } from '../content/cities/najran';
+import { yanbu } from '../content/cities/yanbu';
+import { jubail } from '../content/cities/jubail';
+import { hail } from '../content/cities/hail';
+import { sakaka } from '../content/cities/sakaka';
+import { arar } from '../content/cities/arar';
 
 
-import { ServiceHierarchy, CityProfile, SubService, ServiceCategory } from '@/types/services';
+import { ServiceHierarchy, CityProfile, SubService, ServiceCategory } from '../types/services';
 
 const services = [
     airConditioningHvac,

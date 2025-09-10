@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { siteConfig } from '../config/site';
+import { getAllServices } from '../lib/services';
+import HomePage from '../components/HomePage.astro';
+
+const allServices = getAllServices();
+const essentialServices = allServices.filter(s => (s.category === 'essential' || s.category === 'emergency') && s.priority === 1).slice(0, 5);
+---
+
+<Layout 
+  title={`${siteConfig.name} | احصل على أفضل الخدمات المنزلية`}
+  description={siteConfig.description}
+>
+  <HomePage services={essentialServices} allServicesCount={allServices.length} />
+</Layout>

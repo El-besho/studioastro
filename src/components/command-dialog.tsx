@@ -14,7 +14,7 @@ import {
   LucideIcon,
 } from "lucide-react"
 
-import { cn } from "@/lib/utils"
+import { cn } from "../lib/utils"
 import {
   CommandDialog as ShadcnCommandDialog,
   CommandEmpty,
@@ -23,9 +23,9 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-} from "@/components/ui/command"
-import { getAllServices } from "@/lib/services"
-import { useRouter } from "next/navigation"
+} from "./ui/command"
+import { getAllServices } from "../lib/services"
+// import { useRouter } from "next/navigation" // Removed for Astro compatibility
 
 import {
     Wind,
@@ -75,7 +75,7 @@ interface Props {
 }
 
 export function CommandDialog({ open, onOpenChange }: Props) {
-  const router = useRouter()
+  // const router = useRouter() // Removed for Astro compatibility
   const allServices = React.useMemo(() => getAllServices(), [])
 
   const runCommand = React.useCallback((command: () => unknown) => {
@@ -96,7 +96,7 @@ export function CommandDialog({ open, onOpenChange }: Props) {
                 key={service.slug}
                 value={service.ar_name}
                 onSelect={() => {
-                  runCommand(() => router.push(`/services/${service.slug}`))
+                  runCommand(() => window.location.href = `/services/${service.slug}`)
                 }}
               >
                 <Icon className="mr-2 h-4 w-4" />

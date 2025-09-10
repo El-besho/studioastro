@@ -1,0 +1,123 @@
+---
+import type { Props } from 'astro';
+import { cn } from '../lib/utils';
+import { siteConfig } from '../config/site';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { Breadcrumb } from '../components/semantic/breadcrumb';
+import { Toaster } from '../components/ui/toaster';
+import '../styles/globals.css';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  canonical?: string;
+}
+
+const {
+  title = `${siteConfig.name} | احصل على أفضل الخدمات المنزلية`,
+  description = siteConfig.description,
+  ogImage = siteConfig.ogImage,
+  canonical = Astro.url.href
+} = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: siteConfig.name,
+  url: siteConfig.url,
+  alternateName: 'Enqaz',
+};
+
+const orgJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: siteConfig.name,
+  url: siteConfig.url,
+  logo: `${siteConfig.url}/logo.png`,
+};
+---
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="ar_SA" />
+    <meta property="og:site_name" content={siteConfig.name} />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonical} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImage} />
+    <meta property="twitter:creator" content="@enqaz" />
+    
+    <!-- Keywords -->
+    <meta name="keywords" content={siteConfig.keywords.join(', ')} />
+    
+    <!-- Robots -->
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1" />
+    
+    <!-- Theme -->
+    <meta name="theme-color" content="white" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="black" media="(prefers-color-scheme: dark)" />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;800&family=Noto+Sans+Arabic:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    
+    <!-- JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+    <script type="application/ld+json" set:html={JSON.stringify(orgJsonLd)}></script>
+  </head>
+  <body class={cn(
+    'min-h-screen bg-background font-body antialiased',
+    'font-[--font-cairo] font-[--font-noto-sans-arabic] font-[--font-code]'
+  )}>
+    <Header />
+    <Breadcrumb />
+    <main><slot /></main>
+    <Footer />
+    <Toaster />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --font-cairo: 'Cairo', sans-serif;
+    --font-noto-sans-arabic: 'Noto Sans Arabic', sans-serif;
+    --font-code: 'JetBrains Mono', monospace;
+  }
+  
+  .font-headline {
+    font-family: var(--font-cairo);
+  }
+  
+  .font-body {
+    font-family: var(--font-noto-sans-arabic);
+  }
+  
+  .font-code {
+    font-family: var(--font-code);
+  }
+</style>

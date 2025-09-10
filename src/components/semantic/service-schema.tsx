@@ -1,9 +1,9 @@
 
 'use client';
 
-import { ServiceHierarchy } from '@/types/services';
-import { siteConfig } from '@/config/site';
-import { getAllCities } from '@/lib/services';
+import { ServiceHierarchy } from '../types/services';
+import { siteConfig } from '../config/site';
+import { getAllCities } from '../lib/services';
 import { Service, WithContext } from 'schema-dts';
 
 interface ServiceSchemaProps {

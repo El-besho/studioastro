@@ -2,8 +2,8 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { cn } from '@/lib/utils';
-import { Heading } from '@/types/blog';
+import { cn } from '../lib/utils';
+import { Heading } from '../types/blog';
 
 interface TableOfContentsProps {
   headings: Heading[];

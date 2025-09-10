@@ -1,7 +1,7 @@
 
-import { ServiceHierarchy } from '@/types/services';
+import { ServiceHierarchy } from '../types/services';
 import { ServiceCard } from './service-card';
-import { cn } from '@/lib/utils';
+import { cn } from '../lib/utils';
 
 interface ServiceGridProps {
     services: (ServiceHierarchy & { slug: string })[];

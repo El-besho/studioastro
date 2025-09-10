@@ -3,9 +3,9 @@
 
 import { WithContext, ItemList } from "schema-dts";
 import Link from "next/link";
-import { siteConfig } from "@/config/site";
-import { CategorizedQueries, QueryIntent, TaggedQuery } from '@/types/queries';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { siteConfig } from "../config/site";
+import { CategorizedQueries, QueryIntent, TaggedQuery } from '../types/queries';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface TrendingQueriesProps {

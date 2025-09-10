@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion, AnimatePresence } from "framer-motion";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "./ui/button";
 import {
   Card,
   CardContent,
@@ -15,9 +15,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+} from "./ui/card";
+import { Input } from "./ui/input";
+import { Textarea } from "./ui/textarea";
 import {
   Form,
   FormControl,
@@ -25,18 +25,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from "./ui/form";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { toast } from "@/hooks/use-toast";
+} from "./ui/select";
+import { toast } from "../../hooks/use-toast";
 import { CheckCircle, ArrowRight, ArrowLeft, Send, Loader2, Bot } from "lucide-react";
 import { getLeadQualificationQuestion } from "@/ai/flows/lead-qualification";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "./ui/skeleton";
 
 const leadSchema = z.object({
   name: z.string().min(2, { message: "الاسم مطلوب" }),

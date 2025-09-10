@@ -1,7 +1,7 @@
 
-import { CityProfile, ServiceHierarchy, SubService } from '@/types/services';
+import { CityProfile, ServiceHierarchy, SubService } from '../types/services';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+import { Button } from './ui/button';
 import { MapPin } from 'lucide-react';
 
 interface CityListProps {

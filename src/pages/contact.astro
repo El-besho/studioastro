@@ -1,0 +1,86 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { siteConfig } from '../config/site';
+---
+
+<Layout 
+  title={`تواصل معنا | ${siteConfig.name}`}
+  description="تواصل مع فريق إنقاذ للحصول على المساعدة أو الاستفسارات"
+>
+  <div class="container py-12 px-4 md:px-6">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="font-headline text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl mb-8">
+        تواصل معنا
+      </h1>
+      
+      <div class="grid md:grid-cols-2 gap-12">
+        <div>
+          <h2 class="font-headline text-2xl font-bold mb-6">معلومات التواصل</h2>
+          
+          <div class="space-y-4">
+            <div>
+              <h3 class="font-semibold mb-2">البريد الإلكتروني</h3>
+              <p class="text-muted-foreground">info@enqaz.org</p>
+            </div>
+            
+            <div>
+              <h3 class="font-semibold mb-2">الهاتف</h3>
+              <p class="text-muted-foreground">+966 XX XXX XXXX</p>
+            </div>
+            
+            <div>
+              <h3 class="font-semibold mb-2">العنوان</h3>
+              <p class="text-muted-foreground">المملكة العربية السعودية</p>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <h2 class="font-headline text-2xl font-bold mb-6">أرسل لنا رسالة</h2>
+          
+          <form class="space-y-4">
+            <div>
+              <label for="name" class="block text-sm font-medium mb-2">الاسم</label>
+              <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                class="w-full px-3 py-2 border border-input rounded-md bg-background"
+                required
+              />
+            </div>
+            
+            <div>
+              <label for="email" class="block text-sm font-medium mb-2">البريد الإلكتروني</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                class="w-full px-3 py-2 border border-input rounded-md bg-background"
+                required
+              />
+            </div>
+            
+            <div>
+              <label for="message" class="block text-sm font-medium mb-2">الرسالة</label>
+              <textarea 
+                id="message" 
+                name="message" 
+                rows="4"
+                class="w-full px-3 py-2 border border-input rounded-md bg-background"
+                required
+              ></textarea>
+            </div>
+            
+            <button 
+              type="submit"
+              class="w-full bg-primary text-primary-foreground py-2 px-4 rounded-md font-headline hover:bg-primary/90 transition-colors"
+            >
+              إرسال الرسالة
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

@@ -1,7 +1,7 @@
 
 import Link from 'next/link';
 import { Facebook, Instagram, Twitter } from 'lucide-react';
-import { Logo } from '@/components/logo';
+import { Logo } from './logo';
 
 export function Footer() {
   return (

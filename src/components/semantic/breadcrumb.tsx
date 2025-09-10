@@ -1,14 +1,12 @@
 
 'use client'
 
-import React from 'react';
-import { usePathname } from 'next/navigation';
-import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
 import { Home, ChevronLeft } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { siteConfig } from '@/config/site';
-import { getAllServices, getCityBySlug, getServiceCategories } from '@/lib/services';
+import { cn } from '../../lib/utils';
+import { Button } from '../ui/button';
+import { siteConfig } from '../../config/site';
+import { getAllServices, getCityBySlug, getServiceCategories } from '../../lib/services';
 
 type BreadcrumbSegment = {
   label: string;
@@ -76,7 +74,12 @@ const getLabelForSegment = (segment: string, fullPath: string) => {
 
 
 export function Breadcrumb() {
-  const pathname = usePathname();
+  const [pathname, setPathname] = useState('');
+  
+  useEffect(() => {
+    setPathname(window.location.pathname);
+  }, []);
+  
   const segments = pathname.split('/').filter(Boolean);
 
   // Don't show breadcrumbs on the homepage
@@ -118,9 +121,9 @@ export function Breadcrumb() {
       <nav aria-label="Breadcrumb" className="bg-muted/50">
         <div className="container flex items-center gap-2 px-4 py-2 text-sm text-muted-foreground">
           <Button variant="ghost" size="icon-sm" className="h-7 w-7" asChild>
-            <Link href="/" aria-label="Home">
+            <a href="/" aria-label="Home">
               <Home className="h-4 w-4" />
-            </Link>
+            </a>
           </Button>
           <ChevronLeft className="h-4 w-4" />
           
@@ -129,7 +132,7 @@ export function Breadcrumb() {
             
             return (
               <div key={segment.path} className="flex items-center gap-2">
-                <Link
+                <a
                   href={segment.path}
                   className={cn(
                     'hover:text-foreground',
@@ -138,7 +141,7 @@ export function Breadcrumb() {
                   aria-current={isLast ? 'page' : undefined}
                 >
                   {segment.label}
-                </Link>
+                </a>
                 {!isLast && <ChevronLeft className="h-4 w-4" />}
               </div>
             );

@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { MapPin } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { CityProfile } from '@/types/services';
-import { ServiceHierarchy } from '@/types/services';
+import { Button } from './ui/button';
+import { CityProfile } from '../types/services';
+import { ServiceHierarchy } from '../types/services';
 
 interface CityLinkProps {
   city: CityProfile;

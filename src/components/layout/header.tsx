@@ -2,16 +2,16 @@
 'use client';
 
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+import { Button } from './ui/button';
 import {
   Menu,
   MapPin,
   ChevronDown,
   Search
 } from 'lucide-react';
-import { Logo } from '@/components/logo';
-import { navLinks } from '@/config/nav';
-import { getAllCities, getCityBySlug, getServiceBySlug } from '@/lib/services';
+import { Logo } from './logo';
+import { navLinks } from '../config/nav';
+import { getAllCities, getCityBySlug, getServiceBySlug } from '../lib/services';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { CommandDialog } from '../command-dialog';

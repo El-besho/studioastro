@@ -7,13 +7,13 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
-} from '@/components/ui/card';
+} from './ui/card';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordion';
+} from './ui/accordion';
 import {
   Check,
   ArrowLeft,
@@ -33,16 +33,16 @@ import {
   CheckCircle,
 } from 'lucide-react';
 import Link from 'next/link';
-import { CityList } from '@/components/city-list';
-import { LeadForm } from '@/components/lead-form';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { ServiceHierarchy, CityProfile, SubService } from '@/types/services';
-import { getAllCities, getAllServices } from '@/lib/services';
-import { SubServiceSchema } from '@/components/semantic/sub-service-schema';
-import { ServiceLocationSchema } from '@/components/semantic/service-location-schema';
+import { CityList } from './city-list';
+import { LeadForm } from './lead-form';
+import { Button } from './ui/button';
+import { Badge } from './ui/badge';
+import { ServiceHierarchy, CityProfile, SubService } from '../types/services';
+import { getAllCities, getAllServices } from '../lib/services';
+import { SubServiceSchema } from './semantic/sub-service-schema';
+import { ServiceLocationSchema } from './semantic/service-location-schema';
 import { TrendingQueries } from './trending-queries';
-import { CategorizedQueries } from '@/types/queries';
+import { CategorizedQueries } from '../types/queries';
 import { ServiceCard } from './service-card';
 
 

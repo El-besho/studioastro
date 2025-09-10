@@ -1,9 +1,8 @@
 
-import Link from 'next/link';
 import {
   Card,
   CardContent,
-} from '@/components/ui/card';
+} from './ui/card';
 import {
   Wind,
   Wrench,
@@ -26,8 +25,8 @@ import {
   Refrigerator,
   Gem
 } from 'lucide-react';
-import { ServiceHierarchy, CityProfile } from '@/types/services';
-import { cn } from '@/lib/utils';
+import { ServiceHierarchy, CityProfile } from '../types/services';
+import { cn } from '../lib/utils';
 
 const serviceIconMap: Record<string, LucideIcon> = {
   'air-conditioning-hvac': Wind,
@@ -76,7 +75,7 @@ export function ServiceCard({
     : service.seo.summary;
 
   return (
-    <Link href={link} className="block h-full">
+    <a href={link} className="block h-full">
       <Card className={cn('text-center group hover:shadow-xl hover:-translate-y-1 transition-transform duration-300 h-full flex flex-col', className)}>
         <CardContent className="flex flex-col items-center justify-start p-6 gap-4 text-center flex-grow">
           <div className="flex items-center justify-center h-16 w-16 p-4 bg-primary/10 rounded-full text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
@@ -110,6 +109,6 @@ export function ServiceCard({
           )}
         </CardContent>
       </Card>
-    </Link>
+    </a>
   );
 }
