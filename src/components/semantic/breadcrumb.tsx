@@ -6,7 +6,7 @@ import { Home, ChevronLeft } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { Button } from '../ui/button';
 import { siteConfig } from '../../config/site';
-import { getAllServices, getCityBySlug, getServiceCategories } from '../../lib/services';
+import { getAllServices, getCityBySlug, getServiceCategories, getAllCities } from '../../lib/services';
 
 type BreadcrumbSegment = {
   label: string;
@@ -15,7 +15,7 @@ type BreadcrumbSegment = {
 
 
 const allServices = getAllServices();
-const allCities = getAllServices();
+const allCities = getAllCities();
 const allCategories = getServiceCategories();
 
 // In a real-world app, you'd likely fetch real names from a database/CMS.
@@ -41,13 +41,28 @@ const getLabelForSegment = (segment: string, fullPath: string) => {
           if (category) return category.ar_name;
         }
 
-         const serviceSlug = pathSegments[1];
-         const mainService = allServices.find(s => s.slug === serviceSlug);
-         if (mainService) {
-            const subService = mainService.sub_services.find(sub => sub.slug === decodedSegment);
-             if (subService) {
-                return subService.ar_name;
-             }
+         // Handle service pages: /services/[service]
+         if (pathSegments.length === 2) {
+           const service = allServices.find(s => s.slug === decodedSegment);
+           if (service) return service.ar_name;
+         }
+
+         // Handle sub-service pages: /services/[service]/[subservice]
+         if (pathSegments.length === 3) {
+           const serviceSlug = pathSegments[1];
+           const mainService = allServices.find(s => s.slug === serviceSlug);
+           if (mainService) {
+              const subService = mainService.sub_services.find(sub => sub.slug === decodedSegment);
+               if (subService) {
+                  return subService.ar_name;
+               }
+           }
+         }
+
+         // Handle city pages: /services/[service]/[city] or /services/[service]/[subservice]/[city]
+         if (pathSegments.length >= 3) {
+           const city = allCities.find(c => c.slug === decodedSegment);
+           if (city) return city.ar_name;
          }
       }
 
