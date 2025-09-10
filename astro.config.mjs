@@ -13,11 +13,24 @@ export default defineConfig({
   ],
   output: 'static',
   build: {
-    assets: 'assets'
+    assets: 'assets',
+    inlineStylesheets: 'auto'
   },
+  compressHTML: true,
   vite: {
     define: {
       'process.env': process.env
+    },
+    build: {
+      cssCodeSplit: true,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'react-vendor': ['react', 'react-dom'],
+            'ui-vendor': ['lucide-react']
+          }
+        }
+      }
     }
   }
 });
