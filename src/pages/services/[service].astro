@@ -22,12 +22,12 @@ if (!service) {
   return Astro.redirect('/404');
 }
 
-const seoProps = getSEOProps('services', {
+const seoProps = {
   title: `${service.ar_name} | إنقاذ`,
-  description: service.seo.description,
-  keywords: service.seo.keywords,
+  description: service.seo.summary,
+  keywords: service.seo.primary_keywords,
   canonical: generateCanonicalUrl(`/services/${service.slug}`)
-});
+};
 ---
 
 <Layout {...seoProps}>

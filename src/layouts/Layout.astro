@@ -94,7 +94,7 @@ const orgJsonLd = {
         meta: [
           { name: "viewport", content: "width=device-width, initial-scale=1.0" },
           { name: "generator", content: Astro.generator },
-          { name: "keywords", content: keywords.join(', ') },
+          { name: "keywords", content: Array.isArray(keywords) ? keywords.join(', ') : keywords },
           { name: "author", content: author },
           { name: "theme-color", content: "white", media: "(prefers-color-scheme: light)" },
           { name: "theme-color", content: "black", media: "(prefers-color-scheme: dark)" },

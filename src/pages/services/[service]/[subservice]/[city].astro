@@ -42,12 +42,12 @@ if (!service || !subService || !city) {
   return Astro.redirect('/404');
 }
 
-const seoProps = getSEOProps('services', {
+const seoProps = {
   title: `${subService.ar_name} في ${city.ar_name} | ${service.ar_name}`,
   description: `احصل على أفضل خدمات ${subService.ar_name} في ${city.ar_name} من محترفين معتمدين ومتخصصين في ${service.ar_name}`,
-  keywords: [subService.ar_name, service.ar_name, city.ar_name, 'خدمات منزلية', 'السعودية'],
+  keywords: [...subService.seo.primary_keywords, service.ar_name, city.ar_name, 'خدمات منزلية', 'السعودية'],
   canonical: generateCanonicalUrl(`/services/${service.slug}/${subService.slug}/${city.slug}`)
-});
+};
 ---
 
 <Layout {...seoProps}>
