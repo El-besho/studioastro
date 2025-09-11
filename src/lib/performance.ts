@@ -1,4 +1,4 @@
-import { getCLS, getFID, getFCP, getLCP, getTTFB, type Metric } from 'web-vitals';
+import { onCLS, onFCP, onLCP, onTTFB, onINP, type Metric } from 'web-vitals';
 
 interface PerformanceMetric extends Metric {
   timestamp: number;
@@ -79,11 +79,11 @@ class PerformanceMonitor {
     if (typeof window === 'undefined') return;
 
     // Core Web Vitals
-    getCLS(this.handleMetric.bind(this));
-    getFID(this.handleMetric.bind(this));
-    getFCP(this.handleMetric.bind(this));
-    getLCP(this.handleMetric.bind(this));
-    getTTFB(this.handleMetric.bind(this));
+    onCLS(this.handleMetric.bind(this));
+    onFCP(this.handleMetric.bind(this));
+    onLCP(this.handleMetric.bind(this));
+    onTTFB(this.handleMetric.bind(this));
+    onINP(this.handleMetric.bind(this));
 
     if (this.config.debug) {
       console.log('[Performance] Monitoring started');
@@ -113,7 +113,7 @@ class PerformanceMonitor {
   } {
     const budgets = {
       LCP: 2500, // 2.5 seconds
-      FID: 100,  // 100 milliseconds
+      INP: 200,  // 200 milliseconds (replaces FID)
       CLS: 0.1,  // 0.1
       FCP: 1800, // 1.8 seconds
       TTFB: 800, // 800 milliseconds
@@ -142,7 +142,7 @@ class PerformanceMonitor {
   public getPerformanceScore(): number {
     const budgets = {
       LCP: 2500,
-      FID: 100,
+      INP: 200,
       CLS: 0.1,
       FCP: 1800,
       TTFB: 800,
