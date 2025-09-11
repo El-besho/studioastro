@@ -1,0 +1,49 @@
+---
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { HelpCircle, ChevronDown } from 'lucide-react';
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  faqs: FAQItem[];
+  title?: string;
+}
+
+const { faqs, title = "الأسئلة الشائعة" } = Astro.props;
+---
+
+<Card>
+  <CardHeader>
+    <CardTitle class="font-headline text-2xl flex items-center gap-2">
+      <HelpCircle class="h-6 w-6 text-primary" />
+      {title}
+    </CardTitle>
+  </CardHeader>
+  <CardContent>
+    <div class="space-y-4">
+      {faqs.map((faq, index) => (
+        <details
+          key={index}
+          class="border rounded-lg overflow-hidden hover:shadow-md transition-shadow group"
+        >
+          <summary class="w-full px-6 py-4 text-right flex items-center justify-between hover:bg-muted/50 transition-colors cursor-pointer list-none">
+            <span class="font-medium text-foreground pl-2">
+              {faq.question}
+            </span>
+            <ChevronDown class="h-5 w-5 text-muted-foreground transition-transform group-open:rotate-180 flex-shrink-0" />
+          </summary>
+          <div class="px-6 pb-4">
+            <div class="border-t pt-4">
+              <p class="text-foreground/80 leading-relaxed text-right">
+                {faq.answer}
+              </p>
+            </div>
+          </div>
+        </details>
+      ))}
+    </div>
+  </CardContent>
+</Card>

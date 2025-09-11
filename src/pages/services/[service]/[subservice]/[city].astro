@@ -12,6 +12,7 @@ import { ServiceStats } from '../../../../components/service/ServiceStats';
 import { ServiceGallery } from '../../../../components/service/ServiceGallery';
 import { ServiceProviders } from '../../../../components/service/ServiceProviders';
 import { ServiceCTA } from '../../../../components/service/ServiceCTA';
+import FAQ from '../../../../components/service/FAQ.astro';
 import { FAQSchema } from '../../../../components/semantic/faq-schema';
 
 export async function getStaticPaths() {
@@ -224,6 +225,11 @@ const seoProps = {
               </div>
             </CardContent>
           </Card>
+
+          <!-- FAQ Section -->
+          {subService.seo.faq && subService.seo.faq.length > 0 && (
+            <FAQ faqs={subService.seo.faq} />
+          )}
 
           <!-- Related Services -->
           <Card>

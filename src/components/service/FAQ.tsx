@@ -33,14 +33,14 @@ export function FAQ({ faqs, title = "الأسئلة الشائعة" }: FAQProps)
               className="border rounded-lg overflow-hidden hover:shadow-md transition-shadow group"
             >
               <summary className="w-full px-6 py-4 text-right flex items-center justify-between hover:bg-muted/50 transition-colors cursor-pointer list-none">
-                <ChevronDown className="h-5 w-5 text-muted-foreground transition-transform group-open:rotate-180" />
-                <span className="font-medium text-foreground pr-2">
+                <span className="font-medium text-foreground pl-2">
                   {faq.question}
                 </span>
+                <ChevronDown className="h-5 w-5 text-muted-foreground transition-transform group-open:rotate-180 flex-shrink-0" />
               </summary>
               <div className="px-6 pb-4">
                 <div className="border-t pt-4">
-                  <p className="text-foreground/80 leading-relaxed">
+                  <p className="text-foreground/80 leading-relaxed text-right">
                     {faq.answer}
                   </p>
                 </div>
