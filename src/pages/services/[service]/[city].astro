@@ -21,6 +21,8 @@ import { LocalBusinessSchema } from '../../../components/semantic/local-business
 import { ServiceComparison } from '../../../components/service/ServiceComparison';
 import { PriceCalculator } from '../../../components/service/PriceCalculator';
 import { EmergencyContact } from '../../../components/service/EmergencyContact';
+import { AuthorityBadges } from '../../../components/AuthorityBadges';
+import { IndustryStandards } from '../../../components/IndustryStandards';
 
 export async function getStaticPaths() {
   const services = getAllServices();
@@ -53,10 +55,22 @@ if (!service || !city) {
 }
 
 const seoProps = {
-  title: `${service.ar_name} في ${city.ar_name} | إنقاذ`,
-  description: `احصل على أفضل خدمات ${service.ar_name} في ${city.ar_name} من محترفين معتمدين ومتخصصين`,
-  keywords: [...service.seo.primary_keywords, city.ar_name, 'خدمات منزلية', 'السعودية'],
-  canonical: generateCanonicalUrl(`/services/${service.slug}/${city.slug}`)
+  title: `${service.ar_name} في ${city.ar_name} | إنقاذ - خدمات معتمدة`,
+  description: `احصل على أفضل خدمات ${service.ar_name} في ${city.ar_name} من محترفين معتمدين من وزارة التجارة. خدمات مضمونة الجودة وفقاً لمعايير SASO و ASHRAE الدولية.`,
+  keywords: [...service.seo.primary_keywords, city.ar_name, 'خدمات منزلية معتمدة', 'السعودية', 'معايير SASO', 'معايير ASHRAE', 'وزارة التجارة', 'شركات مرخصة'],
+  canonical: generateCanonicalUrl(`/services/${service.slug}/${city.slug}`),
+  openGraph: {
+    title: `${service.ar_name} في ${city.ar_name} - خدمات معتمدة`,
+    description: `خدمات ${service.ar_name} معتمدة من وزارة التجارة في ${city.ar_name}`,
+    type: 'website',
+    locale: 'ar_SA',
+    siteName: 'إنقاذ - خدمات منزلية معتمدة'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${service.ar_name} في ${city.ar_name} - خدمات معتمدة`,
+    description: `خدمات ${service.ar_name} معتمدة من وزارة التجارة في ${city.ar_name}`
+  }
 };
 ---
 
@@ -83,6 +97,11 @@ const seoProps = {
         <p class="max-w-3xl mx-auto text-foreground/80 md:text-xl/relaxed">
           احصل على أفضل خدمات {service.ar_name} في {city.ar_name} من محترفين معتمدين ومتخصصين
         </p>
+        
+        <!-- Authority Badges -->
+        <div class="mt-8 flex justify-center">
+          <AuthorityBadges client:load />
+        </div>
       </div>
 
       <!-- Service Overview with Enhanced Features -->
@@ -301,6 +320,11 @@ const seoProps = {
       </div>
       
       <ServiceGrid services={getAllServices().filter(s => s.category === service.category && s.slug !== service.slug).slice(0, 6)} />
+
+      <!-- Industry Standards -->
+      <div class="mt-16 mb-12">
+        <IndustryStandards client:load />
+      </div>
 
       <!-- Local Business Schema -->
       <LocalBusinessSchema 
