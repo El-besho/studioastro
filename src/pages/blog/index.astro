@@ -4,7 +4,7 @@ import { getAllPosts } from '../../lib/blog';
 import { getSEOProps, generateCanonicalUrl } from '../../lib/seo';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card';
 import { Badge } from '../../components/ui/badge';
-import { Calendar, User, Tag } from 'lucide-react';
+import { Calendar, User, Tag, Clock, TrendingUp, BookOpen } from 'lucide-react';
 
 const posts = getAllPosts();
 
@@ -24,49 +24,118 @@ const seoProps = getSEOProps('blog', {
         <h1 class="font-headline text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl mb-4">
           المدونة
         </h1>
-        <p class="max-w-3xl mx-auto text-foreground/80 md:text-xl/relaxed">
+        <p class="max-w-3xl mx-auto text-foreground/80 md:text-xl/relaxed mb-8">
           اكتشف أحدث المقالات والنصائح حول الخدمات المنزلية والصيانة في السعودية
         </p>
+        
+        <!-- Blog Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2xl mx-auto">
+          <div class="text-center p-4 border rounded-lg">
+            <BookOpen class="h-8 w-8 mx-auto mb-2 text-primary" />
+            <div class="text-2xl font-bold">{posts.length}</div>
+            <p class="text-sm text-muted-foreground">مقال</p>
+          </div>
+          <div class="text-center p-4 border rounded-lg">
+            <TrendingUp class="h-8 w-8 mx-auto mb-2 text-primary" />
+            <div class="text-2xl font-bold">أسبوعي</div>
+            <p class="text-sm text-muted-foreground">نشر جديد</p>
+          </div>
+          <div class="text-center p-4 border rounded-lg">
+            <Clock class="h-8 w-8 mx-auto mb-2 text-primary" />
+            <div class="text-2xl font-bold">5 دقائق</div>
+            <p class="text-sm text-muted-foreground">متوسط القراءة</p>
+          </div>
+        </div>
       </div>
 
-      <!-- Blog Posts Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {posts.map((post) => (
-          <Card class="group hover:shadow-xl transition-all duration-300">
-            <CardHeader>
-              <div class="flex items-center gap-2 text-sm text-muted-foreground mb-2">
-                <Calendar class="h-4 w-4" />
-                <span>{new Date(post.frontmatter.date).toLocaleDateString('ar-SA')}</span>
-                <User class="h-4 w-4 ml-2" />
-                <span>{post.frontmatter.author}</span>
-              </div>
-              <CardTitle class="font-headline text-xl group-hover:text-primary transition-colors">
-                <a href={`/blog/${post.slug}`} class="hover:underline">
-                  {post.frontmatter.title}
+      <!-- Featured Post -->
+      {posts.length > 0 && (
+        <Card class="mb-12 bg-gradient-to-r from-primary/5 to-accent/5 border-primary/20">
+          <CardContent class="p-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              <div>
+                <Badge class="mb-4">المقال المميز</Badge>
+                <h2 class="font-headline text-3xl font-bold mb-4">
+                  <a href={`/blog/${posts[0].slug}`} class="hover:text-primary transition-colors">
+                    {posts[0].frontmatter.title}
+                  </a>
+                </h2>
+                <p class="text-foreground/80 mb-6 text-lg">
+                  {posts[0].frontmatter.summary}
+                </p>
+                <div class="flex items-center gap-4 text-sm text-muted-foreground mb-4">
+                  <div class="flex items-center gap-2">
+                    <Calendar class="h-4 w-4" />
+                    <span>{new Date(posts[0].frontmatter.date).toLocaleDateString('ar-SA')}</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <User class="h-4 w-4" />
+                    <span>{posts[0].frontmatter.author}</span>
+                  </div>
+                </div>
+                <a 
+                  href={`/blog/${posts[0].slug}`}
+                  class="inline-flex items-center text-primary font-medium hover:underline"
+                >
+                  اقرأ المقال كاملاً →
                 </a>
-              </CardTitle>
-              <CardDescription>
-                {post.frontmatter.summary}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div class="flex flex-wrap gap-2 mb-4">
-                {post.frontmatter.tags.map((tag) => (
-                  <Badge variant="secondary" class="text-xs">
-                    <Tag class="h-3 w-3 mr-1" />
-                    {tag}
-                  </Badge>
-                ))}
               </div>
-              <a 
-                href={`/blog/${post.slug}`}
-                class="inline-flex items-center text-sm font-medium text-primary hover:underline"
-              >
-                اقرأ المزيد →
-              </a>
-            </CardContent>
-          </Card>
-        ))}
+              <div class="text-center">
+                <div class="w-full h-64 bg-muted rounded-lg flex items-center justify-center">
+                  <BookOpen class="h-16 w-16 text-muted-foreground" />
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      <!-- Blog Posts Grid -->
+      <div class="mb-8">
+        <h2 class="font-headline text-2xl font-bold mb-6">جميع المقالات</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {posts.slice(1).map((post) => (
+            <Card class="group hover:shadow-xl transition-all duration-300 h-full">
+              <CardHeader>
+                <div class="flex items-center gap-2 text-sm text-muted-foreground mb-2">
+                  <Calendar class="h-4 w-4" />
+                  <span>{new Date(post.frontmatter.date).toLocaleDateString('ar-SA')}</span>
+                  <User class="h-4 w-4 ml-2" />
+                  <span>{post.frontmatter.author}</span>
+                </div>
+                <CardTitle class="font-headline text-xl group-hover:text-primary transition-colors line-clamp-2">
+                  <a href={`/blog/${post.slug}`} class="hover:underline">
+                    {post.frontmatter.title}
+                  </a>
+                </CardTitle>
+                <CardDescription class="line-clamp-3">
+                  {post.frontmatter.summary}
+                </CardDescription>
+              </CardHeader>
+              <CardContent class="flex flex-col justify-between flex-grow">
+                <div class="flex flex-wrap gap-2 mb-4">
+                  {post.frontmatter.tags.slice(0, 3).map((tag) => (
+                    <Badge variant="secondary" class="text-xs">
+                      <Tag class="h-3 w-3 mr-1" />
+                      {tag}
+                    </Badge>
+                  ))}
+                  {post.frontmatter.tags.length > 3 && (
+                    <Badge variant="outline" class="text-xs">
+                      +{post.frontmatter.tags.length - 3}
+                    </Badge>
+                  )}
+                </div>
+                <a 
+                  href={`/blog/${post.slug}`}
+                  class="inline-flex items-center text-sm font-medium text-primary hover:underline"
+                >
+                  اقرأ المزيد →
+                </a>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
 
       <!-- Empty State -->
