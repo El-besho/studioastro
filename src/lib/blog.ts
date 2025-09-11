@@ -7,6 +7,7 @@ import { VFile } from 'vfile';
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
+import rehypeStringify from 'rehype-stringify';
 import { visit } from 'unist-util-visit';
 
 const postsDirectory = path.join(process.cwd(), 'src/content/blog');
@@ -31,6 +32,17 @@ function getHeadings(content: string): Heading[] {
   return headings;
 }
 
+async function processMarkdownToHtml(content: string): Promise<string> {
+  const file = new VFile({value: content});
+  const result = await unified()
+    .use(remarkParse)
+    .use(remarkRehype)
+    .use(rehypeStringify)
+    .process(file);
+  
+  return result.toString();
+}
+
 export function getPostSlugs() {
   return fs.readdirSync(postsDirectory);
 }
@@ -44,10 +56,13 @@ export async function getPostBySlug(slug: string, withRelated = false): Promise<
   const headings = getHeadings(content);
   data.headings = headings;
 
+  // Process Markdown to HTML
+  const htmlContent = await processMarkdownToHtml(content);
+
   const post: Post = { 
       slug: realSlug, 
       frontmatter: data as Post['frontmatter'],
-      content 
+      content: htmlContent
   };
 
   if (withRelated) {
@@ -64,27 +79,30 @@ export async function getPostBySlug(slug: string, withRelated = false): Promise<
   return post;
 }
 
-export function getAllPosts(): Post[] {
+export async function getAllPosts(): Promise<Post[]> {
   const slugs = getPostSlugs();
-  const posts = slugs
-    .map((slug) => {
+  const posts = await Promise.all(
+    slugs.map(async (slug) => {
         const realSlug = slug.replace(/\.mdx$/, '');
         const fullPath = path.join(postsDirectory, `${realSlug}.mdx`);
         const fileContents = fs.readFileSync(fullPath, 'utf8');
         const { data, content } = matter(fileContents);
         
+        // Process Markdown to HTML
+        const htmlContent = await processMarkdownToHtml(content);
+        
         return { 
           slug: realSlug, 
           frontmatter: data as Post['frontmatter'],
-          content
+          content: htmlContent
         }
     })
-    .sort((post1, post2) => (new Date(post1.frontmatter.date) > new Date(post2.frontmatter.date) ? -1 : 1));
-  return posts;
+  );
+  return posts.sort((post1, post2) => (new Date(post1.frontmatter.date) > new Date(post2.frontmatter.date) ? -1 : 1));
 }
 
-export function getAllTags(): string[] {
-    const allPosts = getAllPosts();
+export async function getAllTags(): Promise<string[]> {
+    const allPosts = await getAllPosts();
     const allTags = new Set<string>();
     allPosts.forEach(post => {
         post.frontmatter.tags.forEach(tag => {
@@ -94,8 +112,8 @@ export function getAllTags(): string[] {
     return Array.from(allTags);
 }
 
-export function getPostsByTag(tag: string): Post[] {
-    const allPosts = getAllPosts();
+export async function getPostsByTag(tag: string): Promise<Post[]> {
+    const allPosts = await getAllPosts();
     const decodedTag = decodeURIComponent(tag);
     return allPosts.filter(post => post.frontmatter.tags.includes(decodedTag));
 }

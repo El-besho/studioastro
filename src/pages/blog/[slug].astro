@@ -9,10 +9,9 @@ import { Breadcrumb } from '../../components/semantic/breadcrumb';
 import { TableOfContents } from '../../components/blog/TableOfContents';
 import { RelatedPosts } from '../../components/blog/RelatedPosts';
 import { BlogPostMeta } from '../../components/blog/BlogPostMeta';
-import { BlogNavigation } from '../../components/blog/BlogNavigation';
 
 export async function getStaticPaths() {
-  const posts = getAllPosts();
+  const posts = await getAllPosts();
   return posts.map((post) => ({
     params: { slug: post.slug },
     props: { post, allPosts: posts },
@@ -101,9 +100,6 @@ const seoProps = {
               </div>
             </CardContent>
           </Card>
-
-          <!-- Blog Navigation -->
-          <BlogNavigation currentPost={post} allPosts={allPosts} class="mb-12" client:load />
 
           <!-- Related Posts -->
           <RelatedPosts currentPost={post} allPosts={allPosts} class="mb-12" client:load />
