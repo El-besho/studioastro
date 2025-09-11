@@ -18,7 +18,7 @@ export function ServiceSchema({ service }: ServiceSchemaProps) {
     '@type': 'Service',
     name: service.ar_name,
     description: service.seo.summary,
-    serviceType: service.en_name,
+    serviceType: service.ar_name,
     category: service.category,
     provider: {
       '@type': 'Organization',

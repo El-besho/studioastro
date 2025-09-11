@@ -49,13 +49,13 @@ export function WhatsAppButton({
   const getVariantStyles = () => {
     switch (variant) {
       case 'outline':
-        return 'border-green-500 text-green-500 hover:bg-green-50';
+        return 'border-green-500 text-green-500 hover:bg-green-50 rounded-xl';
       case 'ghost':
-        return 'text-green-500 hover:bg-green-50';
+        return 'text-green-500 hover:bg-green-50 rounded-xl';
       case 'link':
-        return 'text-green-500 hover:underline p-0 h-auto';
+        return 'text-green-500 hover:underline p-0 h-auto rounded-xl';
       default:
-        return 'bg-green-500 hover:bg-green-600 text-white';
+        return 'bg-green-500 hover:bg-green-600 text-white rounded-xl';
     }
   };
 
@@ -65,7 +65,7 @@ export function WhatsAppButton({
         onClick={handleClick}
         variant={variant}
         size={size}
-        className={`${getVariantStyles()} ${className}`}
+        className={`${getVariantStyles()} ${className} aspect-square min-w-[48px] min-h-[48px] flex items-center justify-center`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >

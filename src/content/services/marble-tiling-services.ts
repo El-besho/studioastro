@@ -4,7 +4,6 @@ import { ServiceHierarchy } from '@/types/services';
 export const marbleTilingServices: ServiceHierarchy = {
     id: 'marble-tiling-services',
     ar_name: 'جلي وتلميع الرخام والبلاط',
-    en_name: 'Marble and Tiling Services',
     category: 'luxury',
     priority: 3,
     seasonal_demand: 'year_round',
@@ -30,10 +29,10 @@ export const marbleTilingServices: ServiceHierarchy = {
         ]
     },
     sub_services: [
-      { id: 'marble-crystallization', ar_name: 'جلي وتلميع الرخام بالكريستال', en_name: 'Marble Polishing with Crystal', urgency: 'scheduled', avg_price_range: [15, 35], skill_requirements: ['floor_care_specialist'], tools_required: ['floor_buffer', 'crystal_powder'], seasonal_multiplier: 1.1, seo: { summary: "استعادة اللمعان الطبيعي للرخام الخاص بك من خلال عملية التلميع بالكريستال الاحترافية.", primary_keywords: [], secondary_keywords: [], long_tail_keywords: [], faq: [] } },
-      { id: 'tile-grout-cleaning', ar_name: 'تنظيف وتلميع السيراميك والبورسلان', en_name: 'Ceramic & Porcelain Tile Cleaning', urgency: 'scheduled', avg_price_range: [10, 25], skill_requirements: ['floor_care_technician'], tools_required: ['steam_cleaner', 'grout_brush'], seasonal_multiplier: 1.2, seo: { summary: "تنظيف عميق للسيراميك والبورسلان لإزالة الأوساخ من الترويبة واستعادة مظهرها الأصلي.", primary_keywords: [], secondary_keywords: [], long_tail_keywords: [], faq: [] } },
-      { id: 'concrete-polishing', ar_name: 'جلي وتلميع الأرضيات الخرسانية', en_name: 'Concrete Polishing', urgency: 'scheduled', avg_price_range: [20, 50], skill_requirements: ['concrete_specialist'], tools_required: ['concrete_grinder', 'diamond_pads'], seasonal_multiplier: 1.0, seo: { summary: "تحويل الأرضيات الخرسانية العادية إلى أسطح مصقولة شديدة اللمعان وسهلة التنظيف.", primary_keywords: [], secondary_keywords: [], long_tail_keywords: [], faq: [] } },
-      { id: 'stain_removal', ar_name: 'إزالة البقع الصعبة', en_name: 'Stain Removal from Floors', urgency: 'urgent', avg_price_range: [300, 700], skill_requirements: ['floor_care_specialist'], tools_required: ['poultice_materials', 'specialty_chemicals'], seasonal_multiplier: 1.1, seo: { summary: "معالجة متخصصة لإزالة البقع الصعبة مثل الصدأ والزيوت والحبر من الرخام والبلاط.", primary_keywords: [], secondary_keywords: [], long_tail_keywords: [], faq: [] } },
+      { id: 'marble-crystallization', ar_name: 'جلي وتلميع الرخام بالكريستال', urgency: 'scheduled', avg_price_range: [15, 35], skill_requirements: ['floor_care_specialist'], tools_required: ['floor_buffer', 'crystal_powder'], seasonal_multiplier: 1.1, seo: { summary: "استعادة اللمعان الطبيعي للرخام الخاص بك من خلال عملية التلميع بالكريستال الاحترافية.", primary_keywords: [], secondary_keywords: [], long_tail_keywords: [], faq: [] } },
+      { id: 'tile-grout-cleaning', ar_name: 'تنظيف وتلميع السيراميك والبورسلان', urgency: 'scheduled', avg_price_range: [10, 25], skill_requirements: ['floor_care_technician'], tools_required: ['steam_cleaner', 'grout_brush'], seasonal_multiplier: 1.2, seo: { summary: "تنظيف عميق للسيراميك والبورسلان لإزالة الأوساخ من الترويبة واستعادة مظهرها الأصلي.", primary_keywords: [], secondary_keywords: [], long_tail_keywords: [], faq: [] } },
+      { id: 'concrete-polishing', ar_name: 'جلي وتلميع الأرضيات الخرسانية', urgency: 'scheduled', avg_price_range: [20, 50], skill_requirements: ['concrete_specialist'], tools_required: ['concrete_grinder', 'diamond_pads'], seasonal_multiplier: 1.0, seo: { summary: "تحويل الأرضيات الخرسانية العادية إلى أسطح مصقولة شديدة اللمعان وسهلة التنظيف.", primary_keywords: [], secondary_keywords: [], long_tail_keywords: [], faq: [] } },
+      { id: 'stain_removal', ar_name: 'إزالة البقع الصعبة', urgency: 'urgent', avg_price_range: [300, 700], skill_requirements: ['floor_care_specialist'], tools_required: ['poultice_materials', 'specialty_chemicals'], seasonal_multiplier: 1.1, seo: { summary: "معالجة متخصصة لإزالة البقع الصعبة مثل الصدأ والزيوت والحبر من الرخام والبلاط.", primary_keywords: [], secondary_keywords: [], long_tail_keywords: [], faq: [] } },
     ],
   };
 

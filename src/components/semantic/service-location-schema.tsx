@@ -28,7 +28,7 @@ export function ServiceLocationSchema({ service, city }: ServiceLocationSchemaPr
     name: `${service.ar_name} في ${city.ar_name}`,
     description: `نقدم خدمات ${service.ar_name} المحترفة في ${city.ar_name}. احصل على أفضل العروض من مزودين معتمدين.`,
     url: serviceUrl,
-    serviceType: service.en_name,
+    serviceType: service.ar_name,
     category: service.category,
     provider: {
       '@type': 'Organization',

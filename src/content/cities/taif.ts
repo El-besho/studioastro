@@ -4,7 +4,6 @@ import { CityProfile } from '@/types/services';
 export const taif: CityProfile = { 
     id: 'taif',
     ar_name: 'الطائف', 
-    en_name: 'Taif', 
     slug: 'taif',
     province: 'Makkah Province',
     population: 1100000,
@@ -13,13 +12,13 @@ export const taif: CityProfile = {
     primary_languages: ['ar'],
     climate: 'moderate',
     key_districts: [
-        { ar: 'الهدا', en: 'Al-Hada' },
-        { ar: 'الشفا', en: 'Al-Shafa' },
-        { ar: 'شهار', en: 'Shihar' },
-        { ar: 'الفيصلية', en: 'Al-Faisaliyah' },
-        { ar: 'الوشحاء', en: 'Al-Wash-ha' },
-        { ar: 'القيم', en: 'Al-Qayyim' },
-        { ar: 'جبرة', en: 'Jabra' },
+        { ar: 'الهدا'},
+        { ar: 'الشفا'},
+        { ar: 'شهار'},
+        { ar: 'الفيصلية'},
+        { ar: 'الوشحاء'},
+        { ar: 'القيم'},
+        { ar: 'جبرة'},
     ],
     service_demand_multipliers: { 'landscaping-gardening': 1.8, 'resort_maintenance': 1.6, 'pest-control': 1.2 },
     peak_seasons: { 'summer_tourism': 1.9, 'winter': 0.8 }
