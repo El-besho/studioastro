@@ -7,6 +7,12 @@ import { Breadcrumb } from '../../../../components/semantic/breadcrumb';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../../components/ui/card';
 import { Badge } from '../../../../components/ui/badge';
 import { Check, MapPin, Star, Clock, Shield, Phone, Mail } from 'lucide-react';
+import { Testimonials } from '../../../../components/service/Testimonials';
+import { ServiceStats } from '../../../../components/service/ServiceStats';
+import { ServiceGallery } from '../../../../components/service/ServiceGallery';
+import { ServiceProviders } from '../../../../components/service/ServiceProviders';
+import { ServiceCTA } from '../../../../components/service/ServiceCTA';
+import { FAQSchema } from '../../../../components/semantic/faq-schema';
 
 export async function getStaticPaths() {
   const services = getAllServices();
@@ -187,28 +193,15 @@ const seoProps = {
         <!-- Sidebar -->
         <div class="space-y-6">
           <!-- CTA -->
-          <Card class="bg-primary/5 border-primary/20">
-            <CardContent class="pt-6">
-              <h3 class="font-headline text-lg font-semibold mb-2">احصل على عرض سعر مجاني</h3>
-              <p class="text-sm text-muted-foreground mb-4">
-                تواصل معنا للحصول على أفضل عروض الأسعار لخدمات {subService.ar_name} في {city.ar_name}
-              </p>
-              <a
-                href="/contact"
-                class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full mb-3"
-              >
-                <Phone class="h-4 w-4 ml-2" />
-                اطلب عرض سعر
-              </a>
-              <a
-                href="/contact"
-                class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 w-full"
-              >
-                <Mail class="h-4 w-4 ml-2" />
-                تواصل معنا
-              </a>
-            </CardContent>
-          </Card>
+          <ServiceCTA 
+            serviceName={subService.ar_name}
+            cityName={city.ar_name}
+            isEmergency={subService.urgency === 'emergency'}
+            priceRange={subService.avg_price_range}
+            responseTime="30 دقيقة"
+            variant="compact"
+            client:load 
+          />
 
           <!-- City Info -->
           <Card>
@@ -254,6 +247,46 @@ const seoProps = {
             </CardContent>
           </Card>
         </div>
+      </div>
+
+      <!-- Service Stats -->
+      <div class="mb-12">
+        <ServiceStats service={service} city={city} client:load />
+      </div>
+
+      <!-- Service Gallery -->
+      <div class="mb-12">
+        <ServiceGallery serviceName={subService.ar_name} cityName={city.ar_name} client:load />
+      </div>
+
+      <!-- Service Providers -->
+      <div class="mb-12">
+        <ServiceProviders serviceName={subService.ar_name} cityName={city.ar_name} client:load />
+      </div>
+
+      <!-- Testimonials -->
+      <div class="mb-12">
+        <Testimonials serviceName={subService.ar_name} cityName={city.ar_name} client:load />
+      </div>
+
+      <!-- FAQ Section -->
+      {subService.seo.faq && subService.seo.faq.length > 0 && (
+        <div class="mb-12">
+          <FAQSchema faqs={subService.seo.faq} serviceName={subService.ar_name} />
+        </div>
+      )}
+
+      <!-- CTA Section -->
+      <div class="mb-12">
+        <ServiceCTA 
+          serviceName={subService.ar_name}
+          cityName={city.ar_name}
+          isEmergency={subService.urgency === 'emergency'}
+          priceRange={subService.avg_price_range}
+          responseTime="30 دقيقة"
+          variant="hero"
+          client:load 
+        />
       </div>
 
       <!-- Related Services -->

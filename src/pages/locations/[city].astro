@@ -7,6 +7,10 @@ import { Breadcrumb } from '../../components/semantic/breadcrumb';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card';
 import { Badge } from '../../components/ui/badge';
 import { MapPin, Users, TrendingUp, Clock } from 'lucide-react';
+import { Testimonials } from '../../components/service/Testimonials';
+import { ServiceGallery } from '../../components/service/ServiceGallery';
+import { ServiceProviders } from '../../components/service/ServiceProviders';
+import { ServiceCTA } from '../../components/service/ServiceCTA';
 
 export async function getStaticPaths() {
   const cities = getAllCities();
@@ -178,6 +182,21 @@ const getClimateText = (climate: string) => {
           </p>
         </div>
         <ServiceGrid services={availableServices} />
+      </div>
+
+      <!-- Service Gallery -->
+      <div class="mb-12">
+        <ServiceGallery serviceName="خدمات منزلية" cityName={city.ar_name} client:load />
+      </div>
+
+      <!-- Service Providers -->
+      <div class="mb-12">
+        <ServiceProviders serviceName="خدمات منزلية" cityName={city.ar_name} client:load />
+      </div>
+
+      <!-- Testimonials -->
+      <div class="mb-12">
+        <Testimonials serviceName="خدمات منزلية" cityName={city.ar_name} client:load />
       </div>
 
       <!-- Popular Services in City -->

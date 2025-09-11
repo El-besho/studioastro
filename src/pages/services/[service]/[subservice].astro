@@ -10,6 +10,12 @@ import { Check, Star, Clock, Shield } from 'lucide-react';
 import { FAQ } from '../../../components/service/FAQ';
 import { PricingCard } from '../../../components/service/PricingCard';
 import { ProcessSteps } from '../../../components/service/ProcessSteps';
+import { Testimonials } from '../../../components/service/Testimonials';
+import { ServiceStats } from '../../../components/service/ServiceStats';
+import { ServiceGallery } from '../../../components/service/ServiceGallery';
+import { ServiceProviders } from '../../../components/service/ServiceProviders';
+import { ServiceCTA } from '../../../components/service/ServiceCTA';
+import { FAQSchema } from '../../../components/semantic/faq-schema';
 
 export async function getStaticPaths() {
   const services = getAllServices();
@@ -114,12 +120,45 @@ const seoProps = {
         <ProcessSteps client:load />
       </div>
 
+      <!-- Service Stats -->
+      <div class="mb-12">
+        <ServiceStats service={service} client:load />
+      </div>
+
+      <!-- Service Gallery -->
+      <div class="mb-12">
+        <ServiceGallery serviceName={subService.ar_name} client:load />
+      </div>
+
+      <!-- Service Providers -->
+      <div class="mb-12">
+        <ServiceProviders serviceName={subService.ar_name} client:load />
+      </div>
+
+      <!-- Testimonials -->
+      <div class="mb-12">
+        <Testimonials serviceName={subService.ar_name} client:load />
+      </div>
+
       <!-- FAQ Section -->
       {subService.seo.faq && subService.seo.faq.length > 0 && (
         <div class="mb-12">
           <FAQ faqs={subService.seo.faq} client:load />
+          <FAQSchema faqs={subService.seo.faq} serviceName={subService.ar_name} />
         </div>
       )}
+
+      <!-- CTA Section -->
+      <div class="mb-12">
+        <ServiceCTA 
+          serviceName={subService.ar_name}
+          isEmergency={subService.urgency === 'emergency'}
+          priceRange={subService.avg_price_range}
+          responseTime="30 دقيقة"
+          variant="hero"
+          client:load 
+        />
+      </div>
 
       <!-- Related Services -->
       <Card class="mb-12">
