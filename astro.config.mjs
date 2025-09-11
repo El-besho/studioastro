@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
 import mdx from '@astrojs/mdx';
+import path from 'path';
 
 // https://astro.build/config
 export default defineConfig({
@@ -23,7 +24,7 @@ export default defineConfig({
     },
     resolve: {
       alias: {
-        '@': new URL('./src', import.meta.url).pathname
+        '@': path.resolve('./src')
       }
     },
     build: {
