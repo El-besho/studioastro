@@ -81,8 +81,8 @@ export default function ServicesLocationsMenu() {
   };
 
   const toggleCategory = (category: string) => {
-    setOpenCategories(prev => 
-      prev.includes(category) 
+    setOpenCategories(prev =>
+      prev.includes(category)
         ? prev.filter(cat => cat !== category)
         : [...prev, category]
     );
@@ -224,16 +224,16 @@ export default function ServicesLocationsMenu() {
 
           {/* Locations Section */}
           <div className="space-y-2">
-            <Collapsible>
-              <CollapsibleTrigger
-                onClick={toggleLocations}
-                className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-primary/5 transition-colors"
-              >
+            <Collapsible open={openLocations} onOpenChange={setOpenLocations}>
+              <CollapsibleTrigger className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-primary/5 transition-colors">
                 <div className="flex items-center gap-2">
                   <MapPin className="h-5 w-5 text-primary" />
                   <h3 className="font-headline text-lg font-semibold text-primary">
                     المدن المتاحة
                   </h3>
+                  <span className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded-full">
+                    {cities.length}
+                  </span>
                 </div>
                 {openLocations ? (
                   <ChevronDown className="h-4 w-4 text-muted-foreground" />
@@ -248,7 +248,7 @@ export default function ServicesLocationsMenu() {
                       key={city.slug}
                       variant="ghost"
                       size="sm"
-                      className="w-full justify-start text-sm"
+                      className="w-full justify-start text-sm text-muted-foreground hover:text-foreground"
                       onClick={() => handleLocationClick(city.slug)}
                     >
                       {city.ar_name}
@@ -275,6 +275,16 @@ export default function ServicesLocationsMenu() {
                 }}
               >
                 عرض جميع الخدمات
+              </Button>
+              <Button
+                variant="outline"
+                className="w-full font-headline"
+                onClick={() => {
+                  window.location.href = '/locations';
+                  setIsOpen(false);
+                }}
+              >
+                عرض جميع المواقع
               </Button>
               <Button
                 variant="outline"
