@@ -97,7 +97,7 @@ export function WhatsAppChat({
     const checkAvailability = () => {
       const now = new Date();
       const timezone = currentAgent.availability.timezone;
-      const localTime = new Date(now.toLocaleString("en-US", { timeZone: timezone }));
+      const localTime = new Date(now.toLocaleString("ar-SA", { timeZone: timezone }));
       
       const currentDay = localTime.getDay();
       const currentTimeStr = localTime.toTimeString().slice(0, 5);
