@@ -10,12 +10,18 @@ import { Logo } from './logo';
 import { navLinks } from '../config/nav';
 import { getAllCities, getCityBySlug, getServiceBySlug } from '../lib/services';
 import HeaderClient from './HeaderClient.tsx';
+import ServicesLocationsMenu from './ServicesLocationsMenu.tsx';
 ---
 
-<header class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
+<header class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm glass-effect">
   <div class="container flex h-16 items-center">
+    <!-- Services & Locations Menu (Left Side) -->
+    <div class="flex items-center gap-2">
+      <ServicesLocationsMenu client:load />
+    </div>
+
     <!-- Mobile Menu -->
-    <div class="md:hidden">
+    <div class="md:hidden ml-2">
       <HeaderClient />
     </div>
 

@@ -1,0 +1,393 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getAllServices } from '../../lib/services';
+import { getSEOProps, generateCanonicalUrl } from '../../lib/seo';
+import { Breadcrumb } from '../../components/semantic/breadcrumb';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card';
+import { Badge } from '../../components/ui/badge';
+import { Button } from '../../components/ui/button';
+import { Check, X, Star, Clock, DollarSign } from 'lucide-react';
+
+export async function getStaticPaths() {
+  const services = getAllServices();
+  const comparisonTypes = [
+    { slug: 'air-conditioning-types', title: 'أنواع التكييف', services: ['air-conditioning-hvac'] },
+    { slug: 'plumbing-services', title: 'خدمات السباكة', services: ['plumbing-services'] },
+    { slug: 'cleaning-companies', title: 'شركات التنظيف', services: ['cleaning-services'] },
+    { slug: 'electrical-services', title: 'خدمات الكهرباء', services: ['electrical-services'] },
+    { slug: 'maintenance-services', title: 'خدمات الصيانة', services: ['home-maintenance-repair', 'air-conditioning-hvac', 'plumbing-services', 'electrical-services'] }
+  ];
+
+  return comparisonTypes.map((type) => ({
+    params: { 'service-type': type.slug },
+    props: { comparisonType: type, services: services.filter(s => type.services.includes(s.id)) },
+  }));
+}
+
+const { comparisonType, services } = Astro.props;
+
+if (!comparisonType || !services || services.length === 0) {
+  return Astro.redirect('/404');
+}
+
+const seoProps = {
+  title: `مقارنة ${comparisonType.title} | أفضل الخدمات في السعودية`,
+  description: `قارن بين أفضل ${comparisonType.title} في السعودية. احصل على مقارنة شاملة للأسعار والخدمات والجودة لاتخاذ القرار الصحيح.`,
+  keywords: [
+    `مقارنة ${comparisonType.title}`,
+    `أفضل ${comparisonType.title}`,
+    'خدمات منزلية',
+    'السعودية',
+    'إنقاذ'
+  ],
+  canonical: generateCanonicalUrl(`/compare/${comparisonType.slug}`)
+};
+
+const getServiceFeatures = (service: any) => {
+  const features = {
+    'air-conditioning-hvac': [
+      { name: 'صيانة دورية', available: true },
+      { name: 'إصلاح طارئ', available: true },
+      { name: 'تركيب جديد', available: true },
+      { name: 'تنظيف شامل', available: true },
+      { name: 'تعبئة فريون', available: true },
+      { name: 'ضمان على العمل', available: true }
+    ],
+    'plumbing-services': [
+      { name: 'إصلاح تسريبات', available: true },
+      { name: 'تنظيف مجاري', available: true },
+      { name: 'تركيب سخانات', available: true },
+      { name: 'إصلاح دورات مياه', available: true },
+      { name: 'تركيب خلاطات', available: true },
+      { name: 'خدمة طوارئ 24/7', available: true }
+    ],
+    'cleaning-services': [
+      { name: 'تنظيف عميق', available: true },
+      { name: 'تنظيف سجاد', available: true },
+      { name: 'تنظيف نوافذ', available: true },
+      { name: 'تنظيف بعد البناء', available: true },
+      { name: 'تنظيف مطابخ', available: true },
+      { name: 'مواد صديقة للبيئة', available: true }
+    ],
+    'electrical-services': [
+      { name: 'تركيب إضاءة', available: true },
+      { name: 'إصلاح أعطال', available: true },
+      { name: 'تركيب مقابس', available: true },
+      { name: 'ترقية لوحات', available: true },
+      { name: 'تركيب مولدات', available: true },
+      { name: 'فحص دوري', available: true }
+    ],
+    'home-maintenance-repair': [
+      { name: 'أعمال نجارة', available: true },
+      { name: 'تركيب أبواب', available: true },
+      { name: 'تجميع أثاث', available: true },
+      { name: 'إصلاح جدران', available: true },
+      { name: 'عزل مائي', available: true },
+      { name: 'تعليق ستائر', available: true }
+    ]
+  };
+  return features[service.id] || [];
+};
+
+const getPriceRange = (service: any) => {
+  const ranges = {
+    'air-conditioning-hvac': { min: 150, max: 800 },
+    'plumbing-services': { min: 100, max: 600 },
+    'cleaning-services': { min: 200, max: 1000 },
+    'electrical-services': { min: 120, max: 700 },
+    'home-maintenance-repair': { min: 80, max: 500 }
+  };
+  return ranges[service.id] || { min: 100, max: 500 };
+};
+
+const getServiceRating = (service: any) => {
+  const ratings = {
+    'air-conditioning-hvac': 4.8,
+    'plumbing-services': 4.7,
+    'cleaning-services': 4.6,
+    'electrical-services': 4.7,
+    'home-maintenance-repair': 4.5
+  };
+  return ratings[service.id] || 4.5;
+};
+
+const getServiceDuration = (service: any) => {
+  const durations = {
+    'air-conditioning-hvac': '2-4 ساعات',
+    'plumbing-services': '1-3 ساعات',
+    'cleaning-services': '3-6 ساعات',
+    'electrical-services': '2-5 ساعات',
+    'home-maintenance-repair': '1-4 ساعات'
+  };
+  return durations[service.id] || '2-4 ساعات';
+};
+---
+
+<Layout {...seoProps}>
+  <div class="container py-12 px-4 md:px-6">
+    <div class="max-w-6xl mx-auto">
+      <!-- Breadcrumb -->
+      <Breadcrumb client:load />
+      
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <Badge class="font-headline bg-primary/10 text-primary hover:bg-primary/20 mb-4">
+          مقارنة الخدمات
+        </Badge>
+        <h1 class="font-headline text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl mb-4">
+          مقارنة {comparisonType.title}
+        </h1>
+        <p class="max-w-3xl mx-auto text-foreground/80 md:text-xl/relaxed">
+          قارن بين أفضل {comparisonType.title} في السعودية. 
+          احصل على مقارنة شاملة للأسعار والخدمات والجودة لاتخاذ القرار الصحيح.
+        </p>
+      </div>
+
+      <!-- Comparison Table -->
+      <Card class="mb-12">
+        <CardHeader>
+          <CardTitle class="font-headline text-2xl">مقارنة شاملة للخدمات</CardTitle>
+          <CardDescription>
+            قارن بين الخدمات المتاحة واختر الأنسب لاحتياجاتك
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse">
+              <thead>
+                <tr class="border-b">
+                  <th class="text-right p-4 font-semibold">الخدمة</th>
+                  <th class="text-right p-4 font-semibold">التقييم</th>
+                  <th class="text-right p-4 font-semibold">نطاق الأسعار</th>
+                  <th class="text-right p-4 font-semibold">مدة الخدمة</th>
+                  <th class="text-right p-4 font-semibold">الخدمات المتاحة</th>
+                  <th class="text-right p-4 font-semibold">الإجراء</th>
+                </tr>
+              </thead>
+              <tbody>
+                {services.map((service) => {
+                  const features = getServiceFeatures(service);
+                  const priceRange = getPriceRange(service);
+                  const rating = getServiceRating(service);
+                  const duration = getServiceDuration(service);
+                  
+                  return (
+                    <tr class="border-b hover:bg-muted/50 transition-colors">
+                      <td class="p-4">
+                        <div>
+                          <h3 class="font-semibold text-lg">{service.ar_name}</h3>
+                          <p class="text-sm text-muted-foreground">
+                            {service.sub_services.length} خدمة فرعية
+                          </p>
+                        </div>
+                      </td>
+                      <td class="p-4">
+                        <div class="flex items-center gap-2">
+                          <Star class="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                          <span class="font-semibold">{rating}</span>
+                        </div>
+                      </td>
+                      <td class="p-4">
+                        <div class="flex items-center gap-2">
+                          <DollarSign class="h-4 w-4 text-green-600" />
+                          <span>{priceRange.min} - {priceRange.max} ريال</span>
+                        </div>
+                      </td>
+                      <td class="p-4">
+                        <div class="flex items-center gap-2">
+                          <Clock class="h-4 w-4 text-blue-600" />
+                          <span>{duration}</span>
+                        </div>
+                      </td>
+                      <td class="p-4">
+                        <div class="space-y-1">
+                          {features.slice(0, 3).map((feature) => (
+                            <div class="flex items-center gap-2 text-sm">
+                              {feature.available ? (
+                                <Check class="h-3 w-3 text-green-600" />
+                              ) : (
+                                <X class="h-3 w-3 text-red-600" />
+                              )}
+                              <span>{feature.name}</span>
+                            </div>
+                          ))}
+                          {features.length > 3 && (
+                            <p class="text-xs text-muted-foreground">
+                              و{features.length - 3} خدمة أخرى
+                            </p>
+                          )}
+                        </div>
+                      </td>
+                      <td class="p-4">
+                        <Button asChild size="sm">
+                          <a href={`/services/${service.slug}`}>
+                            عرض التفاصيل
+                          </a>
+                        </Button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </CardContent>
+      </Card>
+
+      <!-- Detailed Comparison -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+        {services.map((service) => {
+          const features = getServiceFeatures(service);
+          const priceRange = getPriceRange(service);
+          const rating = getServiceRating(service);
+          const duration = getServiceDuration(service);
+          
+          return (
+            <Card>
+              <CardHeader>
+                <CardTitle class="font-headline text-xl">{service.ar_name}</CardTitle>
+                <CardDescription>
+                  {service.seo.summary.substring(0, 150)}...
+                </CardDescription>
+              </CardHeader>
+              <CardContent class="space-y-6">
+                <!-- Service Info -->
+                <div class="grid grid-cols-2 gap-4">
+                  <div class="text-center p-3 border rounded-lg">
+                    <Star class="h-6 w-6 mx-auto mb-2 text-yellow-500" />
+                    <div class="font-semibold">{rating}</div>
+                    <p class="text-xs text-muted-foreground">التقييم</p>
+                  </div>
+                  <div class="text-center p-3 border rounded-lg">
+                    <DollarSign class="h-6 w-6 mx-auto mb-2 text-green-600" />
+                    <div class="font-semibold">{priceRange.min}-{priceRange.max}</div>
+                    <p class="text-xs text-muted-foreground">ريال</p>
+                  </div>
+                </div>
+
+                <!-- Features -->
+                <div>
+                  <h4 class="font-semibold mb-3">الخدمات المتاحة</h4>
+                  <div class="space-y-2">
+                    {features.map((feature) => (
+                      <div class="flex items-center gap-2 text-sm">
+                        {feature.available ? (
+                          <Check class="h-4 w-4 text-green-600" />
+                        ) : (
+                          <X class="h-4 w-4 text-red-600" />
+                        )}
+                        <span>{feature.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <!-- Sub-services -->
+                <div>
+                  <h4 class="font-semibold mb-3">الخدمات الفرعية</h4>
+                  <div class="space-y-1">
+                    {service.sub_services.slice(0, 4).map((subService) => (
+                      <div class="text-sm text-muted-foreground">
+                        • {subService.ar_name}
+                      </div>
+                    ))}
+                    {service.sub_services.length > 4 && (
+                      <div class="text-sm text-muted-foreground">
+                        و{service.sub_services.length - 4} خدمة أخرى...
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <!-- CTA -->
+                <Button asChild class="w-full">
+                  <a href={`/services/${service.slug}`}>
+                    عرض جميع الخدمات
+                  </a>
+                </Button>
+              </CardContent>
+            </Card>
+          );
+        })}
+      </div>
+
+      <!-- Comparison Tips -->
+      <Card class="mb-12">
+        <CardHeader>
+          <CardTitle class="font-headline text-2xl">نصائح لاختيار أفضل خدمة</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-semibold mb-3">عوامل مهمة للاختيار</h4>
+              <ul class="space-y-2 text-sm">
+                <li class="flex items-start gap-2">
+                  <Check class="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                  <span>التقييمات والمراجعات من العملاء السابقين</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <Check class="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                  <span>الأسعار المناسبة لميزانيتك</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <Check class="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                  <span>سرعة الاستجابة وخدمة الطوارئ</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <Check class="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                  <span>الضمان على العمل والقطع</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold mb-3">أسئلة مهمة قبل الاختيار</h4>
+              <ul class="space-y-2 text-sm">
+                <li class="flex items-start gap-2">
+                  <Check class="h-4 w-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                  <span>هل الخدمة متاحة في منطقتي؟</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <Check class="h-4 w-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                  <span>ما هي مدة الضمان المقدمة؟</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <Check class="h-4 w-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                  <span>هل تتوفر خدمة طوارئ 24/7؟</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <Check class="h-4 w-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                  <span>ما هي طرق الدفع المتاحة؟</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      <!-- CTA Section -->
+      <Card class="bg-primary/5 border-primary/20">
+        <CardContent class="pt-6 text-center">
+          <h3 class="font-headline text-2xl font-semibold mb-4">
+            احصل على أفضل {comparisonType.title} في السعودية
+          </h3>
+          <p class="text-foreground/80 mb-6 max-w-2xl mx-auto">
+            تواصل معنا اليوم للحصول على عروض أسعار مجانية من أفضل المحترفين 
+            المعتمدين. نضمن لك جودة الخدمة وأفضل الأسعار.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button asChild size="lg">
+              <a href="/services">
+                عرض جميع الخدمات
+              </a>
+            </Button>
+            <Button asChild variant="outline" size="lg">
+              <a href="/contact">
+                تواصل معنا
+              </a>
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  </div>
+</Layout>

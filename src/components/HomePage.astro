@@ -18,6 +18,8 @@ import {
   ShieldCheck,
   Users,
   MessageSquare,
+  TrendingUp,
+  ArrowRight,
 } from 'lucide-react';
 import { Badge } from './ui/badge';
 import { ServiceGrid } from './service-grid';
@@ -72,15 +74,31 @@ const stats = [
         label: "مدينة مغطاة"
     }
 ]
+
+const popularQueries = [
+    { query: "صيانة مكيفات الرياض", href: "/services/air-conditioning-maintenance/riyadh" },
+    { query: "شركة سباكة جدة", href: "/services/plumbing-services/jeddah" },
+    { query: "فني كهرباء الدمام", href: "/services/electrical-services/dammam" },
+    { query: "شركة تنظيف مكة", href: "/services/cleaning-services/makkah" },
+    { query: "صيانة منزلية المدينة", href: "/services/home-maintenance-repair/medina" },
+    { query: "تركيب مكيف سبليت", href: "/services/air-conditioning-maintenance" },
+    { query: "تنظيف مكيفات", href: "/services/air-conditioning-maintenance" },
+    { query: "إصلاح تسريبات المياه", href: "/services/plumbing-services" },
+    { query: "تركيب إضاءة", href: "/services/electrical-services" },
+    { query: "تنظيف عميق", href: "/services/cleaning-services" },
+    { query: "مكافحة الحشرات", href: "/services/pest-control" },
+    { query: "صيانة غسالات", href: "/services/washing-machine-maintenance" }
+]
 ---
 
 <div class="flex flex-col min-h-[100dvh]">
   <!-- Hero Section -->
   <section id="main-content" class="relative w-full pt-24 pb-12 md:pt-32 md:pb-24 lg:pt-40 lg:pb-32 overflow-hidden">
-    <!-- Background decoration -->
+    <!-- Enhanced Background decoration -->
     <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5"></div>
-    <div class="absolute top-20 right-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-20 left-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl"></div>
+    <div class="absolute top-20 right-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-20 left-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-primary/5 to-accent/5 rounded-full blur-3xl opacity-50"></div>
     
     <div class="container px-4 md:px-6 relative z-10">
       <div class="flex flex-col items-center space-y-6 text-center">
@@ -94,7 +112,10 @@ const stats = [
           </p>
         </div>
         <div class="w-full max-w-2xl animate-fade-in-up animation-delay-200">
-          <SearchForm client:load />
+          <div class="relative">
+            <SearchForm client:load />
+            <div class="absolute -inset-1 bg-gradient-to-r from-primary/20 to-accent/20 rounded-xl blur opacity-30 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -197,6 +218,48 @@ const stats = [
   <!-- Testimonials Section -->
   <TestimonialsSection />
 
+  <!-- Popular Queries Section -->
+  <section class="w-full py-12 md:py-24 lg:py-32">
+    <div class="container px-4 md:px-6">
+      <div class="flex flex-col items-center space-y-8 text-center">
+        <div class="space-y-4">
+          <div class="flex items-center justify-center gap-2 mb-4">
+            <TrendingUp class="h-6 w-6 text-primary" />
+            <h2 class="font-headline text-3xl font-bold tracking-tighter sm:text-4xl">
+              الاستعلامات الأكثر بحثاً
+            </h2>
+          </div>
+          <p class="mx-auto max-w-[600px] text-foreground/80 md:text-xl/relaxed">
+            اكتشف الخدمات الأكثر طلباً من عملائنا في جميع أنحاء المملكة
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-4xl">
+          {popularQueries.map((item) => (
+            <a
+              href={item.href}
+              class="group flex items-center justify-between p-4 border rounded-lg hover:shadow-md transition-all duration-200 hover:border-primary/20 hover:bg-primary/5"
+            >
+              <span class="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
+                {item.query}
+              </span>
+              <ArrowRight class="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors group-hover:translate-x-1" />
+            </a>
+          ))}
+        </div>
+        
+        <div class="pt-4">
+          <Button variant="outline" asChild>
+            <a href="/services">
+              عرض جميع الخدمات
+              <ArrowRight class="h-4 w-4 mr-2" />
+            </a>
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA Section -->
   <section class="w-full py-12 md-py-24 lg:py-32">
     <div class="container grid items-center justify-center gap-4 px-4 text-center md:px-6">
@@ -213,7 +276,8 @@ const stats = [
         <Button
           type="submit"
           size="lg"
-          class="w-full font-headline"
+          class="w-full font-headline btn-hover-lift"
+          variant="gradient"
           asChild
         >
           <a href="/services">اطلب عرض سعر مجاني</a>

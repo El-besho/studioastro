@@ -1,0 +1,289 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getAllCities, getAllServices, getCityBySlug } from '../../lib/services';
+import { getSEOProps, generateCanonicalUrl } from '../../lib/seo';
+import { ServiceGrid } from '../../components/service-grid';
+import { Breadcrumb } from '../../components/semantic/breadcrumb';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card';
+import { Badge } from '../../components/ui/badge';
+import { MapPin, Users, TrendingUp, Clock } from 'lucide-react';
+import { Testimonials } from '../../components/service/Testimonials';
+import { ServiceGallery } from '../../components/service/ServiceGallery';
+import { ServiceProviders } from '../../components/service/ServiceProviders';
+import { ServiceCTA } from '../../components/service/ServiceCTA';
+
+export async function getStaticPaths() {
+  const cities = getAllCities();
+  return cities.map((city) => ({
+    params: { city: city.slug },
+    props: { city },
+  }));
+}
+
+const { city } = Astro.props;
+
+if (!city) {
+  return Astro.redirect('/404');
+}
+
+const allServices = getAllServices();
+const availableServices = allServices.filter(service => 
+  city.service_demand_multipliers[service.id] || 
+  city.service_demand_multipliers[service.category] ||
+  service.category === 'essential'
+);
+
+const seoProps = {
+  title: `خدمات ${city.ar_name} | أفضل الخدمات المنزلية في ${city.ar_name}`,
+  description: `اكتشف أفضل الخدمات المنزلية في ${city.ar_name}. صيانة مكيفات، سباكة، كهرباء، تنظيف، وأكثر. احصل على عروض أسعار مجانية من أفضل المحترفين في ${city.ar_name}.`,
+  keywords: [
+    `خدمات ${city.ar_name}`,
+    `صيانة مكيفات ${city.ar_name}`,
+    `شركة سباكة ${city.ar_name}`,
+    `فني كهرباء ${city.ar_name}`,
+    `شركة تنظيف ${city.ar_name}`,
+    'خدمات منزلية',
+    'إنقاذ'
+  ],
+  canonical: generateCanonicalUrl(`/locations/${city.slug}`)
+};
+
+const getEconomicLevelText = (level: string) => {
+  const levels = {
+    'very_high': 'مرتفع جداً',
+    'high': 'مرتفع',
+    'medium': 'متوسط',
+    'low': 'منخفض'
+  };
+  return levels[level] || 'متوسط';
+};
+
+const getClimateText = (climate: string) => {
+  const climates = {
+    'hot_desert': 'صحراوي حار',
+    'hot_arid': 'جاف حار',
+    'mild_desert': 'صحراوي معتدل',
+    'mountain': 'جبلي'
+  };
+  return climates[climate] || 'صحراوي حار';
+};
+---
+
+<Layout {...seoProps}>
+  <div class="container py-12 px-4 md:px-6">
+    <div class="max-w-6xl mx-auto">
+      <!-- Breadcrumb -->
+      <Breadcrumb client:load />
+      
+      <!-- City Header -->
+      <div class="text-center mb-12">
+        <Badge class="font-headline bg-primary/10 text-primary hover:bg-primary/20 mb-4">
+          <MapPin class="h-4 w-4 ml-2" />
+          {city.ar_name}
+        </Badge>
+        <h1 class="font-headline text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl mb-4">
+          أفضل الخدمات المنزلية في {city.ar_name}
+        </h1>
+        <p class="max-w-3xl mx-auto text-foreground/80 md:text-xl/relaxed">
+          اكتشف مجموعة واسعة من الخدمات المنزلية المتاحة في {city.ar_name}. 
+          نوصلك بأفضل المحترفين المعتمدين في جميع أنحاء المدينة.
+        </p>
+      </div>
+
+      <!-- City Statistics -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+        <Card class="text-center">
+          <CardContent class="pt-6">
+            <Users class="h-8 w-8 mx-auto mb-2 text-primary" />
+            <div class="text-2xl font-bold">{city.population.toLocaleString()}</div>
+            <p class="text-sm text-muted-foreground">نسمة</p>
+          </CardContent>
+        </Card>
+        <Card class="text-center">
+          <CardContent class="pt-6">
+            <TrendingUp class="h-8 w-8 mx-auto mb-2 text-primary" />
+            <div class="text-2xl font-bold">{getEconomicLevelText(city.economic_level)}</div>
+            <p class="text-sm text-muted-foreground">المستوى الاقتصادي</p>
+          </CardContent>
+        </Card>
+        <Card class="text-center">
+          <CardContent class="pt-6">
+            <Clock class="h-8 w-8 mx-auto mb-2 text-primary" />
+            <div class="text-2xl font-bold">{getClimateText(city.climate)}</div>
+            <p class="text-sm text-muted-foreground">المناخ</p>
+          </CardContent>
+        </Card>
+        <Card class="text-center">
+          <CardContent class="pt-6">
+            <MapPin class="h-8 w-8 mx-auto mb-2 text-primary" />
+            <div class="text-2xl font-bold">{availableServices.length}</div>
+            <p class="text-sm text-muted-foreground">خدمة متاحة</p>
+          </CardContent>
+        </Card>
+      </div>
+
+      <!-- City Overview -->
+      <Card class="mb-12">
+        <CardHeader>
+          <CardTitle class="font-headline text-2xl">عن {city.ar_name}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div class="prose prose-lg max-w-none">
+            <p class="text-foreground/80 leading-relaxed mb-4">
+              {city.ar_name} هي واحدة من أهم المدن في المملكة العربية السعودية، 
+              وتتميز بموقعها الاستراتيجي واقتصادها المتنوع. 
+              مع عدد سكان يبلغ {city.population.toLocaleString()} نسمة، 
+              تعد {city.ar_name} مركزاً حيوياً للخدمات المنزلية والمهنية.
+            </p>
+            <p class="text-foreground/80 leading-relaxed mb-4">
+              نقدم في {city.ar_name} مجموعة شاملة من الخدمات المنزلية عالية الجودة، 
+              من صيانة المكيفات والسباكة إلى خدمات التنظيف والصيانة العامة. 
+              جميع مزودي الخدمات لدينا معتمدون ومتخصصون في مجالاتهم.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+              <div>
+                <h3 class="font-headline text-lg font-semibold mb-3">المناطق الرئيسية</h3>
+                <ul class="space-y-2">
+                  {city.key_districts.slice(0, 6).map((district) => (
+                    <li class="flex items-center gap-2 text-sm">
+                      <MapPin class="h-4 w-4 text-primary" />
+                      {district.ar}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3 class="font-headline text-lg font-semibold mb-3">الخدمات المطلوبة</h3>
+                <ul class="space-y-2">
+                  {Object.entries(city.service_demand_multipliers).slice(0, 4).map(([service, multiplier]) => (
+                    <li class="flex items-center justify-between text-sm">
+                      <span>{service === 'air-conditioning' ? 'صيانة مكيفات' : service === 'luxury' ? 'خدمات فاخرة' : service === 'it-tech-services' ? 'خدمات تقنية' : service}</span>
+                      <Badge variant="secondary" class="text-xs">
+                        {multiplier}x
+                      </Badge>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      <!-- Available Services -->
+      <div class="mb-12">
+        <div class="text-center mb-8">
+          <h2 class="font-headline text-3xl font-bold mb-4">
+            الخدمات المتاحة في {city.ar_name}
+          </h2>
+          <p class="text-foreground/80 max-w-2xl mx-auto">
+            اكتشف {availableServices.length} خدمة متاحة في {city.ar_name} 
+            مع أفضل المحترفين المعتمدين
+          </p>
+        </div>
+        <ServiceGrid services={availableServices} />
+      </div>
+
+      <!-- Service Gallery -->
+      <div class="mb-12">
+        <ServiceGallery serviceName="خدمات منزلية" cityName={city.ar_name} client:load />
+      </div>
+
+      <!-- Service Providers -->
+      <div class="mb-12">
+        <ServiceProviders serviceName="خدمات منزلية" cityName={city.ar_name} client:load />
+      </div>
+
+      <!-- Testimonials -->
+      <div class="mb-12">
+        <Testimonials serviceName="خدمات منزلية" cityName={city.ar_name} client:load />
+      </div>
+
+      <!-- Popular Services in City -->
+      <Card class="mb-12">
+        <CardHeader>
+          <CardTitle class="font-headline text-2xl">الخدمات الأكثر طلباً في {city.ar_name}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {Object.entries(city.service_demand_multipliers)
+              .sort(([,a], [,b]) => b - a)
+              .slice(0, 6)
+              .map(([serviceId, multiplier]) => {
+                const service = allServices.find(s => s.id === serviceId || s.category === serviceId);
+                if (!service) return null;
+                return (
+                  <div class="flex items-center justify-between p-4 border rounded-lg hover:bg-muted/50 transition-colors">
+                    <div>
+                      <h3 class="font-medium">{service.ar_name}</h3>
+                      <p class="text-sm text-muted-foreground">
+                        {service.sub_services.length} خدمة فرعية
+                      </p>
+                    </div>
+                    <Badge variant="outline" class="text-primary">
+                      {multiplier}x
+                    </Badge>
+                  </div>
+                );
+              })}
+          </div>
+        </CardContent>
+      </Card>
+
+      <!-- Peak Seasons -->
+      {Object.keys(city.peak_seasons).length > 0 && (
+        <Card class="mb-12">
+          <CardHeader>
+            <CardTitle class="font-headline text-2xl">المواسم عالية الطلب</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {Object.entries(city.peak_seasons).map(([season, multiplier]) => (
+                <div class="flex items-center justify-between p-4 border rounded-lg">
+                  <div>
+                    <h3 class="font-medium">
+                      {season === 'summer' ? 'الصيف' : season === 'ramadan' ? 'رمضان' : season === 'winter' ? 'الشتاء' : season}
+                    </h3>
+                    <p class="text-sm text-muted-foreground">
+                      زيادة الطلب على الخدمات
+                    </p>
+                  </div>
+                  <Badge variant="secondary">
+                    +{Math.round((multiplier - 1) * 100)}%
+                  </Badge>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      <!-- CTA Section -->
+      <Card class="bg-primary/5 border-primary/20">
+        <CardContent class="pt-6 text-center">
+          <h3 class="font-headline text-2xl font-semibold mb-4">
+            احصل على أفضل الخدمات في {city.ar_name}
+          </h3>
+          <p class="text-foreground/80 mb-6 max-w-2xl mx-auto">
+            تواصل معنا اليوم للحصول على عروض أسعار مجانية من أفضل المحترفين 
+            المعتمدين في {city.ar_name}. نضمن لك جودة الخدمة وأفضل الأسعار.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="/services"
+              class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
+            >
+              عرض جميع الخدمات
+            </a>
+            <a
+              href="/contact"
+              class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
+            >
+              تواصل معنا
+            </a>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  </div>
+</Layout>

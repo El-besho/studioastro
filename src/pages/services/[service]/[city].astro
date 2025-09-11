@@ -11,6 +11,12 @@ import { FAQ } from '../../../components/service/FAQ';
 import { ServiceFeatures } from '../../../components/service/ServiceFeatures';
 import { ProcessSteps } from '../../../components/service/ProcessSteps';
 import { SubServiceGrid } from '../../../components/service/SubServiceGrid';
+import { Testimonials } from '../../../components/service/Testimonials';
+import { ServiceStats } from '../../../components/service/ServiceStats';
+import { ServiceGallery } from '../../../components/service/ServiceGallery';
+import { ServiceProviders } from '../../../components/service/ServiceProviders';
+import { ServiceCTA } from '../../../components/service/ServiceCTA';
+import { FAQSchema } from '../../../components/semantic/faq-schema';
 
 export async function getStaticPaths() {
   const services = getAllServices();
@@ -111,12 +117,46 @@ const seoProps = {
         <ProcessSteps client:load />
       </div>
 
+      <!-- Service Stats -->
+      <div class="mb-12">
+        <ServiceStats service={service} city={city} client:load />
+      </div>
+
+      <!-- Service Gallery -->
+      <div class="mb-12">
+        <ServiceGallery serviceName={service.ar_name} cityName={city.ar_name} client:load />
+      </div>
+
+      <!-- Service Providers -->
+      <div class="mb-12">
+        <ServiceProviders serviceName={service.ar_name} cityName={city.ar_name} client:load />
+      </div>
+
+      <!-- Testimonials -->
+      <div class="mb-12">
+        <Testimonials serviceName={service.ar_name} cityName={city.ar_name} client:load />
+      </div>
+
       <!-- FAQ Section -->
       {service.seo.faq && service.seo.faq.length > 0 && (
         <div class="mb-12">
           <FAQ faqs={service.seo.faq} client:load />
+          <FAQSchema faqs={service.seo.faq} serviceName={service.ar_name} />
         </div>
       )}
+
+      <!-- CTA Section -->
+      <div class="mb-12">
+        <ServiceCTA 
+          serviceName={service.ar_name}
+          cityName={city.ar_name}
+          isEmergency={service.emergency_available}
+          priceRange={[100, 500]}
+          responseTime="30 دقيقة"
+          variant="hero"
+          client:load 
+        />
+      </div>
 
       <!-- City Info -->
       <Card class="mb-12">
@@ -128,16 +168,17 @@ const seoProps = {
             <div class="space-y-3">
               <div class="flex items-center gap-2">
                 <MapPin class="h-4 w-4 text-muted-foreground" />
-                <span class="text-sm">المنطقة: {city.region}</span>
+                <span class="text-sm">المنطقة: {city.province}</span>
               </div>
               <div class="flex items-center gap-2">
                 <Star class="h-4 w-4 text-muted-foreground" />
-                <span class="text-sm">عدد السكان: {city.population}</span>
+                <span class="text-sm">عدد السكان: {city.population.toLocaleString()}</span>
               </div>
             </div>
             <div>
               <p class="text-sm text-muted-foreground">
-                {city.description}
+                {city.ar_name} هي واحدة من أهم المدن في المملكة العربية السعودية، 
+                وتتميز بموقعها الاستراتيجي واقتصادها المتنوع.
               </p>
             </div>
           </div>

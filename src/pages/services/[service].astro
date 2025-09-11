@@ -11,6 +11,12 @@ import { FAQ } from '../../components/service/FAQ';
 import { ServiceFeatures } from '../../components/service/ServiceFeatures';
 import { ProcessSteps } from '../../components/service/ProcessSteps';
 import { SubServiceGrid } from '../../components/service/SubServiceGrid';
+import { Testimonials } from '../../components/service/Testimonials';
+import { ServiceStats } from '../../components/service/ServiceStats';
+import { ServiceGallery } from '../../components/service/ServiceGallery';
+import { ServiceProviders } from '../../components/service/ServiceProviders';
+import { ServiceCTA } from '../../components/service/ServiceCTA';
+import { FAQSchema } from '../../components/semantic/faq-schema';
 
 export async function getStaticPaths() {
   const services = getAllServices();
@@ -88,12 +94,45 @@ const seoProps = {
         <ProcessSteps client:load />
       </div>
 
+      <!-- Service Stats -->
+      <div class="mb-12">
+        <ServiceStats service={service} client:load />
+      </div>
+
+      <!-- Service Gallery -->
+      <div class="mb-12">
+        <ServiceGallery serviceName={service.ar_name} client:load />
+      </div>
+
+      <!-- Service Providers -->
+      <div class="mb-12">
+        <ServiceProviders serviceName={service.ar_name} client:load />
+      </div>
+
+      <!-- Testimonials -->
+      <div class="mb-12">
+        <Testimonials serviceName={service.ar_name} client:load />
+      </div>
+
       <!-- FAQ Section -->
       {service.seo.faq && service.seo.faq.length > 0 && (
         <div class="mb-12">
           <FAQ faqs={service.seo.faq} client:load />
+          <FAQSchema faqs={service.seo.faq} serviceName={service.ar_name} />
         </div>
       )}
+
+      <!-- CTA Section -->
+      <div class="mb-12">
+        <ServiceCTA 
+          serviceName={service.ar_name}
+          isEmergency={service.emergency_available}
+          priceRange={[100, 500]}
+          responseTime="30 دقيقة"
+          variant="hero"
+          client:load 
+        />
+      </div>
 
       <!-- Related Services -->
       <div class="text-center mb-8">
