@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Badge } from '../ui/badge';
-import { Check, X, Star, Clock, DollarSign, Shield } from 'lucide-react';
+import { Check, X, Star, Clock, Banknote, Shield } from 'lucide-react';
 
 interface ServiceComparisonProps {
   currentService: any;

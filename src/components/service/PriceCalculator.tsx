@@ -6,7 +6,7 @@ import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
-import { Calculator, DollarSign, Clock, MapPin } from 'lucide-react';
+import { Calculator, Banknote, Clock, MapPin } from 'lucide-react';
 
 interface PriceCalculatorProps {
   serviceName: string;
@@ -132,7 +132,7 @@ export function PriceCalculator({
         {calculatedPrice && (
           <div class="p-4 bg-primary/10 rounded-lg border border-primary/20">
             <div class="flex items-center gap-2 mb-2">
-              <DollarSign class="h-5 w-5 text-primary" />
+              <Banknote class="h-5 w-5 text-primary" />
               <span class="font-semibold">السعر المقدر</span>
             </div>
             <div class="text-2xl font-bold text-primary">

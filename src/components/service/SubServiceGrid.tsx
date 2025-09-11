@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
-import { Check, Clock, DollarSign, Star, Zap } from 'lucide-react';
+import { Check, Clock, Banknote, Star, Zap } from 'lucide-react';
 
 interface SubService {
   id: string;
@@ -93,7 +93,7 @@ export function SubServiceGrid({ subServices, serviceSlug, serviceName }: SubSer
             <CardContent className="space-y-4">
               {/* Pricing */}
               <div className="flex items-center gap-2">
-                <DollarSign className="h-4 w-4 text-primary" />
+                <Banknote className="h-4 w-4 text-primary" />
                 <span className="font-semibold text-primary">
                   {subService.avg_price_range[0]} - {subService.avg_price_range[1]} ريال
                 </span>
