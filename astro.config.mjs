@@ -2,6 +2,8 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
 import mdx from '@astrojs/mdx';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 // https://astro.build/config
 export default defineConfig({
@@ -20,6 +22,11 @@ export default defineConfig({
   vite: {
     define: {
       'process.env': process.env
+    },
+    resolve: {
+      alias: {
+        '@': path.resolve(path.dirname(fileURLToPath(import.meta.url)), './src')
+      }
     },
     build: {
       cssCodeSplit: true,

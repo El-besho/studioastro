@@ -3,7 +3,7 @@ import { performanceMonitor } from '../../src/lib/performance';
 
 // Mock web-vitals
 vi.mock('web-vitals', () => ({
-  getCLS: vi.fn((callback) => {
+  onCLS: vi.fn((callback) => {
     callback({
       name: 'CLS',
       value: 0.05,
@@ -13,17 +13,17 @@ vi.mock('web-vitals', () => ({
       navigationType: 'navigate',
     });
   }),
-  getFID: vi.fn((callback) => {
+  onINP: vi.fn((callback) => {
     callback({
-      name: 'FID',
+      name: 'INP',
       value: 50,
-      id: 'fid-1',
+      id: 'inp-1',
       rating: 'good',
       delta: 50,
       navigationType: 'navigate',
     });
   }),
-  getFCP: vi.fn((callback) => {
+  onFCP: vi.fn((callback) => {
     callback({
       name: 'FCP',
       value: 1200,
@@ -33,7 +33,7 @@ vi.mock('web-vitals', () => ({
       navigationType: 'navigate',
     });
   }),
-  getLCP: vi.fn((callback) => {
+  onLCP: vi.fn((callback) => {
     callback({
       name: 'LCP',
       value: 2000,
@@ -43,7 +43,7 @@ vi.mock('web-vitals', () => ({
       navigationType: 'navigate',
     });
   }),
-  getTTFB: vi.fn((callback) => {
+  onTTFB: vi.fn((callback) => {
     callback({
       name: 'TTFB',
       value: 600,
@@ -81,7 +81,7 @@ describe('PerformanceMonitor', () => {
       
       const metricNames = metrics.map(m => m.name);
       expect(metricNames).toContain('CLS');
-      expect(metricNames).toContain('FID');
+      expect(metricNames).toContain('INP');
       expect(metricNames).toContain('FCP');
       expect(metricNames).toContain('LCP');
       expect(metricNames).toContain('TTFB');
@@ -111,7 +111,7 @@ describe('PerformanceMonitor', () => {
 
   it('should detect budget violations', () => {
     // Mock a poor LCP metric
-    const mockGetLCP = vi.fn((callback) => {
+    const mockOnLCP = vi.fn((callback) => {
       callback({
         name: 'LCP',
         value: 3000, // Above threshold of 2500
@@ -123,11 +123,11 @@ describe('PerformanceMonitor', () => {
     });
     
     vi.doMock('web-vitals', () => ({
-      getLCP: mockGetLCP,
-      getFID: vi.fn(),
-      getFCP: vi.fn(),
-      getCLS: vi.fn(),
-      getTTFB: vi.fn(),
+      onLCP: mockOnLCP,
+      onINP: vi.fn(),
+      onFCP: vi.fn(),
+      onCLS: vi.fn(),
+      onTTFB: vi.fn(),
     }));
     
     performanceMonitor.startMonitoring();
