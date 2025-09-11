@@ -92,10 +92,10 @@ export default function HeaderClient() {
             <span className="sr-only">فتح قائمة التنقل</span>
           </Button>
         </SheetTrigger>
-        <SheetContent side="right" className="p-0 flex flex-col w-full sm:w-80">
+        <SheetContent side="right" className="p-0 flex flex-col w-full sm:w-80 glass-effect">
           <SheetHeader className="border-b p-4 bg-gradient-to-r from-primary/5 to-primary/10">
             <div className="flex items-center gap-2">
-              <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center">
+              <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center pulse-glow">
                 <span className="text-primary-foreground font-bold text-sm">إن</span>
               </div>
               <span className="font-headline text-lg font-bold">إنقاذ</span>
@@ -107,7 +107,7 @@ export default function HeaderClient() {
                 <a 
                   key={link.href} 
                   href={link.href} 
-                  className="flex items-center gap-3 text-lg font-medium text-foreground/80 hover:text-foreground hover:bg-primary/5 rounded-lg p-3 transition-all duration-200" 
+                  className="flex items-center gap-3 text-lg font-medium text-foreground/80 hover:text-foreground hover:bg-primary/5 rounded-lg p-3 transition-all duration-200 focus-ring-enhanced touch-target" 
                   onClick={() => setIsMobileMenuOpen(false)}
                   aria-label={link.label}
                 >
@@ -118,7 +118,7 @@ export default function HeaderClient() {
             </nav>
           </div>
           <SheetFooter className="p-4 border-t bg-muted/30">
-            <Button className="w-full font-headline" size="lg" asChild>
+            <Button className="w-full font-headline btn-gradient" size="lg" asChild>
               <a href="/services" onClick={() => setIsMobileMenuOpen(false)}>
                 اطلب عرض سعر مجاني
               </a>

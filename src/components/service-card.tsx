@@ -84,11 +84,13 @@ export function ServiceCard({
         'text-center group hover:shadow-xl hover:-translate-y-1 transition-all duration-300 h-full flex flex-col',
         'border-2 hover:border-primary/20 focus-within:border-primary/40',
         'bg-gradient-to-b from-background to-muted/20',
+        'card-hover relative overflow-hidden',
         className
       )}>
         <CardContent className="flex flex-col items-center justify-start p-6 gap-4 text-center flex-grow">
-          <div className="flex items-center justify-center h-16 w-16 p-4 bg-primary/10 rounded-full text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 group-hover:scale-110">
-            <Icon className="w-8 h-8" />
+          <div className="flex items-center justify-center h-16 w-16 p-4 bg-primary/10 rounded-full text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 group-hover:scale-110 relative">
+            <Icon className="w-8 h-8 relative z-10" />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
           <div className="w-full flex-grow">
             <h2 className="font-headline text-lg font-semibold group-hover:text-primary transition-colors duration-200">

@@ -77,10 +77,11 @@ const stats = [
 <div class="flex flex-col min-h-[100dvh]">
   <!-- Hero Section -->
   <section id="main-content" class="relative w-full pt-24 pb-12 md:pt-32 md:pb-24 lg:pt-40 lg:pb-32 overflow-hidden">
-    <!-- Background decoration -->
+    <!-- Enhanced Background decoration -->
     <div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5"></div>
-    <div class="absolute top-20 right-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-20 left-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl"></div>
+    <div class="absolute top-20 right-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-20 left-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-primary/5 to-accent/5 rounded-full blur-3xl opacity-50"></div>
     
     <div class="container px-4 md:px-6 relative z-10">
       <div class="flex flex-col items-center space-y-6 text-center">
@@ -94,7 +95,10 @@ const stats = [
           </p>
         </div>
         <div class="w-full max-w-2xl animate-fade-in-up animation-delay-200">
-          <SearchForm client:load />
+          <div class="relative">
+            <SearchForm client:load />
+            <div class="absolute -inset-1 bg-gradient-to-r from-primary/20 to-accent/20 rounded-xl blur opacity-30 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -213,7 +217,8 @@ const stats = [
         <Button
           type="submit"
           size="lg"
-          class="w-full font-headline"
+          class="w-full font-headline btn-hover-lift"
+          variant="gradient"
           asChild
         >
           <a href="/services">اطلب عرض سعر مجاني</a>

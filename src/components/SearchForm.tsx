@@ -23,22 +23,23 @@ export default function SearchForm() {
   };
 
   return (
-    <form onSubmit={handleSearch} className="flex flex-row-reverse items-center gap-2 rounded-xl bg-card p-2 border shadow-lg hover:shadow-xl transition-shadow duration-200">
+    <form onSubmit={handleSearch} className="group relative flex flex-row-reverse items-center gap-2 rounded-xl bg-card/80 backdrop-blur-sm p-2 border border-border/50 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-primary/20">
       <div className="relative w-full flex-1">
-        <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+        <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors duration-200" />
         <Input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="ما الخدمة التي تحتاجها؟ (مثال: تصليح مكيف في الرياض)"
-          className="w-full border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-base text-right pr-10 bg-transparent"
+          variant="enhanced"
+          className="w-full border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-base text-right pr-10 bg-transparent placeholder:text-muted-foreground/70 focus:placeholder:text-muted-foreground/50"
           disabled={isLoading}
           required
         />
       </div>
       <Button 
         type="submit" 
-        className="w-full sm:w-auto font-headline min-w-[120px]"
+        className="w-full sm:w-auto font-headline min-w-[120px] btn-hover-lift relative overflow-hidden"
         disabled={isLoading || !query.trim()}
       >
         {isLoading ? (
