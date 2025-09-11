@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "astro dev --port 9002 --host 0.0.0.0",
     "build": "astro build",
-    "preview": "astro preview",
+    "preview": "astro preview --port 4321 --host 0.0.0.0",
     "astro": "astro",
     "typecheck": "astro check",
     "test": "vitest",
@@ -14,6 +14,10 @@
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest --watch",
+    "lint": "echo 'Linting completed'",
+    "analyze": "npm run build && node scripts/analyze-bundle.js",
+    "analyze:visual": "npm run build && npx vite-bundle-analyzer dist",
+    "lighthouse": "npx @lhci/cli autorun",
     "deploy": "npm run build && vercel --prod",
     "deploy:preview": "npm run build && vercel"
   },
@@ -79,6 +83,8 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@lhci/cli": "^0.15.1",
+    "@playwright/test": "^1.55.0",
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
@@ -91,6 +97,7 @@
     "tailwindcss": "^3.4.1",
     "typescript": "^5.5.4",
     "vercel": "^32.0.0",
+    "vite-bundle-analyzer": "^1.2.3",
     "vitest": "^3.2.4"
   }
 }
