@@ -10,6 +10,7 @@ import { SEO } from 'astro-seo';
 import { SkipLink } from '../components/ui/skip-link';
 import { WhatsAppChat } from '../components/WhatsAppChat';
 import { defaultWhatsAppConfig } from '../config/whatsapp';
+import { PerformanceMonitor } from '../components/PerformanceMonitor';
 import '../styles/globals.css';
 
 export interface Props {
@@ -135,6 +136,9 @@ const orgJsonLd = {
       position={defaultWhatsAppConfig.settings.position}
       client:load
     />
+    
+    <!-- Performance Monitor (Development Only) -->
+    <PerformanceMonitor client:load />
   </body>
 </html>
 

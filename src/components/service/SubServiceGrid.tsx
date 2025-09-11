@@ -6,7 +6,6 @@ import { Check, Clock, DollarSign, Star, Zap } from 'lucide-react';
 interface SubService {
   id: string;
   ar_name: string;
-  en_name: string;
   urgency: string;
   avg_price_range: [number, number];
   skill_requirements: string[];

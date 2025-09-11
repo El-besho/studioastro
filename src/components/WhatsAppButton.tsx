@@ -32,7 +32,7 @@ export function WhatsAppButton({
   const handleClick = () => {
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${phoneNumber.replace(/\D/g, '')}?text=${encodedMessage}`;
-    window.open(whatsappUrl, '_blank');
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   };
 
   const getIcon = () => {
@@ -49,13 +49,13 @@ export function WhatsAppButton({
   const getVariantStyles = () => {
     switch (variant) {
       case 'outline':
-        return 'border-green-500 text-green-500 hover:bg-green-50';
+        return 'border-green-500 text-green-500 hover:bg-green-50 rounded-xl';
       case 'ghost':
-        return 'text-green-500 hover:bg-green-50';
+        return 'text-green-500 hover:bg-green-50 rounded-xl';
       case 'link':
-        return 'text-green-500 hover:underline p-0 h-auto';
+        return 'text-green-500 hover:underline p-0 h-auto rounded-xl';
       default:
-        return 'bg-green-500 hover:bg-green-600 text-white';
+        return 'bg-green-500 hover:bg-green-600 text-white rounded-xl';
     }
   };
 
@@ -65,9 +65,11 @@ export function WhatsAppButton({
         onClick={handleClick}
         variant={variant}
         size={size}
-        className={`${getVariantStyles()} ${className}`}
+        className={`${getVariantStyles()} ${className} aspect-square min-w-[48px] min-h-[48px] flex items-center justify-center`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
+        aria-label={`${label} - ${agentName ? `الوكيل: ${agentName}` : ''}`}
+        aria-describedby={showAgentInfo && agentName ? "agent-info" : undefined}
       >
         {getIcon()}
         {size !== 'icon' && (
@@ -77,7 +79,12 @@ export function WhatsAppButton({
 
       {/* Agent Info Tooltip */}
       {showAgentInfo && agentName && isHovered && (
-        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg whitespace-nowrap">
+        <div 
+          id="agent-info"
+          className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg whitespace-nowrap z-50"
+          role="tooltip"
+          aria-live="polite"
+        >
           {agentName}
           <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
         </div>

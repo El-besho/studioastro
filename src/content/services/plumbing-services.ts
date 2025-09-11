@@ -4,7 +4,6 @@ import { ServiceHierarchy } from '@/types/services';
 export const plumbingServices: ServiceHierarchy = {
     id: 'plumbing-services',
     ar_name: 'خدمات السباكة',
-    en_name: 'Plumbing Services',
     category: 'emergency',
     priority: 1,
     seasonal_demand: 'year_round',
@@ -33,7 +32,6 @@ export const plumbingServices: ServiceHierarchy = {
       { 
         id: 'leak_repair', 
         ar_name: 'إصلاح تسريبات المياه', 
-        en_name: 'Water Leak Repair', 
         urgency: 'emergency', 
         avg_price_range: [200, 450], 
         skill_requirements: ['licensed_plumber'], 
@@ -53,7 +51,6 @@ export const plumbingServices: ServiceHierarchy = {
       { 
         id: 'drain_unclog', 
         ar_name: 'تسليك المجاري والبالوعات', 
-        en_name: 'Drain and Sewer Unclogging', 
         urgency: 'emergency', 
         avg_price_range: [250, 500], 
         skill_requirements: ['drainage_expert'], 
@@ -73,7 +70,6 @@ export const plumbingServices: ServiceHierarchy = {
       { 
         id: 'heater_install', 
         ar_name: 'تركيب سخانات المياه', 
-        en_name: 'Water Heater Installation', 
         urgency: 'scheduled', 
         avg_price_range: [400, 800], 
         skill_requirements: ['licensed_plumber', 'electrical_basics'], 
@@ -93,7 +89,6 @@ export const plumbingServices: ServiceHierarchy = {
       { 
         id: 'toilet_repair_install', 
         ar_name: 'تركيب وإصلاح المراحيض', 
-        en_name: 'Toilet Repair and Installation', 
         urgency: 'urgent', 
         avg_price_range: [200, 500], 
         skill_requirements: ['licensed_plumber'], 
@@ -110,7 +105,6 @@ export const plumbingServices: ServiceHierarchy = {
       { 
         id: 'faucet_mixer_install', 
         ar_name: 'تركيب وإصلاح الحنفيات والخلاطات', 
-        en_name: 'Faucet and Mixer Installation/Repair', 
         urgency: 'scheduled', 
         avg_price_range: [150, 350], 
         skill_requirements: ['plumber'], 
@@ -127,7 +121,6 @@ export const plumbingServices: ServiceHierarchy = {
       { 
         id: 'water_pump_install_repair', 
         ar_name: 'تركيب وإصلاح مضخات المياه', 
-        en_name: 'Water Pump Installation and Repair', 
         urgency: 'urgent', 
         avg_price_range: [400, 1200], 
         skill_requirements: ['pump_technician'], 
@@ -144,7 +137,6 @@ export const plumbingServices: ServiceHierarchy = {
       { 
         id: 'tank_cleaning', 
         ar_name: 'تنظيف خزانات المياه', 
-        en_name: 'Water Tank Cleaning', 
         urgency: 'maintenance', 
         avg_price_range: [300, 700], 
         skill_requirements: ['tank_cleaning_certified'], 
@@ -161,7 +153,6 @@ export const plumbingServices: ServiceHierarchy = {
       { 
         id: 'pipe_replacement', 
         ar_name: 'تمديد وتغيير مواسير المياه', 
-        en_name: 'Pipe Replacement and Rerouting', 
         urgency: 'scheduled', 
         avg_price_range: [1000, 5000], 
         skill_requirements: ['master_plumber'], 
@@ -178,7 +169,6 @@ export const plumbingServices: ServiceHierarchy = {
       { 
         id: 'sewage_camera_inspection', 
         ar_name: 'فحص مواسير الصرف بالكاميرا', 
-        en_name: 'Sewer Camera Inspection', 
         urgency: 'consultation', 
         avg_price_range: [500, 900], 
         skill_requirements: ['drainage_expert'], 

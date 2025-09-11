@@ -23,11 +23,23 @@ export default function SearchForm() {
   };
 
   return (
-    <form onSubmit={handleSearch} className="group relative flex flex-row-reverse items-center gap-2 rounded-xl bg-card/80 backdrop-blur-sm p-2 border border-border/50 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-primary/20">
+    <form 
+      onSubmit={handleSearch} 
+      className="group relative flex flex-row-reverse items-center gap-2 rounded-xl bg-card/80 backdrop-blur-sm p-2 border border-border/50 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-primary/20"
+      role="search"
+      aria-label="البحث عن الخدمات"
+    >
       <div className="relative w-full flex-1">
-        <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors duration-200" />
+        <Search 
+          className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors duration-200" 
+          aria-hidden="true"
+        />
+        <label htmlFor="search-input" className="sr-only">
+          البحث عن الخدمات
+        </label>
         <Input
-          type="text"
+          id="search-input"
+          type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="ما الخدمة التي تحتاجها؟ (مثال: تصليح مكيف في الرياض)"
@@ -35,21 +47,28 @@ export default function SearchForm() {
           className="w-full border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-base text-right pr-10 bg-transparent placeholder:text-muted-foreground/70 focus:placeholder:text-muted-foreground/50"
           disabled={isLoading}
           required
+          aria-describedby="search-help"
+          aria-invalid={query.length > 0 && query.trim().length === 0}
         />
+        <div id="search-help" className="sr-only">
+          اكتب اسم الخدمة أو المدينة للبحث عن مزودي الخدمات
+        </div>
       </div>
       <Button 
         type="submit" 
         className="w-full sm:w-auto font-headline min-w-[120px] btn-hover-lift relative overflow-hidden"
         disabled={isLoading || !query.trim()}
+        aria-describedby={isLoading ? "search-status" : undefined}
       >
         {isLoading ? (
           <>
             <LoadingSpinner size="sm" className="ml-2" />
+            <span id="search-status" className="sr-only">جاري البحث عن الخدمات</span>
             جاري البحث...
           </>
         ) : (
           <>
-            <Search className="ml-2 h-4 w-4" />
+            <Search className="ml-2 h-4 w-4" aria-hidden="true" />
             ابحث الآن
           </>
         )}

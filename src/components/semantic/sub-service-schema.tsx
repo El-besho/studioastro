@@ -45,7 +45,7 @@ export function SubServiceSchema({ service, subService }: SubServiceSchemaProps)
     name: subService.ar_name,
     description: subService.seo?.summary || `خدمة ${subService.ar_name} المتخصصة.`,
     url: serviceUrl,
-    serviceType: subService.en_name,
+    serviceType: subService.ar_name,
     category: service.ar_name,
     provider: {
       '@type': 'Organization',

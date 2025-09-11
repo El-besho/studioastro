@@ -42,7 +42,6 @@ export default function ServicesLocationsMenu() {
     if (!searchQuery.trim()) return services;
     return services.filter(service => 
       service.ar_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      service.en_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       service.sub_services.some(sub => 
         sub.ar_name.toLowerCase().includes(searchQuery.toLowerCase())
       )

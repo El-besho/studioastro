@@ -18,7 +18,6 @@ export interface ServiceCategory {
 export interface ServiceHierarchy {
   id: string;
   ar_name: string;
-  en_name:string;
   category: ServiceCategoryId;
   priority: number;
   seasonal_demand: 'year_round' | 'summer_peak' | 'winter_peak' | 'seasonal';
@@ -35,7 +34,6 @@ export interface SubService {
   id: string;
   slug?: string;
   ar_name: string;
-  en_name: string;
   urgency: 'emergency' | 'urgent' | 'scheduled' | 'maintenance' | 'consultation';
   avg_price_range: [number, number];
   skill_requirements: string[];
@@ -47,7 +45,6 @@ export interface SubService {
 export interface CityProfile {
   id: string;
   ar_name: string;
-  en_name: string;
   slug: string;
   province: string;
   population: number;
@@ -55,7 +52,7 @@ export interface CityProfile {
   expat_percentage: number;
   primary_languages: string[];
   climate: 'hot_desert' | 'hot_humid' | 'moderate' | 'mountainous';
-  key_districts: { ar: string; en: string }[];
+  key_districts: { ar: string }[];
   service_demand_multipliers: Record<string, number>;
   peak_seasons: Record<string, number>;
 }
