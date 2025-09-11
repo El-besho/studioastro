@@ -11,6 +11,8 @@ import {
   Clock,
   Award
 } from 'lucide-react';
+import { WhatsAppButton } from '../WhatsAppButton';
+import { getServiceMessage, getLocationMessage } from '../../config/whatsapp';
 
 interface ServiceCTAProps {
   serviceName: string;
@@ -152,10 +154,13 @@ export function ServiceCTA({
             <Phone className="h-4 w-4 ml-2" />
             اطلب عرض سعر
           </Button>
-          <Button variant="outline" className="w-full">
-            <MessageCircle className="h-4 w-4 ml-2" />
-            تواصل معنا
-          </Button>
+          <WhatsAppButton
+            phoneNumber="+966501234567"
+            message={cityName ? getLocationMessage(cityName.toLowerCase()) : getServiceMessage(serviceName.toLowerCase().replace(/\s+/g, '-'))}
+            variant="outline"
+            className="w-full"
+            label="تواصل عبر WhatsApp"
+          />
           <Button variant="outline" className="w-full">
             <Calendar className="h-4 w-4 ml-2" />
             احجز موعد

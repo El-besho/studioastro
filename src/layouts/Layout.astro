@@ -8,6 +8,8 @@ import { Breadcrumb } from '../components/semantic/breadcrumb';
 import { Toaster } from '../components/ui/toaster';
 import { SEO } from 'astro-seo';
 import { SkipLink } from '../components/ui/skip-link';
+import { WhatsAppChat } from '../components/WhatsAppChat';
+import { defaultWhatsAppConfig } from '../config/whatsapp';
 import '../styles/globals.css';
 
 export interface Props {
@@ -119,6 +121,20 @@ const orgJsonLd = {
     <main><slot /></main>
     <Footer />
     <Toaster />
+    
+    <!-- WhatsApp Chat Widget -->
+    <WhatsAppChat 
+      phoneNumber={defaultWhatsAppConfig.defaultPhone}
+      defaultMessage={defaultWhatsAppConfig.defaultMessage}
+      agents={defaultWhatsAppConfig.agents}
+      showForm={defaultWhatsAppConfig.settings.showForm}
+      showAvailability={defaultWhatsAppConfig.settings.showAvailability}
+      gdprCompliant={defaultWhatsAppConfig.settings.gdprCompliant}
+      deviceSpecific={defaultWhatsAppConfig.settings.deviceSpecific}
+      animation={defaultWhatsAppConfig.settings.animation}
+      position={defaultWhatsAppConfig.settings.position}
+      client:load
+    />
   </body>
 </html>
 
