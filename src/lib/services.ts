@@ -108,10 +108,10 @@ export function getCategoryBySlug(slug: string): ServiceCategory | null {
 export function getAllServices(): (ServiceHierarchy & { slug: string })[] {
   return services.map((service) => ({
     ...service,
-    slug: generateSlug(service.ar_name),
+    slug: service.id, // Use English ID as slug instead of generating from Arabic name
     sub_services: service.sub_services.map(sub => ({
         ...sub,
-        slug: generateSlug(sub.ar_name)
+        slug: sub.id // Use English ID as slug instead of generating from Arabic name
     }))
   }));
 }
