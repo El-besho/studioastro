@@ -49,13 +49,13 @@ export function WhatsAppButton({
   const getVariantStyles = () => {
     switch (variant) {
       case 'outline':
-        return 'border-green-500 text-green-500 hover:bg-green-50 rounded-xl';
+        return 'border-green-500 text-green-500 hover:bg-green-50 rounded-lg';
       case 'ghost':
-        return 'text-green-500 hover:bg-green-50 rounded-xl';
+        return 'text-green-500 hover:bg-green-50 rounded-lg';
       case 'link':
-        return 'text-green-500 hover:underline p-0 h-auto rounded-xl';
+        return 'text-green-500 hover:underline p-0 h-auto rounded-lg';
       default:
-        return 'bg-green-500 hover:bg-green-600 text-white rounded-xl';
+        return 'bg-green-500 hover:bg-green-600 text-white rounded-lg';
     }
   };
 
@@ -65,7 +65,7 @@ export function WhatsAppButton({
         onClick={handleClick}
         variant={variant}
         size={size}
-        className={`${getVariantStyles()} ${className} aspect-square min-w-[48px] min-h-[48px] flex items-center justify-center`}
+        className={`${getVariantStyles()} ${className} aspect-square min-w-[48px] min-h-[48px] flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-200`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         aria-label={`${label} - ${agentName ? `الوكيل: ${agentName}` : ''}`}

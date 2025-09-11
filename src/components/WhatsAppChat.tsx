@@ -217,7 +217,7 @@ export function WhatsAppChat({
                 variant="ghost"
                 size="sm"
                 onClick={() => setIsOpen(false)}
-                className="h-8 w-8 p-0"
+                className="h-8 w-8 p-0 rounded-lg"
               >
                 <X className="h-4 w-4" />
               </Button>
@@ -232,7 +232,7 @@ export function WhatsAppChat({
                   variant="outline"
                   size="sm"
                   onClick={() => setShowAgentList(!showAgentList)}
-                  className="w-full justify-between"
+                  className="w-full justify-between rounded-lg"
                 >
                   <span>اختر الممثل</span>
                   {showAgentList ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
@@ -330,7 +330,7 @@ export function WhatsAppChat({
             <Button
               onClick={handleSendMessage}
               disabled={!isAvailable || (showForm && (!formData.name || !formData.message)) || (gdprCompliant && !gdprAccepted)}
-              className="w-full bg-green-500 hover:bg-green-600 text-white"
+              className="w-full bg-green-500 hover:bg-green-600 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
             >
               <Send className="h-4 w-4 ml-2" />
               إرسال عبر WhatsApp
@@ -342,7 +342,7 @@ export function WhatsAppChat({
                 variant="outline"
                 size="sm"
                 onClick={() => window.open(`tel:${currentAgent.phone}`, '_self')}
-                className="flex-1"
+                className="flex-1 rounded-lg"
               >
                 <Phone className="h-4 w-4 ml-1" />
                 اتصال
@@ -351,7 +351,7 @@ export function WhatsAppChat({
                 variant="outline"
                 size="sm"
                 onClick={() => window.open(`mailto:${currentAgent.email}`, '_self')}
-                className="flex-1"
+                className="flex-1 rounded-lg"
               >
                 <Mail className="h-4 w-4 ml-1" />
                 إيميل
@@ -364,7 +364,7 @@ export function WhatsAppChat({
       {/* Floating Button */}
       <Button
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 text-white shadow-lg ${getAnimationClass()}`}
+        className={`w-14 h-14 rounded-lg bg-green-500 hover:bg-green-600 text-white shadow-lg hover:shadow-xl transition-all duration-200 ${getAnimationClass()}`}
         size="icon"
       >
         {isOpen ? (
