@@ -8,6 +8,7 @@ import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
+import rehypeSlug from 'rehype-slug';
 import { visit } from 'unist-util-visit';
 
 const postsDirectory = path.join(process.cwd(), 'src/content/blog');
@@ -36,8 +37,9 @@ async function processMarkdownToHtml(content: string): Promise<string> {
   const file = new VFile({value: content});
   const result = await unified()
     .use(remarkParse)
-    .use(remarkRehype)
-    .use(rehypeStringify)
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeSlug)
+    .use(rehypeStringify, { allowDangerousHtml: true })
     .process(file);
   
   return result.toString();

@@ -75,6 +75,11 @@ export default function HeaderClient() {
     return `/search?location=${citySlug}`;
   };
 
+  const handleCitySelect = (citySlug: string) => {
+    const link = getCityLink(citySlug);
+    window.location.href = link;
+  };
+
   return (
     <>
       <CommandDialog open={openCommand} onOpenChange={setOpenCommand}/>
@@ -138,8 +143,12 @@ export default function HeaderClient() {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           {cities.map((city) => (
-            <DropdownMenuItem key={city.slug} asChild>
-              <a href={getCityLink(city.slug)}>{city.ar_name}</a>
+            <DropdownMenuItem 
+              key={city.slug} 
+              onClick={() => handleCitySelect(city.slug)}
+              className="cursor-pointer"
+            >
+              {city.ar_name}
             </DropdownMenuItem>
           ))}
         </DropdownMenuContent>
