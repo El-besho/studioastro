@@ -150,7 +150,7 @@ async function getAllParsedQueries(): Promise<TaggedQuery[]> {
     allQueries = uniqueLines.map(line => parseQuery(line)).filter((q): q is TaggedQuery => q !== null);
     return allQueries;
   } catch (error) {
-    console.error("Failed to read or parse queries files:", error);
+    // Failed to read queries files - return empty array
     return [];
   }
 }

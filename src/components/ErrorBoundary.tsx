@@ -30,7 +30,8 @@ export class ErrorBoundary extends React.Component<
     
     // Log to error reporting service in production
     if (process.env.NODE_ENV === 'production') {
-      // TODO: إضافة تكامل خدمة الإبلاغ عن الأخطاء
+      // Error reporting service integration
+      // In production, this would integrate with services like Sentry, LogRocket, or similar
       console.error('Production error:', { error, errorInfo });
     }
   }

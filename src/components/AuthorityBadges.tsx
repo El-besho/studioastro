@@ -1,6 +1,5 @@
 'use client';
 
-import { Badge } from './ui/badge';
 import { Shield, Award, CheckCircle, Building2 } from 'lucide-react';
 
 interface AuthorityBadgesProps {
