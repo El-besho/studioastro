@@ -3,8 +3,25 @@ import Layout from '../../layouts/Layout.astro';
 import { siteConfig } from '../../config/site';
 import { getAllServices } from '../../lib/services';
 import { ServiceGrid } from '../../components/service-grid';
+import { Button } from '../../components/ui/button';
+import { TrendingUp, ArrowRight } from 'lucide-react';
 
 const allServices = getAllServices();
+
+const popularQueries = [
+    { query: "صيانة مكيفات الرياض", href: "/services/air-conditioning-hvac/riyadh" },
+    { query: "شركة سباكة جدة", href: "/services/plumbing-services/jeddah" },
+    { query: "فني كهرباء الدمام", href: "/services/electrical-services/dammam" },
+    { query: "شركة تنظيف مكة", href: "/services/cleaning-services/makkah" },
+    { query: "صيانة منزلية المدينة", href: "/services/home-maintenance-repair/medina" },
+    { query: "تركيب مكيف سبليت", href: "/services/air-conditioning-hvac/ac-install-split" },
+    { query: "تنظيف مكيفات", href: "/services/air-conditioning-hvac/ac-cleaning-split" },
+    { query: "إصلاح تسريبات المياه", href: "/services/plumbing-services/leak-repair" },
+    { query: "تركيب إضاءة", href: "/services/electrical-services/light-install" },
+    { query: "تنظيف عميق", href: "/services/cleaning-services/home-deep-cleaning" },
+    { query: "مكافحة الحشرات", href: "/services/pest-control/termite-control" },
+    { query: "صيانة غسالات", href: "/services/washing-machine-maintenance/washing-machine-repair" }
+]
 ---
 
 <Layout 
