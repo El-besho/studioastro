@@ -192,6 +192,15 @@ export function WhatsAppChat({
 
   return (
     <div className={`fixed z-50 ${getPositionClass()} ${className}`}>
+      {/* Call Button */}
+      <Button
+        onClick={() => window.open(`tel:${currentAgent.phone}`, '_self')}
+        className="w-12 h-12 rounded-lg bg-blue-500 hover:bg-blue-600 text-white shadow-lg hover:shadow-xl transition-all duration-200 mb-2"
+        size="icon"
+      >
+        <Phone className="h-5 w-5" />
+      </Button>
+
       {/* Chat Widget */}
       {isOpen && (
         <Card className="w-80 shadow-2xl border-0 bg-white mb-4">
@@ -208,7 +217,7 @@ export function WhatsAppChat({
                   <div className="flex items-center gap-1">
                     <div className={`w-2 h-2 rounded-full ${isAvailable ? 'bg-green-500' : 'bg-gray-400'}`} />
                     <span className="text-xs text-muted-foreground">
-                      {isAvailable ? 'متاح الآن' : 'غير متاح'}
+                      {isAvailable ? 'متاح الآن' : 'متاح قريباً'}
                     </span>
                   </div>
                 </div>
@@ -278,7 +287,7 @@ export function WhatsAppChat({
                   {isAvailable ? (
                     `متاح الآن - ${formatTime(currentTime)}`
                   ) : (
-                    `غير متاح - ${formatTime(currentTime)}`
+                    `متاح قريباً - ${formatTime(currentTime)}`
                   )}
                 </p>
                 <p className="text-xs text-muted-foreground mt-1">
@@ -378,7 +387,7 @@ export function WhatsAppChat({
       {!isAvailable && (
         <div className="absolute -top-2 -right-2">
           <Badge variant="secondary" className="text-xs">
-            غير متاح
+            متاح قريباً
           </Badge>
         </div>
       )}

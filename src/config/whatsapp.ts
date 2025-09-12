@@ -36,7 +36,7 @@ export const defaultAgents: Agent[] = [
   {
     id: 'support',
     name: 'فريق الدعم',
-    phone: '+966501234567',
+    phone: '+966510102271',
     email: 'support@inqadh.com',
     role: 'دعم العملاء',
     availability: {
@@ -97,7 +97,7 @@ export const defaultAgents: Agent[] = [
 
 // Default configuration
 export const defaultWhatsAppConfig: WhatsAppConfig = {
-  defaultPhone: '+966501234567',
+  defaultPhone: '+966510102271',
   defaultMessage: 'مرحباً! أريد الاستفسار عن خدماتكم',
   agents: defaultAgents,
   settings: {

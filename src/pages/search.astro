@@ -10,6 +10,18 @@ import { getAllCities } from '../lib/services';
 const services = getAllServices();
 const cities = getAllCities();
 
+// Category mapping from English to Arabic
+const categoryMap: { [key: string]: string } = {
+  'essential': 'أساسي',
+  'maintenance': 'صيانة',
+  'repair': 'إصلاح',
+  'cleaning': 'تنظيف',
+  'installation': 'تركيب',
+  'emergency': 'طوارئ',
+  'premium': 'مميز',
+  'standard': 'عادي'
+};
+
 const seoProps = getSEOProps('search', {
   title: 'نتائج البحث | إنقاذ',
   description: 'ابحث عن أفضل الخدمات المنزلية في مدينتك',
@@ -80,7 +92,7 @@ const seoProps = getSEOProps('search', {
           <Card class="group hover:shadow-xl transition-all duration-300">
             <CardHeader>
               <div class="flex items-center gap-2 mb-2">
-                <Badge variant="outline">{service.category}</Badge>
+                <Badge variant="outline">{categoryMap[service.category] || service.category}</Badge>
                 {service.emergency_available && (
                   <Badge variant="destructive">طوارئ</Badge>
                 )}
