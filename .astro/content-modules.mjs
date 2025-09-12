@@ -1,13 +1,13 @@
 
 export default new Map([
 ["src/content/blog/ac-maintenance-summer-tips.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Fac-maintenance-summer-tips.mdx&astroContentModuleFlag=true")],
-["src/content/blog/air-conditioning-maintenance-tips.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Fair-conditioning-maintenance-tips.mdx&astroContentModuleFlag=true")],
 ["src/content/blog/beginner-home-cleaning-guide.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Fbeginner-home-cleaning-guide.mdx&astroContentModuleFlag=true")],
-["src/content/blog/choosing-right-plumber-saudi-arabia.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Fchoosing-right-plumber-saudi-arabia.mdx&astroContentModuleFlag=true")],
+["src/content/blog/air-conditioning-maintenance-tips.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Fair-conditioning-maintenance-tips.mdx&astroContentModuleFlag=true")],
 ["src/content/blog/comprehensive-pest-control-guide-saudi-arabia.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Fcomprehensive-pest-control-guide-saudi-arabia.mdx&astroContentModuleFlag=true")],
-["src/content/blog/emergency-plumber-selection-guide.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Femergency-plumber-selection-guide.mdx&astroContentModuleFlag=true")],
+["src/content/blog/choosing-right-plumber-saudi-arabia.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Fchoosing-right-plumber-saudi-arabia.mdx&astroContentModuleFlag=true")],
 ["src/content/blog/how-to-choose-best-cleaning-company.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Fhow-to-choose-best-cleaning-company.mdx&astroContentModuleFlag=true")],
 ["src/content/blog/how-to-choose-right-plumber-saudi-arabia.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Fhow-to-choose-right-plumber-saudi-arabia.mdx&astroContentModuleFlag=true")],
+["src/content/blog/emergency-plumber-selection-guide.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Femergency-plumber-selection-guide.mdx&astroContentModuleFlag=true")],
 ["src/content/blog/professional-cleaning-services-guide.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Fprofessional-cleaning-services-guide.mdx&astroContentModuleFlag=true")],
 ["src/content/blog/summer-cooling-home-tips.mdx", () => import("astro:content-layer-deferred-module?astro%3Acontent-layer-deferred-module=&fileName=src%2Fcontent%2Fblog%2Fsummer-cooling-home-tips.mdx&astroContentModuleFlag=true")]]);
 		

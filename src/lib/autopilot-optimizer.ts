@@ -40,6 +40,15 @@ export class AutopilotOptimizer {
       this.startAutopilot();
     });
 
+    // Also start on DOM ready for faster initialization
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        this.startAutopilot();
+      });
+    } else {
+      this.startAutopilot();
+    }
+
     // Monitor performance continuously
     if (this.config.continuousMonitoring) {
       this.startContinuousMonitoring();
@@ -54,6 +63,9 @@ export class AutopilotOptimizer {
     console.log('🚀 Autopilot Optimizer started');
 
     try {
+      // Add subtle status indicator
+      this.addStatusIndicator();
+      
       // Apply all optimizations automatically
       await this.applyAllOptimizations();
       
@@ -65,6 +77,78 @@ export class AutopilotOptimizer {
     } catch (error) {
       console.error('Autopilot optimization failed:', error);
     }
+  }
+
+  // Add subtle status indicator
+  private addStatusIndicator() {
+    // Check if indicator already exists
+    if (document.querySelector('.autopilot-status')) return;
+
+    const statusIndicator = document.createElement('div');
+    statusIndicator.className = 'autopilot-status';
+    statusIndicator.style.cssText = `
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(0, 123, 255, 0.9);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-family: system-ui, sans-serif;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    `;
+    statusIndicator.innerHTML = '🤖 Auto-Optimizing';
+    statusIndicator.title = 'Autopilot SEO & Performance Optimization Active';
+    
+    // Add click handler to show status
+    statusIndicator.addEventListener('click', () => {
+      this.showOptimizationStatus();
+    });
+
+    document.body.appendChild(statusIndicator);
+
+    // Auto-hide after 5 seconds
+    setTimeout(() => {
+      if (statusIndicator.parentNode) {
+        statusIndicator.style.opacity = '0.7';
+        statusIndicator.style.transform = 'scale(0.95)';
+      }
+    }, 5000);
+  }
+
+  // Show optimization status
+  private showOptimizationStatus() {
+    const status = this.getOptimizationStatus();
+    const statusText = `
+      Autopilot Status: ${status.isRunning ? 'Active' : 'Inactive'}
+      
+      Active Modules:
+      • Semantic Optimization: ${status.config.enableSemanticOptimization ? 'ON' : 'OFF'}
+      • Performance Optimization: ${status.config.enablePerformanceOptimization ? 'ON' : 'OFF'}
+      • Content Enhancement: ${status.config.enableContentEnhancement ? 'ON' : 'OFF'}
+      • Entity Optimization: ${status.config.enableEntityOptimization ? 'ON' : 'OFF'}
+      • Ranking Optimization: ${status.config.enableRankingOptimization ? 'ON' : 'OFF'}
+      
+      Performance Metrics:
+      • Load Time: ${status.metrics.current?.loadTime ? status.metrics.current.loadTime.toFixed(2) + 'ms' : 'N/A'}
+      • Memory Usage: ${status.metrics.current?.memoryUsage ? this.formatBytes(status.metrics.current.memoryUsage) : 'N/A'}
+      • DOM Size: ${status.metrics.current?.domSize ? this.formatBytes(status.metrics.current.domSize) : 'N/A'}
+    `;
+    
+    alert(statusText);
+  }
+
+  // Format bytes helper
+  private formatBytes(bytes: number): string {
+    if (bytes === 0) return '0 B';
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
   }
 
   // Apply all optimizations automatically
@@ -172,14 +256,17 @@ export class AutopilotOptimizer {
 
   // Apply semantic optimizations to DOM
   private applySemanticOptimizations(semanticContent: any) {
-    // Add semantic markup
-    this.addSemanticMarkup();
+    // Add semantic markup to existing content
+    this.addSemanticMarkupToExistingContent();
     
     // Optimize content structure
     this.optimizeContentStructure();
     
     // Add entity relationships
     this.addEntityRelationships();
+    
+    // Enhance existing content sections
+    this.enhanceExistingContentSections();
   }
 
   // Apply performance optimizations to DOM
@@ -274,14 +361,161 @@ export class AutopilotOptimizer {
     this.addContextualCoverage();
   }
 
-  // Add comprehensive content
+  // Add comprehensive content to existing sections
   private addComprehensiveContent() {
-    const mainContent = document.querySelector('main, .main-content');
-    if (!mainContent) return;
+    // Find existing content sections that need enhancement
+    const contentSections = document.querySelectorAll('main, .main-content, section, .content');
+    
+    contentSections.forEach(section => {
+      const text = section.textContent || '';
+      const wordCount = text.split(' ').length;
+      
+      // If section is too short, enhance it
+      if (wordCount < 300) {
+        this.enhanceExistingSection(section as HTMLElement);
+      }
+    });
+  }
 
-    // Add comprehensive sections
-    const comprehensiveSections = this.generateComprehensiveSections();
-    mainContent.insertAdjacentHTML('beforeend', comprehensiveSections);
+  // Enhance existing section with comprehensive content
+  private enhanceExistingSection(section: HTMLElement) {
+    const topic = this.extractTopicFromElement(section);
+    const enhancedContent = this.generateEnhancedContentForSection(topic);
+    
+    // Insert enhanced content at the end of the section
+    section.insertAdjacentHTML('beforeend', enhancedContent);
+  }
+
+  // Generate enhanced content for a specific section
+  private generateEnhancedContentForSection(topic: string): string {
+    const lowerTopic = topic.toLowerCase();
+    
+    if (lowerTopic.includes('air conditioning') || lowerTopic.includes('ac')) {
+      return this.generateACEnhancedContent();
+    } else if (lowerTopic.includes('plumbing')) {
+      return this.generatePlumbingEnhancedContent();
+    } else if (lowerTopic.includes('electrical')) {
+      return this.generateElectricalEnhancedContent();
+    } else if (lowerTopic.includes('cleaning')) {
+      return this.generateCleaningEnhancedContent();
+    } else {
+      return this.generateGenericEnhancedContent();
+    }
+  }
+
+  // Generate AC-specific enhanced content
+  private generateACEnhancedContent(): string {
+    return `
+      <div class="enhanced-content" style="margin-top: 1.5rem; padding: 1.5rem; background: #f8f9fa; border-radius: 0.5rem; border-left: 4px solid #007bff;">
+        <h3 style="color: #007bff; margin-bottom: 1rem;">Professional AC Services in Saudi Arabia</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+          <div>
+            <h4 style="color: #333; margin-bottom: 0.5rem;">Expert Installation</h4>
+            <p style="margin: 0; color: #666;">Professional AC installation ensures optimal performance and energy efficiency for your home or office.</p>
+          </div>
+          <div>
+            <h4 style="color: #333; margin-bottom: 0.5rem;">Regular Maintenance</h4>
+            <p style="margin: 0; color: #666;">Scheduled maintenance extends equipment lifespan and prevents costly breakdowns during peak usage.</p>
+          </div>
+          <div>
+            <h4 style="color: #333; margin-bottom: 0.5rem;">Emergency Repairs</h4>
+            <p style="margin: 0; color: #666;">24/7 emergency repair services to restore comfort quickly when your AC system fails.</p>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // Generate plumbing-specific enhanced content
+  private generatePlumbingEnhancedContent(): string {
+    return `
+      <div class="enhanced-content" style="margin-top: 1.5rem; padding: 1.5rem; background: #f8f9fa; border-radius: 0.5rem; border-left: 4px solid #28a745;">
+        <h3 style="color: #28a745; margin-bottom: 1rem;">Expert Plumbing Solutions</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+          <div>
+            <h4 style="color: #333; margin-bottom: 0.5rem;">Leak Detection & Repair</h4>
+            <p style="margin: 0; color: #666;">Advanced leak detection technology to identify and repair water leaks before they cause damage.</p>
+          </div>
+          <div>
+            <h4 style="color: #333; margin-bottom: 0.5rem;">Drain Cleaning</h4>
+            <p style="margin: 0; color: #666;">Professional drain cleaning services to clear blockages and maintain proper water flow.</p>
+          </div>
+          <div>
+            <h4 style="color: #333; margin-bottom: 0.5rem;">Water Heater Services</h4>
+            <p style="margin: 0; color: #666;">Installation, maintenance, and repair of water heaters for reliable hot water supply.</p>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // Generate electrical-specific enhanced content
+  private generateElectricalEnhancedContent(): string {
+    return `
+      <div class="enhanced-content" style="margin-top: 1.5rem; padding: 1.5rem; background: #f8f9fa; border-radius: 0.5rem; border-left: 4px solid #ffc107;">
+        <h3 style="color: #ffc107; margin-bottom: 1rem;">Safe Electrical Services</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+          <div>
+            <h4 style="color: #333; margin-bottom: 0.5rem;">Wiring & Installation</h4>
+            <p style="margin: 0; color: #666;">Professional electrical wiring and installation services for new construction and renovations.</p>
+          </div>
+          <div>
+            <h4 style="color: #333; margin-bottom: 0.5rem;">Fault Detection</h4>
+            <p style="margin: 0; color: #666;">Advanced fault detection and repair services to ensure electrical safety and reliability.</p>
+          </div>
+          <div>
+            <h4 style="color: #333; margin-bottom: 0.5rem;">Panel Upgrades</h4>
+            <p style="margin: 0; color: #666;">Electrical panel upgrades to meet modern power demands and safety standards.</p>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // Generate cleaning-specific enhanced content
+  private generateCleaningEnhancedContent(): string {
+    return `
+      <div class="enhanced-content" style="margin-top: 1.5rem; padding: 1.5rem; background: #f8f9fa; border-radius: 0.5rem; border-left: 4px solid #17a2b8;">
+        <h3 style="color: #17a2b8; margin-bottom: 1rem;">Professional Cleaning Services</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+          <div>
+            <h4 style="color: #333; margin-bottom: 0.5rem;">Deep Cleaning</h4>
+            <p style="margin: 0; color: #666;">Comprehensive deep cleaning services for homes and offices using professional equipment.</p>
+          </div>
+          <div>
+            <h4 style="color: #333; margin-bottom: 0.5rem;">Specialized Cleaning</h4>
+            <p style="margin: 0; color: #666;">Carpet, upholstery, and window cleaning services for complete home maintenance.</p>
+          </div>
+          <div>
+            <h4 style="color: #333; margin-bottom: 0.5rem;">Regular Maintenance</h4>
+            <p style="margin: 0; color: #666;">Scheduled cleaning services to maintain a clean and healthy living environment.</p>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // Generate generic enhanced content
+  private generateGenericEnhancedContent(): string {
+    return `
+      <div class="enhanced-content" style="margin-top: 1.5rem; padding: 1.5rem; background: #f8f9fa; border-radius: 0.5rem; border-left: 4px solid #6c757d;">
+        <h3 style="color: #6c757d; margin-bottom: 1rem;">Professional Service Excellence</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+          <div>
+            <h4 style="color: #333; margin-bottom: 0.5rem;">Quality Assurance</h4>
+            <p style="margin: 0; color: #666;">All our services are backed by quality assurance and customer satisfaction guarantees.</p>
+          </div>
+          <div>
+            <h4 style="color: #333; margin-bottom: 0.5rem;">Expert Technicians</h4>
+            <p style="margin: 0; color: #666;">Our certified technicians have extensive experience and training in their respective fields.</p>
+          </div>
+          <div>
+            <h4 style="color: #333; margin-bottom: 0.5rem;">24/7 Support</h4>
+            <p style="margin: 0; color: #666;">Round-the-clock customer support and emergency services when you need them most.</p>
+          </div>
+        </div>
+      </div>
+    `;
   }
 
   // Generate comprehensive sections
@@ -430,11 +664,294 @@ export class AutopilotOptimizer {
     document.body.insertAdjacentHTML('beforeend', lazyScript);
   }
 
-  // Add semantic markup
-  private addSemanticMarkup() {
-    // Add structured data
-    const structuredData = this.generateStructuredData();
+  // Add semantic markup to existing content
+  private addSemanticMarkupToExistingContent() {
+    // Add structured data to existing content
+    this.addStructuredDataToExistingContent();
+    
+    // Enhance existing headings with semantic markup
+    this.enhanceExistingHeadings();
+    
+    // Add microdata to existing elements
+    this.addMicrodataToExistingElements();
+  }
+
+  // Add structured data to existing content
+  private addStructuredDataToExistingContent() {
+    // Check if structured data already exists
+    const existingStructuredData = document.querySelector('script[type="application/ld+json"]');
+    if (existingStructuredData) return;
+
+    // Add structured data based on page type
+    const structuredData = this.generateContextualStructuredData();
     document.head.insertAdjacentHTML('beforeend', structuredData);
+  }
+
+  // Generate contextual structured data based on existing content
+  private generateContextualStructuredData(): string {
+    const pageType = this.detectPageType();
+    const currentUrl = window.location.href;
+    const pageTitle = document.title;
+    
+    switch (pageType) {
+      case 'service':
+        return this.generateServiceStructuredData(currentUrl, pageTitle);
+      case 'blog':
+        return this.generateBlogStructuredData(currentUrl, pageTitle);
+      case 'home':
+        return this.generateHomeStructuredData(currentUrl, pageTitle);
+      default:
+        return this.generateGenericStructuredData(currentUrl, pageTitle);
+    }
+  }
+
+  // Detect page type based on URL and content
+  private detectPageType(): string {
+    const url = window.location.pathname;
+    
+    if (url.includes('/services/')) return 'service';
+    if (url.includes('/blog/')) return 'blog';
+    if (url === '/' || url === '/index.html') return 'home';
+    
+    return 'generic';
+  }
+
+  // Generate service-specific structured data
+  private generateServiceStructuredData(url: string, title: string): string {
+    return `
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "${title}",
+        "description": "Professional ${title.toLowerCase()} services in Saudi Arabia",
+        "provider": {
+          "@type": "Organization",
+          "name": "خدمتك",
+          "url": "${window.location.origin}"
+        },
+        "areaServed": {
+          "@type": "Country",
+          "name": "Saudi Arabia"
+        },
+        "url": "${url}",
+        "serviceType": "Home Services"
+      }
+      </script>
+    `;
+  }
+
+  // Generate blog-specific structured data
+  private generateBlogStructuredData(url: string, title: string): string {
+    return `
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "${title}",
+        "description": "Comprehensive guide about ${title.toLowerCase()}",
+        "author": {
+          "@type": "Organization",
+          "name": "خدمتك"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "خدمتك",
+          "url": "${window.location.origin}"
+        },
+        "datePublished": "${new Date().toISOString()}",
+        "url": "${url}"
+      }
+      </script>
+    `;
+  }
+
+  // Generate home page structured data
+  private generateHomeStructuredData(url: string, title: string): string {
+    return `
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "خدمتك",
+        "url": "${url}",
+        "description": "Professional home services in Saudi Arabia",
+        "areaServed": {
+          "@type": "Country",
+          "name": "Saudi Arabia"
+        },
+        "serviceType": "Home Services"
+      }
+      </script>
+    `;
+  }
+
+  // Generate generic structured data
+  private generateGenericStructuredData(url: string, title: string): string {
+    return `
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "${title}",
+        "url": "${url}",
+        "description": "Professional services in Saudi Arabia"
+      }
+      </script>
+    `;
+  }
+
+  // Enhance existing headings with semantic markup
+  private enhanceExistingHeadings() {
+    const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    
+    headings.forEach((heading, index) => {
+      // Add semantic attributes
+      heading.setAttribute('itemprop', 'headline');
+      
+      // Add ARIA labels for accessibility
+      if (!heading.getAttribute('aria-label')) {
+        heading.setAttribute('aria-label', heading.textContent);
+      }
+      
+      // Add structured data attributes
+      if (heading.tagName === 'H1') {
+        heading.setAttribute('itemscope', '');
+        heading.setAttribute('itemtype', 'https://schema.org/Thing');
+      }
+    });
+  }
+
+  // Add microdata to existing elements
+  private addMicrodataToExistingElements() {
+    // Enhance existing service cards
+    const serviceCards = document.querySelectorAll('.service-card, .card, [class*="service"]');
+    serviceCards.forEach(card => {
+      card.setAttribute('itemscope', '');
+      card.setAttribute('itemtype', 'https://schema.org/Service');
+    });
+
+    // Enhance existing contact information
+    const contactInfo = document.querySelectorAll('[class*="contact"], [class*="phone"], [class*="email"]');
+    contactInfo.forEach(info => {
+      info.setAttribute('itemprop', 'contactPoint');
+    });
+
+    // Enhance existing addresses
+    const addresses = document.querySelectorAll('[class*="address"], [class*="location"]');
+    addresses.forEach(address => {
+      address.setAttribute('itemprop', 'address');
+    });
+  }
+
+  // Enhance existing content sections
+  private enhanceExistingContentSections() {
+    // Find existing content sections
+    const contentSections = document.querySelectorAll('main, .content, .main-content, section');
+    
+    contentSections.forEach(section => {
+      // Add semantic markup
+      section.setAttribute('itemscope', '');
+      section.setAttribute('itemtype', 'https://schema.org/Article');
+      
+      // Enhance with additional content if needed
+      this.enhanceSectionContent(section as HTMLElement);
+    });
+  }
+
+  // Enhance individual section content
+  private enhanceSectionContent(section: HTMLElement) {
+    const text = section.textContent || '';
+    const wordCount = text.split(' ').length;
+    
+    // If section is too short, enhance it
+    if (wordCount < 200) {
+      this.addContextualContent(section);
+    }
+    
+    // Add internal links to related content
+    this.addInternalLinksToSection(section);
+  }
+
+  // Add contextual content to existing sections
+  private addContextualContent(section: HTMLElement) {
+    const topic = this.extractTopicFromElement(section);
+    const contextualContent = this.generateContextualContentForTopic(topic);
+    
+    // Insert contextual content at the end of the section
+    section.insertAdjacentHTML('beforeend', contextualContent);
+  }
+
+  // Generate contextual content for a specific topic
+  private generateContextualContentForTopic(topic: string): string {
+    const contextualSnippets = {
+      'air conditioning': `
+        <div class="contextual-info" style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 0.5rem;">
+          <h4>Why Choose Professional AC Services?</h4>
+          <p>Professional air conditioning services ensure optimal performance, energy efficiency, and extended equipment lifespan. Our certified technicians provide comprehensive maintenance and repair solutions.</p>
+        </div>
+      `,
+      'plumbing': `
+        <div class="contextual-info" style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 0.5rem;">
+          <h4>Expert Plumbing Solutions</h4>
+          <p>Professional plumbing services prevent costly water damage and ensure reliable water systems. Our experienced technicians handle everything from minor repairs to major installations.</p>
+        </div>
+      `,
+      'electrical': `
+        <div class="contextual-info" style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 0.5rem;">
+          <h4>Safe Electrical Services</h4>
+          <p>Electrical work requires professional expertise to ensure safety and compliance. Our licensed electricians provide reliable solutions for all your electrical needs.</p>
+        </div>
+      `,
+      'cleaning': `
+        <div class="contextual-info" style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 0.5rem;">
+          <h4>Professional Cleaning Standards</h4>
+          <p>Professional cleaning services use advanced techniques and eco-friendly products to deliver superior results. Our trained staff ensures thorough cleaning and sanitization.</p>
+        </div>
+      `
+    };
+
+    const lowerTopic = topic.toLowerCase();
+    for (const [key, content] of Object.entries(contextualSnippets)) {
+      if (lowerTopic.includes(key)) {
+        return content;
+      }
+    }
+
+    // Default contextual content
+    return `
+      <div class="contextual-info" style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 0.5rem;">
+        <h4>Professional Service Excellence</h4>
+        <p>Our professional services are designed to meet the highest standards of quality and reliability. We provide comprehensive solutions tailored to your specific needs.</p>
+      </div>
+    `;
+  }
+
+  // Add internal links to existing sections
+  private addInternalLinksToSection(section: HTMLElement) {
+    const text = section.textContent || '';
+    const words = text.split(' ');
+    
+    // Link service-related terms
+    const serviceTerms = {
+      'repair': '/services',
+      'maintenance': '/services',
+      'installation': '/services',
+      'cleaning': '/services/cleaning-services',
+      'plumbing': '/services/plumbing-services',
+      'electrical': '/services/electrical-services',
+      'air conditioning': '/services/air-conditioning-hvac'
+    };
+
+    let enhancedText = text;
+    Object.entries(serviceTerms).forEach(([term, link]) => {
+      const regex = new RegExp(`\\b${term}\\b`, 'gi');
+      enhancedText = enhancedText.replace(regex, `<a href="${link}" class="internal-link" style="color: #007bff; text-decoration: underline;">${term}</a>`);
+    });
+
+    if (enhancedText !== text) {
+      section.innerHTML = enhancedText;
+    }
   }
 
   // Generate structured data
