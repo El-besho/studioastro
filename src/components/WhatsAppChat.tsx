@@ -192,13 +192,13 @@ export function WhatsAppChat({
 
   return (
     <div className={`fixed z-50 ${getPositionClass()} ${className}`}>
-      {/* Call Button */}
+      {/* Call Button - Above WhatsApp button with same size */}
       <Button
         onClick={() => window.open(`tel:${currentAgent.phone}`, '_self')}
-        className="w-12 h-12 rounded-lg bg-blue-500 hover:bg-blue-600 text-white shadow-lg hover:shadow-xl transition-all duration-200 mb-2"
+        className="w-14 h-14 rounded-lg bg-blue-500 hover:bg-blue-600 text-white shadow-lg hover:shadow-xl transition-all duration-200 mb-2"
         size="icon"
       >
-        <Phone className="h-5 w-5" />
+        <Phone className="h-6 w-6" />
       </Button>
 
       {/* Chat Widget */}
@@ -217,7 +217,7 @@ export function WhatsAppChat({
                   <div className="flex items-center gap-1">
                     <div className={`w-2 h-2 rounded-full ${isAvailable ? 'bg-green-500' : 'bg-gray-400'}`} />
                     <span className="text-xs text-muted-foreground">
-                      {isAvailable ? 'متاح الآن' : 'متاح قريباً'}
+                      متاح دائماً
                     </span>
                   </div>
                 </div>
@@ -284,11 +284,7 @@ export function WhatsAppChat({
                   <span className="text-sm font-medium">ساعات العمل</span>
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  {isAvailable ? (
-                    `متاح الآن - ${formatTime(currentTime)}`
-                  ) : (
-                    `متاح قريباً - ${formatTime(currentTime)}`
-                  )}
+                  متاح دائماً - {formatTime(currentTime)}
                 </p>
                 <p className="text-xs text-muted-foreground mt-1">
                   ساعات العمل: {currentAgent.availability.workingHours.start} - {currentAgent.availability.workingHours.end}
@@ -383,14 +379,6 @@ export function WhatsAppChat({
         )}
       </Button>
 
-      {/* Availability Badge */}
-      {!isAvailable && (
-        <div className="absolute -top-2 -right-2">
-          <Badge variant="secondary" className="text-xs">
-            متاح قريباً
-          </Badge>
-        </div>
-      )}
     </div>
   );
 }
