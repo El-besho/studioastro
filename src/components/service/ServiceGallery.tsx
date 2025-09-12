@@ -22,7 +22,7 @@ const defaultGalleryItems: GalleryItem[] = [
     id: '1',
     title: 'قبل الخدمة',
     description: 'حالة المكيف قبل الصيانة',
-    image: '/images/services/ac-before.jpg',
+    image: '/images/services/ac-before.svg',
     category: 'before',
     service: 'صيانة مكيفات'
   },
@@ -30,7 +30,7 @@ const defaultGalleryItems: GalleryItem[] = [
     id: '2',
     title: 'بعد الخدمة',
     description: 'المكيف بعد الصيانة الشاملة',
-    image: '/images/services/ac-after.jpg',
+    image: '/images/services/ac-after.svg',
     category: 'after',
     service: 'صيانة مكيفات'
   },
@@ -38,7 +38,7 @@ const defaultGalleryItems: GalleryItem[] = [
     id: '3',
     title: 'عملية التنظيف',
     description: 'تنظيف الملفات الداخلية',
-    image: '/images/services/ac-cleaning.jpg',
+    image: '/images/services/ac-cleaning.svg',
     category: 'process',
     service: 'صيانة مكيفات'
   },
@@ -46,7 +46,7 @@ const defaultGalleryItems: GalleryItem[] = [
     id: '4',
     title: 'المعدات المستخدمة',
     description: 'أدوات ومعدات متطورة',
-    image: '/images/services/ac-equipment.jpg',
+    image: '/images/services/ac-equipment.svg',
     category: 'equipment',
     service: 'صيانة مكيفات'
   },
@@ -54,7 +54,7 @@ const defaultGalleryItems: GalleryItem[] = [
     id: '5',
     title: 'قبل الإصلاح',
     description: 'مشكلة في السباكة',
-    image: '/images/services/plumbing-before.jpg',
+    image: '/images/services/plumbing-before.svg',
     category: 'before',
     service: 'خدمات السباكة'
   },
@@ -62,7 +62,7 @@ const defaultGalleryItems: GalleryItem[] = [
     id: '6',
     title: 'بعد الإصلاح',
     description: 'السباكة بعد الإصلاح',
-    image: '/images/services/plumbing-after.jpg',
+    image: '/images/services/plumbing-after.svg',
     category: 'after',
     service: 'خدمات السباكة'
   }
