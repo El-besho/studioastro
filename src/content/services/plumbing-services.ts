@@ -30,7 +30,7 @@ export const plumbingServices: ServiceHierarchy = {
     },
     sub_services: [
       { 
-        id: 'leak_repair', 
+        id: 'leak-repair', 
         ar_name: 'إصلاح تسريبات المياه', 
         urgency: 'emergency', 
         avg_price_range: [200, 450], 
@@ -49,7 +49,7 @@ export const plumbingServices: ServiceHierarchy = {
         } 
       },
       { 
-        id: 'drain_unclog', 
+        id: 'drain-unclog', 
         ar_name: 'تسليك المجاري والبالوعات', 
         urgency: 'emergency', 
         avg_price_range: [250, 500], 
@@ -68,7 +68,7 @@ export const plumbingServices: ServiceHierarchy = {
         } 
       },
       { 
-        id: 'heater_install', 
+        id: 'heater-install', 
         ar_name: 'تركيب سخانات المياه', 
         urgency: 'scheduled', 
         avg_price_range: [400, 800], 
@@ -87,7 +87,7 @@ export const plumbingServices: ServiceHierarchy = {
         } 
       },
       { 
-        id: 'toilet_repair_install', 
+        id: 'toilet-repair-install', 
         ar_name: 'تركيب وإصلاح المراحيض', 
         urgency: 'urgent', 
         avg_price_range: [200, 500], 
@@ -103,7 +103,7 @@ export const plumbingServices: ServiceHierarchy = {
         } 
       },
       { 
-        id: 'faucet_mixer_install', 
+        id: 'faucet-mixer-install', 
         ar_name: 'تركيب وإصلاح الحنفيات والخلاطات', 
         urgency: 'scheduled', 
         avg_price_range: [150, 350], 
@@ -119,7 +119,7 @@ export const plumbingServices: ServiceHierarchy = {
         }
       },
       { 
-        id: 'water_pump_install_repair', 
+        id: 'water-pump-install-repair', 
         ar_name: 'تركيب وإصلاح مضخات المياه', 
         urgency: 'urgent', 
         avg_price_range: [400, 1200], 
@@ -135,7 +135,7 @@ export const plumbingServices: ServiceHierarchy = {
         }
       },
       { 
-        id: 'tank_cleaning', 
+        id: 'tank-cleaning', 
         ar_name: 'تنظيف خزانات المياه', 
         urgency: 'maintenance', 
         avg_price_range: [300, 700], 
@@ -151,7 +151,7 @@ export const plumbingServices: ServiceHierarchy = {
         }
       },
       { 
-        id: 'pipe_replacement', 
+        id: 'pipe-replacement', 
         ar_name: 'تمديد وتغيير مواسير المياه', 
         urgency: 'scheduled', 
         avg_price_range: [1000, 5000], 
@@ -167,7 +167,7 @@ export const plumbingServices: ServiceHierarchy = {
         }
       },
       { 
-        id: 'sewage_camera_inspection', 
+        id: 'sewage-camera-inspection', 
         ar_name: 'فحص مواسير الصرف بالكاميرا', 
         urgency: 'consultation', 
         avg_price_range: [500, 900], 
