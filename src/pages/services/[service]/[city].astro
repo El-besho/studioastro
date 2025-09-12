@@ -23,6 +23,9 @@ import { PriceCalculator } from '../../../components/service/PriceCalculator';
 import { EmergencyContact } from '../../../components/service/EmergencyContact';
 import { AuthorityBadges } from '../../../components/AuthorityBadges';
 import { IndustryStandards } from '../../../components/IndustryStandards';
+import { ComprehensiveContent } from '../../../components/content/ComprehensiveContent';
+import { DetailedProcess } from '../../../components/content/DetailedProcess';
+import { LocalExpertise } from '../../../components/content/LocalExpertise';
 
 export async function getStaticPaths() {
   const services = getAllServices();
@@ -227,9 +230,19 @@ const seoProps = {
         />
       </div>
 
-      <!-- Process Steps -->
+      <!-- Local Expertise -->
       <div class="mb-12">
-        <ProcessSteps client:load />
+        <LocalExpertise city={city.slug} serviceType={service.slug} client:load />
+      </div>
+
+      <!-- Detailed Process -->
+      <div class="mb-12">
+        <DetailedProcess serviceType={service.slug} serviceName={service.ar_name} client:load />
+      </div>
+
+      <!-- Comprehensive Content -->
+      <div class="mb-12">
+        <ComprehensiveContent serviceType={service.slug} serviceName={service.ar_name} city={city.slug} client:load />
       </div>
 
       <!-- Service Stats -->
