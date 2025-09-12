@@ -138,7 +138,7 @@ const orgJsonLd = {
     />
     
     <!-- Performance Monitor (Development Only) -->
-    <PerformanceMonitor client:load />
+    {import.meta.env.DEV && <PerformanceMonitor client:load />}
   </body>
 </html>
 
