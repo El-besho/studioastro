@@ -6,7 +6,6 @@ import {
   sanitizeString,
   sanitizeHtml,
   RateLimiter,
-  ValidationError,
   type SearchInput,
   type ContactInput,
   type ServiceRequestInput

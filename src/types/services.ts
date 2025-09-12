@@ -1,6 +1,7 @@
 
 export interface SEOInfo {
   summary: string;
+  description?: string;
   primary_keywords: string[];
   secondary_keywords: string[];
   long_tail_keywords: string[];
@@ -34,8 +35,12 @@ export interface SubService {
   id: string;
   slug?: string;
   ar_name: string;
+  description?: string;
   urgency: 'emergency' | 'urgent' | 'scheduled' | 'maintenance' | 'consultation';
   avg_price_range: [number, number];
+  avg_duration?: string;
+  difficulty_level?: string;
+  warranty_period?: string;
   skill_requirements: string[];
   tools_required: string[];
   seasonal_multiplier: number;
@@ -47,6 +52,8 @@ export interface CityProfile {
   ar_name: string;
   slug: string;
   province: string;
+  region?: string;
+  description?: string;
   population: number;
   economic_level: 'very_high' | 'high' | 'medium' | 'developing';
   expat_percentage: number;

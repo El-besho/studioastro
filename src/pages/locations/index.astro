@@ -66,30 +66,30 @@ const getClimateText = (climate: string) => {
 
       <!-- Stats -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-        <Card class="text-center">
-          <CardContent class="pt-6">
-            <MapPin class="h-8 w-8 mx-auto mb-2 text-primary" />
+        <Card className="text-center">
+          <CardContent className="pt-6">
+            <MapPin className="h-8 w-8 mx-auto mb-2 text-primary" />
             <div class="text-2xl font-bold">{cities.length}</div>
             <p class="text-sm text-muted-foreground">مدينة</p>
           </CardContent>
         </Card>
-        <Card class="text-center">
-          <CardContent class="pt-6">
-            <Users class="h-8 w-8 mx-auto mb-2 text-primary" />
+        <Card className="text-center">
+          <CardContent className="pt-6">
+            <Users className="h-8 w-8 mx-auto mb-2 text-primary" />
             <div class="text-2xl font-bold">{cities.reduce((sum, city) => sum + city.population, 0).toLocaleString()}</div>
             <p class="text-sm text-muted-foreground">نسمة</p>
           </CardContent>
         </Card>
-        <Card class="text-center">
-          <CardContent class="pt-6">
-            <TrendingUp class="h-8 w-8 mx-auto mb-2 text-primary" />
+        <Card className="text-center">
+          <CardContent className="pt-6">
+            <TrendingUp className="h-8 w-8 mx-auto mb-2 text-primary" />
             <div class="text-2xl font-bold">{services.length}</div>
             <p class="text-sm text-muted-foreground">خدمة</p>
           </CardContent>
         </Card>
-        <Card class="text-center">
-          <CardContent class="pt-6">
-            <Star class="h-8 w-8 mx-auto mb-2 text-primary" />
+        <Card className="text-center">
+          <CardContent className="pt-6">
+            <Star className="h-8 w-8 mx-auto mb-2 text-primary" />
             <div class="text-2xl font-bold">24/7</div>
             <p class="text-sm text-muted-foreground">خدمة طوارئ</p>
           </CardContent>
@@ -99,15 +99,15 @@ const getClimateText = (climate: string) => {
       <!-- Cities Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {cities.map((city) => (
-          <Card class="group hover:shadow-xl transition-all duration-300">
+          <Card className="group hover:shadow-xl transition-all duration-300">
             <CardHeader>
               <div class="flex items-center justify-between">
-                <CardTitle class="font-headline text-xl group-hover:text-primary transition-colors">
+                <CardTitle className="font-headline text-xl group-hover:text-primary transition-colors">
                   <a href={`/locations/${city.slug}`} class="hover:underline">
                     {city.ar_name}
                   </a>
                 </CardTitle>
-                <Badge variant="outline" class="text-xs">
+                <Badge variant="outline" className="text-xs">
                   {city.province}
                 </Badge>
               </div>
@@ -118,15 +118,15 @@ const getClimateText = (climate: string) => {
             <CardContent>
               <div class="space-y-3">
                 <div class="flex items-center gap-2 text-sm">
-                  <Users class="h-4 w-4 text-muted-foreground" />
+                  <Users className="h-4 w-4 text-muted-foreground" />
                   <span>عدد السكان: {city.population.toLocaleString()}</span>
                 </div>
                 <div class="flex items-center gap-2 text-sm">
-                  <TrendingUp class="h-4 w-4 text-muted-foreground" />
+                  <TrendingUp className="h-4 w-4 text-muted-foreground" />
                   <span>المستوى الاقتصادي: {getEconomicLevelText(city.economic_level)}</span>
                 </div>
                 <div class="flex items-center gap-2 text-sm">
-                  <Clock class="h-4 w-4 text-muted-foreground" />
+                  <Clock className="h-4 w-4 text-muted-foreground" />
                   <span>المناخ: {getClimateText(city.climate)}</span>
                 </div>
                 
@@ -136,7 +136,7 @@ const getClimateText = (climate: string) => {
                     {Object.entries(city.service_demand_multipliers)
                       .slice(0, 3)
                       .map(([service, multiplier]) => (
-                        <Badge key={service} variant="secondary" class="text-xs">
+                        <Badge key={service} variant="secondary" className="text-xs">
                           {service === 'air-conditioning' ? 'تكييف' : 
                            service === 'luxury' ? 'فاخرة' : 
                            service === 'it-tech-services' ? 'تقنية' : service}
@@ -165,8 +165,8 @@ const getClimateText = (climate: string) => {
       </div>
 
       <!-- CTA Section -->
-      <Card class="mt-12 bg-primary/5 border-primary/20">
-        <CardContent class="pt-6 text-center">
+      <Card className="mt-12 bg-primary/5 border-primary/20">
+        <CardContent className="pt-6 text-center">
           <h3 class="font-headline text-2xl font-semibold mb-4">
             لا تجد مدينتك؟
           </h3>

@@ -9,7 +9,7 @@ interface WhatsAppButtonProps {
   message?: string;
   variant?: 'default' | 'outline' | 'ghost' | 'link';
   size?: 'default' | 'sm' | 'lg' | 'icon';
-  icon?: 'message' | 'phone' | 'mail' | 'location' | 'user';
+  icon?: 'message' | 'phone' | 'mail' | 'location' | 'user' | 'clock';
   label?: string;
   className?: string;
   agentName?: string;

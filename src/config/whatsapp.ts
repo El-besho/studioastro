@@ -132,12 +132,12 @@ export const locationMessages = {
 
 // Get message for specific service
 export function getServiceMessage(serviceSlug: string): string {
-  return serviceMessages[serviceSlug] || defaultWhatsAppConfig.defaultMessage;
+  return serviceMessages[serviceSlug as keyof typeof serviceMessages] || defaultWhatsAppConfig.defaultMessage;
 }
 
 // Get message for specific location
 export function getLocationMessage(citySlug: string): string {
-  return locationMessages[citySlug] || defaultWhatsAppConfig.defaultMessage;
+  return locationMessages[citySlug as keyof typeof locationMessages] || defaultWhatsAppConfig.defaultMessage;
 }
 
 // Get agent by role

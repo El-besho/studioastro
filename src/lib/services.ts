@@ -88,7 +88,6 @@ const cities = [
 ];
 
 
-const generateSlug = (name: string) => name.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-').replace(/[(),/]/g, '');
 
 const serviceCategories: ServiceCategory[] = [
     { id: 'essential', ar_name: 'خدمات أساسية', slug: 'essential' },
@@ -138,7 +137,7 @@ export function getServiceAndSubServiceBySlugs(serviceSlug: string, subServiceSl
     const subService = service.sub_services.find(s => s.slug === subServiceSlug);
     if (!subService) return null;
 
-    return { service, subService };
+    return { service, subService: { ...subService, slug: subService.slug || subService.id } };
 }
 
 

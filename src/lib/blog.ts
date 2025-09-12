@@ -66,12 +66,12 @@ export async function getPostBySlug(slug: string, withRelated = false): Promise<
   };
 
   if (withRelated) {
-    const allPosts = getAllPosts();
-    const relatedPosts = allPosts.filter(p => {
+    const allPosts = await getAllPosts();
+    const relatedPosts = allPosts.filter((p: any) => {
         if (p.slug === realSlug) {
             return false;
         }
-        return p.frontmatter.tags.some(tag => post.frontmatter.tags.includes(tag));
+        return p.frontmatter.tags.some((tag: any) => post.frontmatter.tags.includes(tag));
     }).slice(0, 3);
     post.related = relatedPosts;
   }

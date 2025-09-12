@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Badge } from '../ui/badge';
-import { MapPin, TrendingUp, Users, Building, Shield, Calendar, Star } from 'lucide-react';
+import { MapPin, TrendingUp, Users, Building, Shield, Calendar, Star, CheckCircle } from 'lucide-react';
 
 interface LocationContentBlockProps {
   cityName: string;

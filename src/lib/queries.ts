@@ -4,7 +4,8 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { TaggedQuery, QueryIntent, CategorizedQueries } from '@/types/queries';
-import { getAllServices, getCityBySlug, ServiceHierarchy, getAllCities } from './services';
+import { getAllServices, getAllCities } from './services';
+import { ServiceHierarchy } from '../types/services';
 
 const seoDirectory = path.join(process.cwd(), 'src/SEO');
 

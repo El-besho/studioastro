@@ -427,7 +427,7 @@ function ServiceLocationPage({ service, city, trendingQueries }: ServiceLocation
                     <CardContent className="pt-6">
                         <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-4 gap-y-2">
                         {city.key_districts.map((district) => (
-                          <li key={district.en} className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <li key={district.ar} className="flex items-center gap-2 text-sm text-muted-foreground">
                             <MapPin className="h-4 w-4 text-primary flex-shrink-0" />
                             <span>{district.ar}</span>
                           </li>
