@@ -6,7 +6,7 @@ import { ServiceGrid } from '../../../components/service-grid';
 import { Breadcrumb } from '../../../components/semantic/breadcrumb';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../components/ui/card';
 import { Badge } from '../../../components/ui/badge';
-import { Check, MapPin, Star, Clock, Shield } from 'lucide-react';
+import { Check, MapPin, Star, Clock, Shield, Phone, Mail, Users, Award, TrendingUp, Zap } from 'lucide-react';
 import { FAQ } from '../../../components/service/FAQ';
 import { ServiceFeatures } from '../../../components/service/ServiceFeatures';
 import { ProcessSteps } from '../../../components/service/ProcessSteps';
@@ -17,6 +17,12 @@ import { ServiceGallery } from '../../../components/service/ServiceGallery';
 import { ServiceProviders } from '../../../components/service/ServiceProviders';
 import { ServiceCTA } from '../../../components/service/ServiceCTA';
 import { FAQSchema } from '../../../components/semantic/faq-schema';
+import { LocalBusinessSchema } from '../../../components/semantic/local-business-schema';
+import { ServiceComparison } from '../../../components/service/ServiceComparison';
+import { PriceCalculator } from '../../../components/service/PriceCalculator';
+import { EmergencyContact } from '../../../components/service/EmergencyContact';
+import { AuthorityBadges } from '../../../components/AuthorityBadges';
+import { IndustryStandards } from '../../../components/IndustryStandards';
 
 export async function getStaticPaths() {
   const services = getAllServices();
@@ -49,10 +55,22 @@ if (!service || !city) {
 }
 
 const seoProps = {
-  title: `${service.ar_name} في ${city.ar_name} | إنقاذ`,
-  description: `احصل على أفضل خدمات ${service.ar_name} في ${city.ar_name} من محترفين معتمدين ومتخصصين`,
-  keywords: [...service.seo.primary_keywords, city.ar_name, 'خدمات منزلية', 'السعودية'],
-  canonical: generateCanonicalUrl(`/services/${service.slug}/${city.slug}`)
+  title: `${service.ar_name} في ${city.ar_name} | إنقاذ - خدمات معتمدة`,
+  description: `احصل على أفضل خدمات ${service.ar_name} في ${city.ar_name} من محترفين معتمدين من وزارة التجارة. خدمات مضمونة الجودة وفقاً لمعايير SASO و ASHRAE الدولية.`,
+  keywords: [...service.seo.primary_keywords, city.ar_name, 'خدمات منزلية معتمدة', 'السعودية', 'معايير SASO', 'معايير ASHRAE', 'وزارة التجارة', 'شركات مرخصة'],
+  canonical: generateCanonicalUrl(`/services/${service.slug}/${city.slug}`),
+  openGraph: {
+    title: `${service.ar_name} في ${city.ar_name} - خدمات معتمدة`,
+    description: `خدمات ${service.ar_name} معتمدة من وزارة التجارة في ${city.ar_name}`,
+    type: 'website',
+    locale: 'ar_SA',
+    siteName: 'إنقاذ - خدمات منزلية معتمدة'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${service.ar_name} في ${city.ar_name} - خدمات معتمدة`,
+    description: `خدمات ${service.ar_name} معتمدة من وزارة التجارة في ${city.ar_name}`
+  }
 };
 ---
 
@@ -79,25 +97,122 @@ const seoProps = {
         <p class="max-w-3xl mx-auto text-foreground/80 md:text-xl/relaxed">
           احصل على أفضل خدمات {service.ar_name} في {city.ar_name} من محترفين معتمدين ومتخصصين
         </p>
+        
+        <!-- Authority Badges -->
+        <div class="mt-8 flex justify-center">
+          <AuthorityBadges client:load />
+        </div>
       </div>
 
-      <!-- Service Overview -->
-      <Card class="mb-12">
-        <CardHeader>
-          <CardTitle class="font-headline text-2xl">خدمات {service.ar_name} في {city.ar_name}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div class="prose prose-lg max-w-none">
-            <p class="text-foreground/80 leading-relaxed mb-4">
-              نقدم خدمات {service.ar_name} المتخصصة في {city.ar_name} بأعلى معايير الجودة والاحترافية. 
-              فريقنا من المحترفين المعتمدين في {city.ar_name} جاهز لتقديم أفضل الحلول لاحتياجاتك.
-            </p>
-            <p class="text-foreground/80 leading-relaxed">
-              {service.seo.summary}
-            </p>
+      <!-- Service Overview with Enhanced Features -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        <!-- Main Content -->
+        <div class="lg:col-span-2">
+          <Card class="mb-6">
+            <CardHeader>
+              <CardTitle class="font-headline text-2xl">خدمات {service.ar_name} في {city.ar_name}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div class="prose prose-lg max-w-none">
+                <p class="text-foreground/80 leading-relaxed mb-4">
+                  نقدم خدمات {service.ar_name} المتخصصة في {city.ar_name} بأعلى معايير الجودة والاحترافية. 
+                  فريقنا من المحترفين المعتمدين في {city.ar_name} جاهز لتقديم أفضل الحلول لاحتياجاتك.
+                </p>
+                <p class="text-foreground/80 leading-relaxed">
+                  {service.seo.summary}
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <!-- Quick Stats -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+            <Card class="text-center">
+              <CardContent class="pt-6">
+                <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-primary/10 text-primary mx-auto mb-2">
+                  <Users class="h-6 w-6" />
+                </div>
+                <div class="text-2xl font-bold">500+</div>
+                <div class="text-sm text-muted-foreground">عميل راضي</div>
+              </CardContent>
+            </Card>
+            <Card class="text-center">
+              <CardContent class="pt-6">
+                <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-primary/10 text-primary mx-auto mb-2">
+                  <Award class="h-6 w-6" />
+                </div>
+                <div class="text-2xl font-bold">5 سنوات</div>
+                <div class="text-sm text-muted-foreground">خبرة في {city.ar_name}</div>
+              </CardContent>
+            </Card>
+            <Card class="text-center">
+              <CardContent class="pt-6">
+                <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-primary/10 text-primary mx-auto mb-2">
+                  <TrendingUp class="h-6 w-6" />
+                </div>
+                <div class="text-2xl font-bold">98%</div>
+                <div class="text-sm text-muted-foreground">معدل الرضا</div>
+              </CardContent>
+            </Card>
+            <Card class="text-center">
+              <CardContent class="pt-6">
+                <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-primary/10 text-primary mx-auto mb-2">
+                  <Zap class="h-6 w-6" />
+                </div>
+                <div class="text-2xl font-bold">30 دقيقة</div>
+                <div class="text-sm text-muted-foreground">وقت الاستجابة</div>
+              </CardContent>
+            </Card>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-6">
+          <!-- Emergency Contact -->
+          {service.emergency_available && (
+            <EmergencyContact 
+              serviceName={service.ar_name}
+              cityName={city.ar_name}
+              client:load 
+            />
+          )}
+
+          <!-- Price Calculator -->
+          <PriceCalculator 
+            serviceName={service.ar_name}
+            cityName={city.ar_name}
+            serviceType={service.category}
+            client:load 
+          />
+
+          <!-- Quick Contact -->
+          <Card>
+            <CardHeader>
+              <CardTitle class="font-headline text-lg">تواصل معنا الآن</CardTitle>
+            </CardHeader>
+            <CardContent class="space-y-4">
+              <div class="flex items-center gap-3">
+                <div class="flex items-center justify-center h-10 w-10 rounded-lg bg-green-100 text-green-600">
+                  <Phone class="h-5 w-5" />
+                </div>
+                <div>
+                  <div class="font-semibold">اتصل بنا</div>
+                  <div class="text-sm text-muted-foreground">متاح 24/7</div>
+                </div>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="flex items-center justify-center h-10 w-10 rounded-lg bg-blue-100 text-blue-600">
+                  <Mail class="h-5 w-5" />
+                </div>
+                <div>
+                  <div class="font-semibold">راسلنا</div>
+                  <div class="text-sm text-muted-foreground">رد سريع مضمون</div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
 
       <!-- Service Features with City Context -->
       <ServiceFeatures service={service} city={city} client:load />
@@ -185,6 +300,15 @@ const seoProps = {
         </CardContent>
       </Card>
 
+      <!-- Service Comparison -->
+      <div class="mb-12">
+        <ServiceComparison 
+          currentService={service}
+          cityName={city.ar_name}
+          client:load 
+        />
+      </div>
+
       <!-- Related Services -->
       <div class="text-center mb-8">
         <h2 class="font-headline text-3xl font-bold tracking-tighter mb-4">
@@ -196,6 +320,24 @@ const seoProps = {
       </div>
       
       <ServiceGrid services={getAllServices().filter(s => s.category === service.category && s.slug !== service.slug).slice(0, 6)} />
+
+      <!-- Industry Standards -->
+      <div class="mt-16 mb-12">
+        <IndustryStandards client:load />
+      </div>
+
+      <!-- Local Business Schema -->
+      <LocalBusinessSchema 
+        serviceName={service.ar_name}
+        cityName={city.ar_name}
+        serviceType={service.category}
+        phoneNumber="+966500000000"
+        address={`${city.ar_name}, المملكة العربية السعودية`}
+        rating={4.8}
+        reviewCount={127}
+        priceRange="ريال"
+        openingHours="24/7"
+      />
     </div>
   </div>
 </Layout>

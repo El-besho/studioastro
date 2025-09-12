@@ -4,7 +4,8 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { TaggedQuery, QueryIntent, CategorizedQueries } from '@/types/queries';
-import { getAllServices, getCityBySlug, ServiceHierarchy, getAllCities } from './services';
+import { getAllServices, getAllCities } from './services';
+import { ServiceHierarchy } from '../types/services';
 
 const seoDirectory = path.join(process.cwd(), 'src/SEO');
 
@@ -149,7 +150,7 @@ async function getAllParsedQueries(): Promise<TaggedQuery[]> {
     allQueries = uniqueLines.map(line => parseQuery(line)).filter((q): q is TaggedQuery => q !== null);
     return allQueries;
   } catch (error) {
-    console.error("Failed to read or parse queries files:", error);
+    // Failed to read queries files - return empty array
     return [];
   }
 }

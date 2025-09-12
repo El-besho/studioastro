@@ -132,12 +132,12 @@ export const locationMessages = {
 
 // Get message for specific service
 export function getServiceMessage(serviceSlug: string): string {
-  return serviceMessages[serviceSlug] || defaultWhatsAppConfig.defaultMessage;
+  return serviceMessages[serviceSlug as keyof typeof serviceMessages] || defaultWhatsAppConfig.defaultMessage;
 }
 
 // Get message for specific location
 export function getLocationMessage(citySlug: string): string {
-  return locationMessages[citySlug] || defaultWhatsAppConfig.defaultMessage;
+  return locationMessages[citySlug as keyof typeof locationMessages] || defaultWhatsAppConfig.defaultMessage;
 }
 
 // Get agent by role
@@ -150,7 +150,7 @@ export function getAvailableAgents(): Agent[] {
   const now = new Date();
   return defaultAgents.filter(agent => {
     const timezone = agent.availability.timezone;
-    const localTime = new Date(now.toLocaleString("en-US", { timeZone: timezone }));
+    const localTime = new Date(now.toLocaleString("ar-SA", { timeZone: timezone }));
     
     const currentDay = localTime.getDay();
     const currentTimeStr = localTime.toTimeString().slice(0, 5);

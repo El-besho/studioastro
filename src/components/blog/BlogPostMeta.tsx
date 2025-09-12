@@ -38,7 +38,7 @@ export function BlogPostMeta({ post, className = '' }: BlogPostMetaProps) {
           url: window.location.href,
         });
       } catch (error) {
-        console.log('Error sharing:', error);
+        // Share functionality not available
       }
     } else {
       // Fallback: copy to clipboard

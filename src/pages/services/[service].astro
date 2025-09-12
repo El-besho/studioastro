@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getServiceBySlug, getAllServices } from '../../lib/services';
+import { getServiceBySlug, getAllServices, getAllCities } from '../../lib/services';
 import { getSEOProps, generateCanonicalUrl } from '../../lib/seo';
 import { ServiceGrid } from '../../components/service-grid';
 import { Breadcrumb } from '../../components/semantic/breadcrumb';
@@ -17,6 +17,7 @@ import { ServiceGallery } from '../../components/service/ServiceGallery';
 import { ServiceProviders } from '../../components/service/ServiceProviders';
 import { ServiceCTA } from '../../components/service/ServiceCTA';
 import { FAQSchema } from '../../components/semantic/faq-schema';
+import { CityServices } from '../../components/service/CityServices';
 
 export async function getStaticPaths() {
   const services = getAllServices();
@@ -130,6 +131,17 @@ const seoProps = {
           priceRange={[100, 500]}
           responseTime="30 دقيقة"
           variant="hero"
+          client:load 
+        />
+      </div>
+
+      <!-- City Services Section -->
+      <div class="mb-12">
+        <CityServices 
+          serviceName={service.ar_name}
+          serviceSlug={service.slug}
+          cities={getAllCities()}
+          maxCities={12}
           client:load 
         />
       </div>

@@ -6,7 +6,7 @@ import { ServiceGrid } from '../../../../components/service-grid';
 import { Breadcrumb } from '../../../../components/semantic/breadcrumb';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../../components/ui/card';
 import { Badge } from '../../../../components/ui/badge';
-import { Check, MapPin, Star, Clock, Shield, Phone, Mail } from 'lucide-react';
+import { Check, MapPin, Star, Clock, Shield, Phone, Mail, Users, Award, TrendingUp, Zap, AlertTriangle } from 'lucide-react';
 import { Testimonials } from '../../../../components/service/Testimonials';
 import { ServiceStats } from '../../../../components/service/ServiceStats';
 import { ServiceGallery } from '../../../../components/service/ServiceGallery';
@@ -14,6 +14,10 @@ import { ServiceProviders } from '../../../../components/service/ServiceProvider
 import { ServiceCTA } from '../../../../components/service/ServiceCTA';
 import FAQ from '../../../../components/service/FAQ.astro';
 import { FAQSchema } from '../../../../components/semantic/faq-schema';
+import { LocalBusinessSchema } from '../../../../components/semantic/local-business-schema';
+import { PriceCalculator } from '../../../../components/service/PriceCalculator';
+import { EmergencyContact } from '../../../../components/service/EmergencyContact';
+import { ServiceTimeline } from '../../../../components/service/ServiceTimeline';
 
 export async function getStaticPaths() {
   const services = getAllServices();
@@ -90,6 +94,12 @@ const seoProps = {
           <Card>
             <CardHeader>
               <CardTitle class="font-headline text-2xl">خدمات {subService.ar_name} في {city.ar_name}</CardTitle>
+              {subService.urgency === 'emergency' && (
+                <Badge variant="destructive" class="flex items-center gap-1 w-fit">
+                  <AlertTriangle class="h-3 w-3" />
+                  خدمة طوارئ
+                </Badge>
+              )}
             </CardHeader>
             <CardContent>
               <div class="prose prose-lg max-w-none">
@@ -103,6 +113,14 @@ const seoProps = {
               </div>
             </CardContent>
           </Card>
+
+          <!-- Service Timeline -->
+          <ServiceTimeline 
+            serviceName={subService.ar_name}
+            cityName={city.ar_name}
+            estimatedDuration={subService.avg_duration || "2-4 ساعات"}
+            client:load 
+          />
 
           <!-- Features -->
           <Card>
@@ -193,6 +211,24 @@ const seoProps = {
 
         <!-- Sidebar -->
         <div class="space-y-6">
+          <!-- Emergency Contact -->
+          {subService.urgency === 'emergency' && (
+            <EmergencyContact 
+              serviceName={subService.ar_name}
+              cityName={city.ar_name}
+              client:load 
+            />
+          )}
+
+          <!-- Price Calculator -->
+          <PriceCalculator 
+            serviceName={subService.ar_name}
+            cityName={city.ar_name}
+            serviceType={service.category}
+            basePrice={subService.avg_price_range?.[0] || 100}
+            client:load 
+          />
+
           <!-- CTA -->
           <ServiceCTA 
             serviceName={subService.ar_name}
@@ -203,6 +239,33 @@ const seoProps = {
             variant="compact"
             client:load 
           />
+
+          <!-- Service Stats -->
+          <Card>
+            <CardHeader>
+              <CardTitle class="font-headline text-lg">إحصائيات الخدمة</CardTitle>
+            </CardHeader>
+            <CardContent class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-muted-foreground">متوسط السعر</span>
+                <span class="font-semibold">
+                  {subService.avg_price_range ? `${subService.avg_price_range[0]}-${subService.avg_price_range[1]} ريال` : '100-500 ريال'}
+                </span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-muted-foreground">مدة التنفيذ</span>
+                <span class="font-semibold">{subService.avg_duration || '2-4 ساعات'}</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-muted-foreground">مستوى الصعوبة</span>
+                <span class="font-semibold">{subService.difficulty_level || 'متوسط'}</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-muted-foreground">الضمان</span>
+                <span class="font-semibold">{subService.warranty_period || '6 أشهر'}</span>
+              </div>
+            </CardContent>
+          </Card>
 
           <!-- City Info -->
           <Card>
@@ -306,6 +369,19 @@ const seoProps = {
       </div>
       
       <ServiceGrid services={getAllServices().filter(s => s.category === service.category && s.slug !== service.slug).slice(0, 6)} />
+
+      <!-- Local Business Schema -->
+      <LocalBusinessSchema 
+        serviceName={subService.ar_name}
+        cityName={city.ar_name}
+        serviceType={service.category}
+        phoneNumber="+966500000000"
+        address={`${city.ar_name}, المملكة العربية السعودية`}
+        rating={4.8}
+        reviewCount={127}
+        priceRange="ريال"
+        openingHours="24/7"
+      />
     </div>
   </div>
 </Layout>

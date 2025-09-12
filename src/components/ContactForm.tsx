@@ -61,7 +61,7 @@ export default function ContactForm({
         onSubmit(result.data);
       } else {
         // Default behavior - show success message
-        console.log('Contact form submitted:', result.data);
+        // Form submitted successfully
       }
     }
   };

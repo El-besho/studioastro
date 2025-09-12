@@ -88,7 +88,6 @@ const cities = [
 ];
 
 
-const generateSlug = (name: string) => name.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-').replace(/[(),/]/g, '');
 
 const serviceCategories: ServiceCategory[] = [
     { id: 'essential', ar_name: 'خدمات أساسية', slug: 'essential' },
@@ -108,10 +107,10 @@ export function getCategoryBySlug(slug: string): ServiceCategory | null {
 export function getAllServices(): (ServiceHierarchy & { slug: string })[] {
   return services.map((service) => ({
     ...service,
-    slug: generateSlug(service.ar_name),
+    slug: service.id, // استخدام المعرف الإنجليزي كرابط بدلاً من توليده من الاسم العربي
     sub_services: service.sub_services.map(sub => ({
         ...sub,
-        slug: generateSlug(sub.ar_name)
+        slug: sub.id // استخدام المعرف الإنجليزي كرابط بدلاً من توليده من الاسم العربي
     }))
   }));
 }
@@ -138,7 +137,7 @@ export function getServiceAndSubServiceBySlugs(serviceSlug: string, subServiceSl
     const subService = service.sub_services.find(s => s.slug === subServiceSlug);
     if (!subService) return null;
 
-    return { service, subService };
+    return { service, subService: { ...subService, slug: subService.slug || subService.id } };
 }
 
 

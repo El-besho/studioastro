@@ -69,13 +69,13 @@ export function Footer() {
             © {new Date().getFullYear()} إنقاذ. جميع الحقوق محفوظة.
           </p>
           <div className="flex gap-4">
-            <a href="/" className="text-muted-foreground hover:text-foreground">
+            <a href="https://twitter.com/enqaz" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
               <Twitter className="h-5 w-5" />
             </a>
-            <a href="/" className="text-muted-foreground hover:text-foreground">
+            <a href="https://facebook.com/enqaz" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
               <Facebook className="h-5 w-5" />
             </a>
-            <a href="/" className="text-muted-foreground hover:text-foreground">
+            <a href="https://instagram.com/enqaz" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground">
               <Instagram className="h-5 w-5" />
             </a>
           </div>
