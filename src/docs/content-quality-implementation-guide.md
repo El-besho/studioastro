@@ -4,6 +4,30 @@
 
 تم تطبيق 14 قاعدة إلزامية لضمان جودة المحتوى في خطة السلطة الموضوعية لخدمات التنظيف. هذه القواعد هي **قيود إلزامية** وليس اقتراحات.
 
+> **📚 للمطورين**: راجع [دليل نظام قواعد الجودة الـ14](./content-quality-rules-system-guide.md) للحصول على تفاصيل تقنية شاملة حول التطبيق والاختبار.
+
+## المكونات التقنية
+
+### الملفات الأساسية
+- `src/lib/content-quality-rules.ts` - تعريف القواعد والتحقق
+- `src/components/seo/ContentValidator.tsx` - مكون التحقق من الجودة
+- `src/components/seo/ContentOptimizer.tsx` - مكون تحسين المحتوى
+- `src/lib/enhanced-content-generator.ts` - مولد المحتوى المحسن
+- `src/tests/content-quality.test.ts` - اختبارات الجودة
+
+### الاستخدام السريع
+```typescript
+import { ContentQualityValidator } from '@/lib/content-quality-rules';
+import ContentValidator from '@/components/seo/ContentValidator';
+
+// التحقق من جودة المحتوى
+const validator = new ContentQualityValidator();
+const results = validator.validateContent(content);
+
+// استخدام المكون
+<ContentValidator content={content} onValidationComplete={handleResults} />
+```
+
 ## القواعد الحرجة (يجب تطبيقها أولاً)
 
 ### القاعدة 2: كن محدداً - احذف كل اللغة القائمة على الرأي
