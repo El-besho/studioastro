@@ -17,6 +17,7 @@ import { swimmingPoolServices } from '../content/services/swimming-pool-services
 import { washingMachineMaintenance } from '../content/services/washing-machine-maintenance';
 import { refrigeratorMaintenance } from '../content/services/refrigerator-maintenance';
 import { marbleTilingServices } from '../content/services/marble-tiling-services';
+import { restaurantChimneyCleaning } from '../content/services/restaurant-chimney-cleaning';
 
 
 import { riyadh } from '../content/cities/riyadh';
@@ -62,6 +63,7 @@ const services = [
     washingMachineMaintenance,
     refrigeratorMaintenance,
     marbleTilingServices,
+    restaurantChimneyCleaning,
 ];
 
 const cities = [

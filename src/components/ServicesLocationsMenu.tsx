@@ -68,6 +68,8 @@ export default function ServicesLocationsMenu() {
     'construction': 'خدمات البناء والتشييد',
     'automotive': 'خدمات السيارات',
     'technology': 'خدمات التكنولوجيا',
+    'home': 'خدمات منزلية',
+    'business': 'خدمات تجارية',
     'other': 'خدمات أخرى'
   };
 
@@ -256,6 +258,27 @@ export default function ServicesLocationsMenu() {
                 </div>
               </CollapsibleContent>
             </Collapsible>
+          </div>
+
+          {/* Popular Services */}
+          <div className="space-y-2 pt-4 border-t">
+            <h3 className="font-headline text-lg font-semibold text-primary flex items-center gap-2">
+              <Wrench className="h-5 w-5" />
+              الخدمات الأكثر طلباً
+            </h3>
+            <div className="grid grid-cols-1 gap-2">
+              {services.slice(0, 6).map((service) => (
+                <Button
+                  key={service.slug}
+                  variant="outline"
+                  size="sm"
+                  className="w-full justify-start text-sm"
+                  onClick={() => handleServiceClick(service.slug)}
+                >
+                  {service.ar_name}
+                </Button>
+              ))}
+            </div>
           </div>
 
           {/* Quick Actions */}

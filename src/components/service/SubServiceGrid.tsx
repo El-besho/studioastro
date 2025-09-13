@@ -192,7 +192,7 @@ export function SubServiceGrid({ subServices, serviceSlug, serviceName }: SubSer
         </p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid-subservice">
         {subServices.map((subService) => (
           <Card key={subService.id} className="group hover:shadow-xl transition-all duration-300">
             <CardHeader>

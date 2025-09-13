@@ -35,13 +35,16 @@ const availableServices = allServices.filter(service =>
 
 const seoProps = {
   title: `خدمات ${city.ar_name} | أفضل الخدمات المنزلية في ${city.ar_name}`,
-  description: `اكتشف أفضل الخدمات المنزلية في ${city.ar_name}. صيانة مكيفات، سباكة، كهرباء، تنظيف، وأكثر. احصل على عروض أسعار مجانية من أفضل المحترفين في ${city.ar_name}.`,
+  description: `اكتشف أفضل الخدمات المنزلية في ${city.ar_name}. صيانة مكيفات، سباكة، كهرباء، تنظيف، تنظيف مداخن المطاعم، وأكثر. احصل على عروض أسعار مجانية من أفضل المحترفين في ${city.ar_name}.`,
   keywords: [
     `خدمات ${city.ar_name}`,
     `صيانة مكيفات ${city.ar_name}`,
     `شركة سباكة ${city.ar_name}`,
     `فني كهرباء ${city.ar_name}`,
     `شركة تنظيف ${city.ar_name}`,
+    `تنظيف مداخن المطاعم ${city.ar_name}`,
+    `شركة تنظيف مداخن ${city.ar_name}`,
+    `صيانة مداخن المطاعم ${city.ar_name}`,
     'خدمات منزلية',
     'إنقاذ'
   ],
@@ -138,7 +141,8 @@ const getClimateText = (climate: string) => {
             <p class="text-foreground/80 leading-relaxed mb-4">
               نقدم في {city.ar_name} مجموعة شاملة من الخدمات المنزلية عالية الجودة، 
               من صيانة المكيفات والسباكة إلى خدمات التنظيف والصيانة العامة. 
-              جميع مزودي الخدمات لدينا معتمدون ومتخصصون في مجالاتهم.
+              تشمل خدماتنا المتخصصة تنظيف مداخن المطاعم، صيانة أنظمة التهوية، 
+              وإزالة الدهون المتراكمة. جميع مزودي الخدمات لدينا معتمدون ومتخصصون في مجالاتهم.
             </p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
               <div>
@@ -157,7 +161,7 @@ const getClimateText = (climate: string) => {
                 <ul class="space-y-2">
                   {Object.entries(city.service_demand_multipliers).slice(0, 4).map(([service, multiplier]) => (
                     <li class="flex items-center justify-between text-sm">
-                      <span>{service === 'air-conditioning' ? 'صيانة مكيفات' : service === 'luxury' ? 'خدمات فاخرة' : service === 'it-tech-services' ? 'خدمات تقنية' : service}</span>
+                      <span>{service === 'air-conditioning' ? 'صيانة مكيفات' : service === 'luxury' ? 'خدمات فاخرة' : service === 'it-tech-services' ? 'خدمات تقنية' : service === 'restaurant-chimney-cleaning' ? 'تنظيف مداخن المطاعم' : service}</span>
                       <Badge variant="secondary" class="text-xs">
                         {multiplier}x
                       </Badge>
@@ -183,6 +187,74 @@ const getClimateText = (climate: string) => {
         </div>
         <ServiceGrid services={availableServices} />
       </div>
+
+      <!-- Restaurant Chimney Cleaning Highlight -->
+      {availableServices.some(service => service.id === 'restaurant-chimney-cleaning') && (
+        <Card class="mb-12 bg-gradient-to-r from-orange-50 to-red-50 border-orange-200">
+          <CardHeader>
+            <CardTitle class="font-headline text-2xl text-orange-800">
+              تنظيف مداخن المطاعم في {city.ar_name}
+            </CardTitle>
+            <CardDescription class="text-orange-700">
+              خدمة متخصصة لتنظيف وصيانة مداخن المطاعم مع أفضل التقنيات المتقدمة
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h3 class="font-headline text-lg font-semibold mb-3 text-orange-800">خدماتنا المتخصصة:</h3>
+                <ul class="space-y-2 text-orange-700">
+                  <li class="flex items-center gap-2">
+                    <span class="w-2 h-2 bg-orange-500 rounded-full"></span>
+                    تنظيف هود المطاعم بالبخار عالي الضغط
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span class="w-2 h-2 bg-orange-500 rounded-full"></span>
+                    تنظيف مجاري التهوية والمرواح الصناعية
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span class="w-2 h-2 bg-orange-500 rounded-full"></span>
+                    إزالة الدهون المتراكمة والرواسب العنيدة
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span class="w-2 h-2 bg-orange-500 rounded-full"></span>
+                    صيانة أنظمة التهوية الشاملة
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h3 class="font-headline text-lg font-semibold mb-3 text-orange-800">لماذا نحن الأفضل:</h3>
+                <ul class="space-y-2 text-orange-700">
+                  <li class="flex items-center gap-2">
+                    <span class="w-2 h-2 bg-orange-500 rounded-full"></span>
+                    خبرة 10+ سنوات في تنظيف مداخن المطاعم
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span class="w-2 h-2 bg-orange-500 rounded-full"></span>
+                    تقنيات متقدمة بالليزر والموجات فوق الصوتية
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span class="w-2 h-2 bg-orange-500 rounded-full"></span>
+                    شهادات تنظيف معتمدة للامتثال للوائح
+                  </li>
+                  <li class="flex items-center gap-2">
+                    <span class="w-2 h-2 bg-orange-500 rounded-full"></span>
+                    خدمة 24/7 لجميع أنواع المطاعم
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="mt-6 text-center">
+              <a
+                href="/services/restaurant-chimney-cleaning"
+                class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-orange-600 text-white hover:bg-orange-700 h-10 px-6 py-2"
+              >
+                احصل على عرض سعر مجاني
+              </a>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       <!-- Service Gallery -->
       <div class="mb-12">

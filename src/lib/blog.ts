@@ -19,9 +19,13 @@ function getHeadings(content: string): Heading[] {
   const headings: Heading[] = [];
 
   visit(tree, 'heading', (node: any) => {
-    if (node.depth === 2 || node.depth === 3) {
+    if (node.depth >= 2 && node.depth <= 6) {
       const text = node.children.map((child: any) => child.value).join('');
-      const slug = text.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+      const slug = text.toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^\w-]+/g, '')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '');
       headings.push({
         level: node.depth,
         text: text,
@@ -38,7 +42,7 @@ async function processMarkdownToHtml(content: string): Promise<string> {
   const result = await unified()
     .use(remarkParse)
     .use(remarkRehype, { allowDangerousHtml: true })
-    .use(rehypeSlug)
+    .use(rehypeSlug, { prefix: '' })
     .use(rehypeStringify, { allowDangerousHtml: true })
     .process(file);
   

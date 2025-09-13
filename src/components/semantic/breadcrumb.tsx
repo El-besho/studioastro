@@ -7,6 +7,7 @@ import { cn } from '../../lib/utils';
 import { Button } from '../ui/button';
 import { siteConfig } from '../../config/site';
 import { getAllServices, getCityBySlug, getServiceCategories, getAllCities } from '../../lib/services';
+import { getPostBySlug } from '../../lib/blog';
 
 type BreadcrumbSegment = {
   label: string;
@@ -34,6 +35,19 @@ const getLabelForSegment = (segment: string, fullPath: string) => {
       }
 
       const pathSegments = fullPath.split('/').filter(Boolean);
+      
+      // Handle blog posts: /blog/[slug]
+      if (pathSegments.length === 2 && pathSegments[0] === 'blog') {
+        try {
+          const post = getPostBySlug(decodedSegment);
+          if (post) {
+            return post.frontmatter.title;
+          }
+        } catch (error) {
+          // If post not found, fall through to default handling
+        }
+      }
+      
       if (pathSegments.length > 1 && pathSegments[0] === 'services') {
          // Handle category pages: /services/category/[slug]
         if (pathSegments[1] === 'category') {

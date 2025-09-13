@@ -1,6 +1,7 @@
 ---
 import { Facebook, Instagram, Twitter } from 'lucide-react';
 import { Logo } from './logo';
+import { footerLinks } from '../config/nav';
 ---
 
 <footer class="bg-muted/50 text-right">
@@ -18,46 +19,37 @@ import { Logo } from './logo';
         <div>
           <h3 class="font-headline font-semibold mb-4">أهم الخدمات</h3>
           <ul class="space-y-2">
-            <li>
-              <a href="/services/air-conditioning-hvac" class="text-sm text-muted-foreground hover:text-foreground">خدمات التكييف</a>
-            </li>
-            <li>
-              <a href="/services/plumbing-services" class="text-sm text-muted-foreground hover:text-foreground">السباكة</a>
-            </li>
-            <li>
-              <a href="/services/electrical-services" class="text-sm text-muted-foreground hover:text-foreground">الكهرباء</a>
-            </li>
-             <li>
-              <a href="/services" class="text-sm text-muted-foreground hover:text-foreground">المزيد...</a>
-            </li>
+            {footerLinks.services.map((link) => (
+              <li key={link.href}>
+                <a href={link.href} class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  {link.label}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
         <div>
           <h3 class="font-headline font-semibold mb-4">عن الشركة</h3>
           <ul class="space-y-2">
-            <li>
-              <a href="/about" class="text-sm text-muted-foreground hover:text-foreground">من نحن</a>
-            </li>
-            <li>
-              <a href="/blog" class="text-sm text-muted-foreground hover:text-foreground">المدونة</a>
-            </li>
-            <li>
-              <a href="/contact" class="text-sm text-muted-foreground hover:text-foreground">تواصل معنا</a>
-            </li>
-            <li>
-              <a href="/join-provider" class="text-sm text-muted-foreground hover:text-foreground">انضم كمزود خدمة</a>
-            </li>
+            {footerLinks.company.map((link) => (
+              <li key={link.href}>
+                <a href={link.href} class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  {link.label}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
         <div>
           <h3 class="font-headline font-semibold mb-4">قانوني</h3>
           <ul class="space-y-2">
-            <li>
-              <a href="/privacy" class="text-sm text-muted-foreground hover:text-foreground">سياسة الخصوصية</a>
-            </li>
-            <li>
-              <a href="/terms" class="text-sm text-muted-foreground hover:text-foreground">شروط الاستخدام</a>
-            </li>
+            {footerLinks.legal.map((link) => (
+              <li key={link.href}>
+                <a href={link.href} class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  {link.label}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

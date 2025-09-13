@@ -21,6 +21,6 @@ export const dammam: CityProfile = {
         { ar: 'النور'},
         { ar: 'النهضة'},
     ],
-    service_demand_multipliers: { 'automotive-services': 1.4, 'industrial_cleaning': 1.7, 'it-tech-services': 1.5 },
+    service_demand_multipliers: { 'automotive-services': 1.4, 'industrial_cleaning': 1.7, 'it-tech-services': 1.5, 'restaurant-chimney-cleaning': 1.2 },
     peak_seasons: { 'summer': 1.4, 'winter': 1.1 }
 };

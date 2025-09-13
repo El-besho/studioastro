@@ -1,10 +1,30 @@
 
-import { Building, Info, Rss, Newspaper, Users, MapPin } from "lucide-react"
+import { Building, Info, Rss, Newspaper, Users, MapPin, Search } from "lucide-react"
 
 export const navLinks = [
-    { href: '/services', label: 'الخدمات والمواقع', icon: Building },
+    { href: '/services', label: 'الخدمات', icon: Building },
+    { href: '/locations', label: 'المواقع', icon: MapPin },
     { href: '/blog', label: 'المدونة', icon: Newspaper },
     { href: '/about', label: 'من نحن', icon: Users },
-    { href: '/#testimonials', label: 'آراء العملاء', icon: Rss },
     { href: '/contact', label: 'تواصل معنا', icon: Info },
 ];
+
+export const footerLinks = {
+    services: [
+        { href: '/services/air-conditioning-hvac', label: 'خدمات التكييف' },
+        { href: '/services/plumbing-services', label: 'السباكة' },
+        { href: '/services/electrical-services', label: 'الكهرباء' },
+        { href: '/services/cleaning-services', label: 'التنظيف' },
+        { href: '/services', label: 'المزيد...' }
+    ],
+    company: [
+        { href: '/about', label: 'من نحن' },
+        { href: '/blog', label: 'المدونة' },
+        { href: '/contact', label: 'تواصل معنا' },
+        { href: '/join-provider', label: 'انضم كمزود خدمة' }
+    ],
+    legal: [
+        { href: '/privacy', label: 'سياسة الخصوصية' },
+        { href: '/terms', label: 'شروط الاستخدام' }
+    ]
+};

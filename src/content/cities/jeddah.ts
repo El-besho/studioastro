@@ -25,6 +25,6 @@ export const jeddah: CityProfile = {
         { ar: 'البغدادية'},
         { ar: 'الخالدية'},
     ],
-    service_demand_multipliers: { 'swimming-pool-services': 1.6, 'moving-relocation': 1.4, 'event-planning': 1.5 },
+    service_demand_multipliers: { 'swimming-pool-services': 1.6, 'moving-relocation': 1.4, 'event-planning': 1.5, 'restaurant-chimney-cleaning': 1.3 },
     peak_seasons: { 'summer': 1.6, 'hajj': 1.4 }
 };

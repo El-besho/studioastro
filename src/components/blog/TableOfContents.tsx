@@ -30,41 +30,65 @@ export function TableOfContents({ headings, className = '' }: TableOfContentsPro
       }
     );
 
-    // Observe all headings
-    headings.forEach((heading) => {
-      const element = document.getElementById(heading.slug);
-      if (element) {
-        observer.observe(element);
-      }
-    });
+    // Function to observe headings
+    const observeHeadings = () => {
+      headings.forEach((heading) => {
+        const element = document.getElementById(heading.slug);
+        if (element) {
+          observer.observe(element);
+        }
+      });
+    };
+
+    // Try to observe immediately
+    observeHeadings();
+
+    // Also try after a short delay to ensure content is loaded
+    const timeoutId = setTimeout(observeHeadings, 100);
 
     return () => {
       observer.disconnect();
+      clearTimeout(timeoutId);
     };
   }, [headings]);
 
   useEffect(() => {
     // Add IDs to headings in the content
-    headings.forEach((heading) => {
-      const element = document.getElementById(heading.slug);
-      if (!element) {
-        // Find heading by text content and add ID
-        const headings = document.querySelectorAll('h2, h3, h4, h5, h6');
-        headings.forEach((h) => {
-          if (h.textContent?.trim() === heading.text.trim()) {
-            h.id = heading.slug;
-          }
-        });
-      }
-    });
+    const addIdsToHeadings = () => {
+      headings.forEach((heading) => {
+        const element = document.getElementById(heading.slug);
+        if (!element) {
+          // Find heading by text content and add ID
+          const allHeadings = document.querySelectorAll('h2, h3, h4, h5, h6');
+          allHeadings.forEach((h) => {
+            if (h.textContent?.trim() === heading.text.trim() && !h.id) {
+              h.id = heading.slug;
+            }
+          });
+        }
+      });
+    };
+
+    // Try to add IDs immediately
+    addIdsToHeadings();
+
+    // Also try after a short delay to ensure content is loaded
+    const timeoutId = setTimeout(addIdsToHeadings, 100);
+    
+    return () => clearTimeout(timeoutId);
   }, [headings]);
 
   const scrollToHeading = (slug: string) => {
     const element = document.getElementById(slug);
     if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
+      // Add offset for fixed header
+      const offset = 100;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
       });
     }
   };

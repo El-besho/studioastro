@@ -26,6 +26,6 @@ export const riyadh: CityProfile = {
         { ar: 'المرسلات'},
         { ar: 'اليرموك'},
     ],
-    service_demand_multipliers: { 'air-conditioning': 1.8, 'luxury': 1.5, 'it-tech-services': 1.6 },
+    service_demand_multipliers: { 'air-conditioning': 1.8, 'luxury': 1.5, 'it-tech-services': 1.6, 'restaurant-chimney-cleaning': 1.4 },
     peak_seasons: { 'summer': 1.5, 'ramadan': 1.2 }
 };

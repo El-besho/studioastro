@@ -6,7 +6,8 @@ import {
   Menu,
   MapPin,
   ChevronDown,
-  Search
+  Search,
+  Users
 } from 'lucide-react';
 import { navLinks } from '../config/nav';
 import { getAllCities, getCityBySlug, getServiceBySlug } from '../lib/services';
@@ -120,6 +121,28 @@ export default function HeaderClient() {
                   {link.label}
                 </a>
               ))}
+              
+              {/* Additional Mobile Links */}
+              <div className="pt-4 border-t mt-4">
+                <a 
+                  href="/search" 
+                  className="flex items-center gap-3 text-lg font-medium text-foreground/80 hover:text-foreground hover:bg-primary/5 rounded-lg p-3 transition-all duration-200 focus-ring-enhanced touch-target" 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  aria-label="البحث المتقدم"
+                >
+                  <Search className="h-5 w-5 ml-2 text-primary" />
+                  البحث المتقدم
+                </a>
+                <a 
+                  href="/join-provider" 
+                  className="flex items-center gap-3 text-lg font-medium text-foreground/80 hover:text-foreground hover:bg-primary/5 rounded-lg p-3 transition-all duration-200 focus-ring-enhanced touch-target" 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  aria-label="انضم كمزود خدمة"
+                >
+                  <Users className="h-5 w-5 ml-2 text-primary" />
+                  انضم كمزود خدمة
+                </a>
+              </div>
             </nav>
           </div>
           <SheetFooter className="p-4 border-t bg-muted/30">

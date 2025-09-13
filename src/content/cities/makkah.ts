@@ -21,6 +21,6 @@ export const makkah: CityProfile = {
         { ar: 'الهجرة'},
         { ar: 'الكعكية'},
     ],
-    service_demand_multipliers: { 'cleaning-services': 1.7, 'hospitality_services': 2.0, 'construction-renovation': 1.3 },
+    service_demand_multipliers: { 'cleaning-services': 1.7, 'hospitality_services': 2.0, 'construction-renovation': 1.3, 'restaurant-chimney-cleaning': 1.5 },
     peak_seasons: { 'ramadan': 2.0, 'hajj': 3.0 }
 };

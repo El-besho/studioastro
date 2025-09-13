@@ -18,6 +18,8 @@ import { ServiceProviders } from '../../components/service/ServiceProviders';
 import { ServiceCTA } from '../../components/service/ServiceCTA';
 import { FAQSchema } from '../../components/semantic/faq-schema';
 import { CityServices } from '../../components/service/CityServices';
+import { ComprehensiveContent } from '../../components/content/ComprehensiveContent';
+import { DetailedProcess } from '../../components/content/DetailedProcess';
 
 export async function getStaticPaths() {
   const services = getAllServices();
@@ -90,9 +92,14 @@ const seoProps = {
         />
       </div>
 
-      <!-- Process Steps -->
+      <!-- Detailed Process -->
       <div class="mb-12">
-        <ProcessSteps client:load />
+        <DetailedProcess serviceType={service.slug} serviceName={service.ar_name} client:load />
+      </div>
+
+      <!-- Comprehensive Content -->
+      <div class="mb-12">
+        <ComprehensiveContent serviceType={service.slug} serviceName={service.ar_name} client:load />
       </div>
 
       <!-- Service Stats -->

@@ -1,0 +1,107 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { ContentCalendar } from '../components/content/ContentCalendar';
+import { KeywordOptimizer } from '../components/content/KeywordOptimizer';
+import { ContentGrowthDashboard } from '../components/content/ContentGrowthDashboard';
+import { generateContentCalendar } from '../lib/content-strategy';
+
+const seoProps = {
+  title: 'إدارة المحتوى الشامل | إنقاذ - منصة إدارة المحتوى المتقدمة',
+  description: 'إدارة شاملة للمحتوى مع تحسين الكلمات المفتاحية وتتبع النمو. أدوات متقدمة لإنشاء وتوزيع المحتوى بكفاءة.',
+  keywords: ['إدارة المحتوى', 'تحسين SEO', 'الكلمات المفتاحية', 'تخطيط المحتوى', 'تحليل الأداء'],
+  canonical: '/content-management'
+};
+
+// Generate sample content calendar
+const contentCalendar = generateContentCalendar(new Date(), 3);
+---
+
+<Layout {...seoProps}>
+  <div class="container py-12 px-4 md:px-6">
+    <div class="max-w-7xl mx-auto">
+      <!-- Page Header -->
+      <div class="text-center mb-12">
+        <h1 class="font-headline text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl mb-4">
+          إدارة المحتوى الشامل
+        </h1>
+        <p class="max-w-3xl mx-auto text-foreground/80 md:text-xl/relaxed">
+          منصة متكاملة لإدارة المحتوى مع تحسين الكلمات المفتاحية وتتبع النمو
+        </p>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="flex flex-wrap justify-center gap-2 mb-8">
+        <button 
+          class="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium transition-colors"
+          onclick="showTab('dashboard')"
+        >
+          لوحة التحكم
+        </button>
+        <button 
+          class="px-6 py-3 bg-muted text-muted-foreground rounded-lg font-medium transition-colors hover:bg-muted/80"
+          onclick="showTab('calendar')"
+        >
+          تقويم المحتوى
+        </button>
+        <button 
+          class="px-6 py-3 bg-muted text-muted-foreground rounded-lg font-medium transition-colors hover:bg-muted/80"
+          onclick="showTab('keywords')"
+        >
+          محسن الكلمات المفتاحية
+        </button>
+      </div>
+
+      <!-- Dashboard Tab -->
+      <div id="dashboard-tab" class="tab-content">
+        <ContentGrowthDashboard client:load />
+      </div>
+
+      <!-- Calendar Tab -->
+      <div id="calendar-tab" class="tab-content hidden">
+        <ContentCalendar client:load />
+      </div>
+
+      <!-- Keywords Tab -->
+      <div id="keywords-tab" class="tab-content hidden">
+        <KeywordOptimizer client:load />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showTab(tabName) {
+      // Hide all tabs
+      const tabs = document.querySelectorAll('.tab-content');
+      tabs.forEach(tab => tab.classList.add('hidden'));
+      
+      // Remove active class from all buttons
+      const buttons = document.querySelectorAll('button[onclick^="showTab"]');
+      buttons.forEach(btn => {
+        btn.classList.remove('bg-primary', 'text-primary-foreground');
+        btn.classList.add('bg-muted', 'text-muted-foreground');
+      });
+      
+      // Show selected tab
+      const selectedTab = document.getElementById(tabName + '-tab');
+      if (selectedTab) {
+        selectedTab.classList.remove('hidden');
+      }
+      
+      // Add active class to clicked button
+      const clickedButton = event.target;
+      clickedButton.classList.remove('bg-muted', 'text-muted-foreground');
+      clickedButton.classList.add('bg-primary', 'text-primary-foreground');
+    }
+  </script>
+
+  <style>
+    .tab-content {
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</Layout>
