@@ -11,7 +11,7 @@ const services = getAllServices();
 
 const seoProps = {
   title: 'المواقع | خدمات إنقاذ في جميع أنحاء السعودية',
-  description: 'اكتشف خدمات إنقاذ في جميع أنحاء المملكة العربية السعودية. نقدم خدمات منزلية متخصصة في 20+ مدينة مع أفضل المحترفين المعتمدين.',
+  description: 'اكتشف خدمات إنقاذ في جميع أنحاء المملكة العربية السعودية. نقدم خدمات منزلية متخصصة في 20+ مدينة مع أفضل المحترفين المعتمدين. تشمل خدمات تنظيف مداخن المطاعم، صيانة المكيفات، السباكة، والكهرباء.',
   keywords: [
     'المواقع',
     'خدمات منزلية',
@@ -21,6 +21,9 @@ const seoProps = {
     'الدمام',
     'مكة',
     'المدينة',
+    'تنظيف مداخن المطاعم',
+    'شركة تنظيف مداخن',
+    'صيانة مداخن المطاعم',
     'إنقاذ'
   ],
   canonical: generateCanonicalUrl('/locations')
@@ -139,7 +142,8 @@ const getClimateText = (climate: string) => {
                         <Badge key={service} variant="secondary" className="text-xs">
                           {service === 'air-conditioning' ? 'تكييف' : 
                            service === 'luxury' ? 'فاخرة' : 
-                           service === 'it-tech-services' ? 'تقنية' : service}
+                           service === 'it-tech-services' ? 'تقنية' : 
+                           service === 'restaurant-chimney-cleaning' ? 'مداخن المطاعم' : service}
                         </Badge>
                       ))}
                     {Object.keys(city.service_demand_multipliers).length > 3 && (
