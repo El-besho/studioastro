@@ -20,6 +20,9 @@ import { FAQSchema } from '../../components/semantic/faq-schema';
 import { CityServices } from '../../components/service/CityServices';
 import { ComprehensiveContent } from '../../components/content/ComprehensiveContent';
 import { DetailedProcess } from '../../components/content/DetailedProcess';
+import InternalLinks from '../../components/seo/InternalLinks.astro';
+import BreadcrumbSchema from '../../components/seo/BreadcrumbSchema.astro';
+import ServiceSchema from '../../components/seo/ServiceSchema.astro';
 
 export async function getStaticPaths() {
   const services = getAllServices();
@@ -44,6 +47,19 @@ const seoProps = {
 ---
 
 <Layout {...seoProps}>
+  <!-- Schema Markup -->
+  <BreadcrumbSchema items={[
+    { name: 'الرئيسية', path: '/' },
+    { name: 'الخدمات', path: '/services' },
+    { name: service.ar_name, path: `/services/${service.slug}` }
+  ]} />
+  <ServiceSchema service={{
+    name: service.ar_name,
+    description: service.description,
+    category: service.category,
+    priceRange: '$$'
+  }} />
+  
   <div class="container py-12 px-4 md:px-6">
     <div class="max-w-6xl mx-auto">
       <!-- Breadcrumb -->
@@ -164,6 +180,12 @@ const seoProps = {
       </div>
       
       <ServiceGrid services={getAllServices().filter(s => s.category === service.category && s.slug !== service.slug).slice(0, 6)} />
+      
+      <!-- Internal Links for SEO -->
+      <InternalLinks 
+        currentService={service.id}
+        type="service"
+      />
     </div>
   </div>
 </Layout>

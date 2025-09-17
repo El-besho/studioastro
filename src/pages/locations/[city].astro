@@ -11,6 +11,9 @@ import { Testimonials } from '../../components/service/Testimonials';
 import { ServiceGallery } from '../../components/service/ServiceGallery';
 import { ServiceProviders } from '../../components/service/ServiceProviders';
 import { ServiceCTA } from '../../components/service/ServiceCTA';
+import LocalBusinessSchema from '../../components/seo/LocalBusinessSchema.astro';
+import FAQSchema from '../../components/seo/FAQSchema.astro';
+import BreadcrumbSchema from '../../components/seo/BreadcrumbSchema.astro';
 
 export async function getStaticPaths() {
   const cities = getAllCities();
@@ -73,6 +76,35 @@ const getClimateText = (climate: string) => {
 ---
 
 <Layout {...seoProps}>
+  <!-- Schema Markup -->
+  <LocalBusinessSchema 
+    city={{
+      name: city.slug,
+      nameAr: city.ar_name,
+      region: city.region
+    }}
+    services={availableServices.map(s => s.name)}
+  />
+  <FAQSchema faqs={[
+    {
+      question: `ما هي أفضل الخدمات المنزلية في ${city.ar_name}؟`,
+      answer: `أكثر الخدمات طلباً في ${city.ar_name} هي: صيانة التكييف، السباكة، الكهرباء، التنظيف، وتنظيف مداخن المطاعم. جميع الخدمات متوفرة مع فنيين معتمدين محليين.`
+    },
+    {
+      question: `كم تكلف الخدمات المنزلية في ${city.ar_name}؟`,
+      answer: `تختلف الأسعار حسب نوع الخدمة وحجم العمل. بشكل عام، تبدأ أسعار الكشف من 60-100 ريال، والخدمات الأساسية من 150-500 ريال. نوفر عروض أسعار مجانية قبل البدء.`
+    },
+    {
+      question: `هل خدمات الطوارئ متوفرة في ${city.ar_name}؟`,
+      answer: `نعم، نوفر خدمات طوارئ 24/7 في ${city.ar_name} للسباكة، الكهرباء، والتكييف. وقت الاستجابة عادة 30-45 دقيقة في المناطق الرئيسية.`
+    }
+  ]} />
+  <BreadcrumbSchema items={[
+    { name: 'الرئيسية', path: '/' },
+    { name: 'المواقع', path: '/locations' },
+    { name: city.ar_name, path: `/locations/${city.slug}` }
+  ]} />
+  
   <div class="container py-12 px-4 md:px-6">
     <div class="max-w-6xl mx-auto">
       <!-- Breadcrumb -->

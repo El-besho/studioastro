@@ -1,0 +1,146 @@
+---
+// Internal Links Component for SEO
+export interface Props {
+  currentService?: string;
+  currentCity?: string;
+  currentCategory?: string;
+  type: 'service' | 'city' | 'category' | 'mixed';
+}
+
+import { getAllServices, getAllCities } from '../../lib/services';
+
+const { currentService, currentCity, currentCategory, type } = Astro.props;
+
+// Get all services and cities for linking
+const allServices = getAllServices();
+const allCities = getAllCities();
+
+// Generate contextual links based on current page
+function getRelatedLinks() {
+  const links = [];
+  
+  if (type === 'service' && currentService) {
+    // Find related services in same category
+    const service = allServices.find(s => s.id === currentService);
+    if (service) {
+      const relatedServices = allServices
+        .filter(s => s.category === service.category && s.id !== currentService)
+        .slice(0, 4);
+      
+      relatedServices.forEach(s => {
+        links.push({
+          href: `/services/${s.id}`,
+          text: s.name,
+          type: 'service'
+        });
+      });
+      
+      // Add city-specific links
+      const topCities = ['riyadh', 'jeddah', 'dammam', 'makkah'];
+      topCities.forEach(cityId => {
+        const city = allCities.find(c => c.id === cityId);
+        if (city) {
+          links.push({
+            href: `/services/${currentService}/${cityId}`,
+            text: `${service.name} في ${city.nameAr}`,
+            type: 'city-service'
+          });
+        }
+      });
+    }
+  }
+  
+  if (type === 'city' && currentCity) {
+    // Add top services for this city
+    const topServices = ['air-conditioning-hvac', 'plumbing-services', 'electrical-services', 'cleaning-services'];
+    topServices.forEach(serviceId => {
+      const service = allServices.find(s => s.id === serviceId);
+      if (service) {
+        links.push({
+          href: `/services/${serviceId}/${currentCity}`,
+          text: `${service.name} في ${currentCity}`,
+          type: 'city-service'
+        });
+      }
+    });
+    
+    // Add nearby cities
+    const city = allCities.find(c => c.id === currentCity);
+    if (city && city.nearby_cities) {
+      city.nearby_cities.slice(0, 3).forEach(nearbyId => {
+        const nearbyCity = allCities.find(c => c.id === nearbyId);
+        if (nearbyCity) {
+          links.push({
+            href: `/locations/${nearbyId}`,
+            text: `خدمات ${nearbyCity.nameAr}`,
+            type: 'city'
+          });
+        }
+      });
+    }
+  }
+  
+  if (type === 'category') {
+    // Add category hub links
+    links.push(
+      { href: '/services/category/essential', text: 'الخدمات الأساسية', type: 'category' },
+      { href: '/services/category/specialized', text: 'الخدمات المتخصصة', type: 'category' },
+      { href: '/emergency', text: 'خدمات الطوارئ 24/7', type: 'emergency' }
+    );
+  }
+  
+  // Always add some general links
+  links.push(
+    { href: '/services', text: 'جميع الخدمات', type: 'general' },
+    { href: '/locations', text: 'جميع المدن', type: 'general' }
+  );
+  
+  return links;
+}
+
+const relatedLinks = getRelatedLinks();
+---
+
+{relatedLinks.length > 0 && (
+  <section class="py-8 border-t">
+    <div class="container mx-auto px-4">
+      <h3 class="text-xl font-semibold mb-4">صفحات ذات صلة</h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {relatedLinks.map((link) => (
+          <a 
+            href={link.href}
+            class="group flex items-center gap-2 p-3 bg-gray-50 rounded-lg hover:bg-blue-50 transition"
+          >
+            {link.type === 'emergency' && (
+              <span class="text-red-500">🚨</span>
+            )}
+            {link.type === 'service' && (
+              <span class="text-blue-500">🔧</span>
+            )}
+            {link.type === 'city' && (
+              <span class="text-green-500">📍</span>
+            )}
+            {link.type === 'city-service' && (
+              <span class="text-purple-500">🏠</span>
+            )}
+            {link.type === 'category' && (
+              <span class="text-orange-500">📂</span>
+            )}
+            {link.type === 'general' && (
+              <span class="text-gray-500">🔗</span>
+            )}
+            
+            <span class="text-gray-700 group-hover:text-blue-600 transition">
+              {link.text}
+            </span>
+            
+            <svg class="w-4 h-4 text-gray-400 group-hover:text-blue-600 mr-auto transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

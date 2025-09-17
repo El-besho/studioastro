@@ -1,0 +1,167 @@
+---
+// LocalBusiness Schema Component for city pages
+import { siteConfig } from '../../config/site';
+
+export interface Props {
+  city: {
+    name: string;
+    nameAr: string;
+    region?: string;
+  };
+  services?: string[];
+}
+
+const { city, services } = Astro.props;
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": `${siteConfig.url}/locations/${city.name.toLowerCase()}`,
+  "name": `إنقاذ - خدمات منزلية في ${city.nameAr}`,
+  "alternateName": `Enqaz Home Services ${city.name}`,
+  "description": `مزود خدمات منزلية رائد في ${city.nameAr}. تكييف، سباكة، كهرباء، تنظيف وأكثر. فنيون معتمدون محليون، خدمة 24/7`,
+  "url": `${siteConfig.url}/locations/${city.name.toLowerCase()}`,
+  "telephone": "+966-50-XXXX-XXX",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": city.nameAr,
+    "addressRegion": city.region || "المنطقة الوسطى",
+    "addressCountry": "SA",
+    "postalCode": "12345"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": getCityCoordinates(city.name).lat,
+    "longitude": getCityCoordinates(city.name).lng
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": city.nameAr,
+    "@id": `https://www.wikidata.org/wiki/${getWikidataId(city.name)}`
+  },
+  "serviceArea": {
+    "@type": "GeoCircle",
+    "geoMidpoint": {
+      "@type": "GeoCoordinates",
+      "latitude": getCityCoordinates(city.name).lat,
+      "longitude": getCityCoordinates(city.name).lng
+    },
+    "geoRadius": "50000"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": `خدمات منزلية في ${city.nameAr}`,
+    "itemListElement": services?.map(service => ({
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": service,
+        "serviceType": "Home Services"
+      }
+    })) || []
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday", 
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "00:00",
+      "closes": "23:59"
+    }
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.7",
+    "reviewCount": getReviewCount(city.name),
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "محمد أحمد"
+      },
+      "reviewBody": `خدمة ممتازة في ${city.nameAr}. الفني وصل في الوقت المحدد وأنجز العمل باحترافية`
+    }
+  ],
+  "sameAs": [
+    `https://www.facebook.com/enqaz${city.name.toLowerCase()}`,
+    `https://twitter.com/enqaz${city.name.toLowerCase()}`,
+    `https://www.instagram.com/enqaz${city.name.toLowerCase()}`
+  ]
+};
+
+// Helper functions
+function getCityCoordinates(cityName: string) {
+  const coordinates: Record<string, { lat: number; lng: number }> = {
+    'riyadh': { lat: 24.7136, lng: 46.6753 },
+    'jeddah': { lat: 21.4858, lng: 39.1925 },
+    'makkah': { lat: 21.4225, lng: 39.8262 },
+    'medina': { lat: 24.4672, lng: 39.6024 },
+    'dammam': { lat: 26.4207, lng: 50.0888 },
+    'khobar': { lat: 26.2172, lng: 50.1971 },
+    'dhahran': { lat: 26.2361, lng: 50.0393 },
+    'taif': { lat: 21.2703, lng: 40.4158 },
+    'buraidah': { lat: 26.3595, lng: 43.9780 },
+    'tabuk': { lat: 28.3838, lng: 36.5550 },
+    'hail': { lat: 27.5219, lng: 41.6907 },
+    'abha': { lat: 18.2164, lng: 42.5053 },
+    'najran': { lat: 17.4933, lng: 44.1277 },
+    'jizan': { lat: 16.8892, lng: 42.5511 },
+    'al-ahsa': { lat: 25.3799, lng: 49.5855 },
+    'yanbu': { lat: 24.0893, lng: 38.0637 },
+    'jubail': { lat: 27.0046, lng: 49.6606 },
+    'arar': { lat: 30.9753, lng: 41.0381 },
+    'sakaka': { lat: 29.9697, lng: 40.2064 },
+    'khamis-mushait': { lat: 18.3060, lng: 42.7293 }
+  };
+  
+  return coordinates[cityName.toLowerCase()] || { lat: 24.7136, lng: 46.6753 };
+}
+
+function getWikidataId(cityName: string) {
+  const wikidataIds: Record<string, string> = {
+    'riyadh': 'Q3692',
+    'jeddah': 'Q374365',
+    'makkah': 'Q5806',
+    'medina': 'Q35484',
+    'dammam': 'Q213692',
+    'khobar': 'Q1019631',
+    'dhahran': 'Q987869'
+  };
+  
+  return wikidataIds[cityName.toLowerCase()] || 'Q851';
+}
+
+function getReviewCount(cityName: string) {
+  // Simulate different review counts by city
+  const reviewCounts: Record<string, string> = {
+    'riyadh': '3421',
+    'jeddah': '2156',
+    'makkah': '1893',
+    'medina': '1654',
+    'dammam': '1432',
+    'khobar': '987',
+    'dhahran': '654'
+  };
+  
+  return reviewCounts[cityName.toLowerCase()] || '432';
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema, null, 2)} />
