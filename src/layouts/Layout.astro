@@ -77,7 +77,6 @@ const siteDescription = description || 'خدمات منزلية متكاملة �
     </style>
     
     <!-- Preload critical resources -->
-    <link rel="preload" href="/fonts/main.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/css/main.css" as="style" />
     <link rel="preload" href="/js/main.js" as="script" />
     
@@ -156,7 +155,7 @@ const siteDescription = description || 'خدمات منزلية متكاملة �
             if (entry.isIntersecting) {
               const component = entry.target;
               if (component.dataset.lazy) {
-                import(component.dataset.lazy).then(module => {
+                import(/* @vite-ignore */ component.dataset.lazy).then(module => {
                   component.innerHTML = module.default;
                   component.classList.add('loaded');
                 });
