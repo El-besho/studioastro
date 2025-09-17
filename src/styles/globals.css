@@ -1,4 +1,5 @@
 @import '/node_modules/@abdulrysr/saudi-riyal-new-symbol-font/style.css';
+@import './grid-optimizations.css';
 
 @tailwind base;
 @tailwind components;

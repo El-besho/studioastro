@@ -1,0 +1,245 @@
+---
+// Semantic Content Demo Page
+// Demonstrates the semantic content framework with entity optimization
+
+import Layout from '../layouts/Layout.astro';
+import SemanticContentRenderer from '../components/semantic/SemanticContentRenderer';
+import { semanticContentGenerator } from '../lib/semantic-content-generator';
+import { SemanticEntity } from '../lib/semantic-framework';
+---
+
+<Layout title="Semantic Content Demo - Advanced SEO Framework">
+  <main class="min-h-screen bg-gray-50">
+    <div class="container mx-auto px-4 py-8">
+      <div class="text-center mb-8">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">
+          Semantic Content Framework Demo
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Advanced content generation using topical authority, entity optimization, 
+          and semantic content networks for superior SEO performance.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <h3 class="text-xl font-semibold mb-4 text-blue-600">
+            Topical Authority
+          </h3>
+          <p class="text-gray-600 mb-4">
+            Content depth and coverage calculated using the formula:
+            <br />
+            <code class="bg-gray-100 px-2 py-1 rounded text-sm">
+              Topical Authority = Topical Coverage × Historical Data
+            </code>
+          </p>
+          <ul class="text-sm text-gray-600 space-y-2">
+            <li>• Entity coverage analysis</li>
+            <li>• Depth score calculation</li>
+            <li>• Historical performance metrics</li>
+            <li>• Contextual domain coverage</li>
+          </ul>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <h3 class="text-xl font-semibold mb-4 text-green-600">
+            Entity Optimization
+          </h3>
+          <p class="text-gray-600 mb-4">
+            Named Entity Recognition and semantic linking for enhanced
+            search engine understanding and user experience.
+          </p>
+          <ul class="text-sm text-gray-600 space-y-2">
+            <li>• N-gram and skip-gram generation</li>
+            <li>• Entity relationship mapping</li>
+            <li>• Search intent analysis</li>
+            <li>• Information gap identification</li>
+          </ul>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <h3 class="text-xl font-semibold mb-4 text-purple-600">
+            Semantic Writing
+          </h3>
+          <p class="text-gray-600 mb-4">
+            Fact-based content generation following semantic writing rules
+            for optimal NLP processing and user value.
+          </p>
+          <ul class="text-sm text-gray-600 space-y-2">
+            <li>• Short, precise sentences</li>
+            <li>• Verifiable facts only</li>
+            <li>• Source citations</li>
+            <li>• Contextual relevance</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+        <h2 class="text-2xl font-semibold mb-4">Framework Features</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="text-center">
+            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+              <span class="text-blue-600 font-bold">15</span>
+            </div>
+            <h4 class="font-medium">Max Links</h4>
+            <p class="text-sm text-gray-600">Per page limit</p>
+          </div>
+          <div class="text-center">
+            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
+              <span class="text-green-600 font-bold">3</span>
+            </div>
+            <h4 class="font-medium">Anchor Text</h4>
+            <p class="text-sm text-gray-600">Max variations</p>
+          </div>
+          <div class="text-center">
+            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
+              <span class="text-purple-600 font-bold">100%</span>
+            </div>
+            <h4 class="font-medium">Fact Based</h4>
+            <p class="text-sm text-gray-600">Content accuracy</p>
+          </div>
+          <div class="text-center">
+            <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-2">
+              <span class="text-orange-600 font-bold">SEO</span>
+            </div>
+            <h4 class="font-medium">Optimized</h4>
+            <p class="text-sm text-gray-600">For search engines</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-2xl font-semibold mb-4">Live Demo</h2>
+        <p class="text-gray-600 mb-6">
+          Generate semantic content for different service types and see the 
+          entity optimization, topical coverage, and search intent analysis in action.
+        </p>
+        
+        <div id="semantic-content-demo" class="space-y-6">
+          <!-- Demo content will be rendered here by React -->
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  // Demo data for semantic content generation
+  const demoEntities: SemanticEntity[] = [
+    {
+      id: 'ac-repair',
+      name: 'Air Conditioning Repair',
+      type: 'service',
+      attributes: {
+        category: 'HVAC',
+        availability: '24/7',
+        expertise: 'certified technicians',
+        responseTime: '1 hour',
+        warranty: '1 year'
+      },
+      relationships: [
+        {
+          target: 'riyadh',
+          relationship: 'availableIn',
+          strength: 0.9,
+          context: 'service coverage'
+        },
+        {
+          target: 'emergency-service',
+          relationship: 'includes',
+          strength: 0.8,
+          context: 'service types'
+        }
+      ],
+      contextQualifiers: ['professional', 'reliable', 'emergency', 'certified'],
+      ngrams: ['air conditioning', 'AC repair', 'HVAC service'],
+      skipGrams: ['air conditioning repair', 'AC maintenance service']
+    },
+    {
+      id: 'riyadh',
+      name: 'Riyadh',
+      type: 'location',
+      attributes: {
+        country: 'Saudi Arabia',
+        region: 'Central Region',
+        population: '7.6 million',
+        climate: 'desert',
+        economicCenter: true
+      },
+      relationships: [
+        {
+          target: 'ac-repair',
+          relationship: 'provides',
+          strength: 0.9,
+          context: 'service availability'
+        }
+      ],
+      contextQualifiers: ['urban', 'developed', 'commercial', 'metropolitan'],
+      ngrams: ['Riyadh', 'Saudi Arabia', 'Central Region'],
+      skipGrams: ['Riyadh services', 'Saudi Arabia capital']
+    },
+    {
+      id: 'emergency-service',
+      name: 'Emergency Service',
+      type: 'service',
+      attributes: {
+        category: 'emergency',
+        availability: '24/7',
+        responseTime: '30 minutes',
+        priority: 'high',
+        coverage: 'nationwide'
+      },
+      relationships: [
+        {
+          target: 'ac-repair',
+          relationship: 'partOf',
+          strength: 0.8,
+          context: 'service hierarchy'
+        }
+      ],
+      contextQualifiers: ['urgent', 'immediate', 'critical', 'priority'],
+      ngrams: ['emergency service', '24/7', 'urgent repair'],
+      skipGrams: ['emergency AC repair', 'urgent service call']
+    }
+  ];
+
+  // Generate semantic content
+  const semanticContent = semanticContentGenerator.generateServiceContent(
+    'air-conditioning-repair',
+    'Air Conditioning Repair',
+    'Riyadh'
+  );
+
+  // Render the demo
+  const demoContainer = document.getElementById('semantic-content-demo');
+  if (demoContainer) {
+    // This would be rendered by React in a real implementation
+    demoContainer.innerHTML = `
+      <div class="bg-gray-100 rounded-lg p-6">
+        <h3 class="text-lg font-semibold mb-4">Generated Semantic Content</h3>
+        <div class="space-y-4">
+          <div>
+            <h4 class="font-medium">Title:</h4>
+            <p class="text-gray-700">${semanticContent.title}</p>
+          </div>
+          <div>
+            <h4 class="font-medium">Entities Found:</h4>
+            <p class="text-gray-700">${semanticContent.entities.length} entities identified</p>
+          </div>
+          <div>
+            <h4 class="font-medium">N-grams Generated:</h4>
+            <p class="text-gray-700">${semanticContent.ngrams.length} n-grams and skip-grams</p>
+          </div>
+          <div>
+            <h4 class="font-medium">Search Intents:</h4>
+            <p class="text-gray-700">${semanticContent.searchIntents.length} search intents identified</p>
+          </div>
+          <div>
+            <h4 class="font-medium">Information Gaps:</h4>
+            <p class="text-gray-700">${semanticContent.informationGaps.length} gaps identified for content improvement</p>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+</script>

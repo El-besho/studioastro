@@ -1,163 +1,177 @@
 ---
-import type { Props } from 'astro';
-import { cn } from '../lib/utils';
-import { siteConfig } from '../config/site';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { Breadcrumb } from '../components/semantic/breadcrumb';
-import { Toaster } from '../components/ui/toaster';
-import { SEO } from 'astro-seo';
-import { SkipLink } from '../components/ui/skip-link';
-import { WhatsAppChat } from '../components/WhatsAppChat';
-import { defaultWhatsAppConfig } from '../config/whatsapp';
-import { PerformanceMonitor } from '../components/PerformanceMonitor';
-import '../styles/globals.css';
+import WhatsAppChat from '../components/WhatsAppChat.tsx';
+import AutopilotDashboard from '../components/autopilot/AutopilotDashboard.tsx';
 
 export interface Props {
-  title?: string;
+  title: string;
   description?: string;
-  ogImage?: string;
-  canonical?: string;
+  image?: string;
   noindex?: boolean;
-  nofollow?: boolean;
-  keywords?: string[];
-  author?: string;
-  publishedTime?: string;
-  modifiedTime?: string;
 }
 
-const {
-  title = `${siteConfig.name} | احصل على أفضل الخدمات المنزلية`,
-  description = siteConfig.description,
-  ogImage = siteConfig.ogImage,
-  canonical = Astro.url.href,
-  noindex = false,
-  nofollow = false,
-  keywords = siteConfig.keywords,
-  author = siteConfig.name,
-  publishedTime,
-  modifiedTime
-} = Astro.props;
-
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: siteConfig.name,
-  url: siteConfig.url,
-  alternateName: 'Enqaz',
-};
-
-const orgJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: siteConfig.name,
-  url: siteConfig.url,
-  logo: `${siteConfig.url}/logo.png`,
-};
+const { title, description, image, noindex } = Astro.props;
+const siteTitle = title ? `${title} | خدمتك` : 'خدمتك - خدمات منزلية متكاملة';
+const siteDescription = description || 'خدمات منزلية متكاملة في المملكة العربية السعودية. صيانة، تنظيف، إصلاح، وتركيب بجودة عالية وأسعار مناسبة.';
 ---
 
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
   <head>
-    <SEO
-      title={title}
-      description={description}
-      canonical={canonical}
-      noindex={noindex}
-      nofollow={nofollow}
-      charset="UTF-8"
-      openGraph={{
-        basic: {
-          title: title,
-          type: "website",
-          image: ogImage,
-          url: canonical
-        },
-        optional: {
-          description: description,
-          locale: "ar_SA",
-          siteName: siteConfig.name
-        }
-      }}
-      twitter={{
-        card: "summary_large_image",
-        site: "@enqaz",
-        creator: "@enqaz",
-        title: title,
-        description: description,
-        image: ogImage
-      }}
-      extend={{
-        link: [
-          { rel: "icon", href: "/favicon.ico" },
-          { rel: "preconnect", href: "https://fonts.googleapis.com" },
-          { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: true },
-          { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Cairo:wght@700;800&family=Noto+Sans+Arabic:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" }
-        ],
-        meta: [
-          { name: "viewport", content: "width=device-width, initial-scale=1.0" },
-          { name: "generator", content: Astro.generator },
-          { name: "keywords", content: Array.isArray(keywords) ? keywords.join(', ') : keywords },
-          { name: "author", content: author },
-          { name: "theme-color", content: "white", media: "(prefers-color-scheme: light)" },
-          { name: "theme-color", content: "black", media: "(prefers-color-scheme: dark)" },
-          { name: "googlebot", content: "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1" },
-          ...(publishedTime ? [{ name: "article:published_time", content: publishedTime }] : []),
-          ...(modifiedTime ? [{ name: "article:modified_time", content: modifiedTime }] : [])
-        ]
-      }}
-    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
     
-    <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
-    <script type="application/ld+json" set:html={JSON.stringify(orgJsonLd)}></script>
+    <!-- Primary Meta Tags -->
+    <title>{siteTitle}</title>
+    <meta name="title" content={siteTitle} />
+    <meta name="description" content={siteDescription} />
+    <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={siteTitle} />
+    <meta property="og:description" content={siteDescription} />
+    <meta property="og:image" content={image || `${Astro.site}/og-image.jpg`} />
+    <meta property="og:locale" content="ar_SA" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={siteTitle} />
+    <meta property="twitter:description" content={siteDescription} />
+    <meta property="twitter:image" content={image || `${Astro.site}/og-image.jpg`} />
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="author" content="خدمتك" />
+    <meta name="keywords" content="خدمات منزلية, صيانة, تنظيف, إصلاح, تركيب, السعودية, الرياض, جدة, الدمام" />
+    <meta name="language" content="Arabic" />
+    <meta name="revisit-after" content="7 days" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={Astro.url} />
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Critical CSS -->
+    <style>
+      /* Critical CSS for above-fold content */
+      body { margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+      .header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
+      .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+      .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+      .btn { display: inline-block; padding: 0.75rem 1.5rem; background: #007bff; color: white; text-decoration: none; border-radius: 0.25rem; }
+      .btn:hover { background: #0056b3; }
+      .loading { opacity: 0; transition: opacity 0.3s ease; }
+      .loaded { opacity: 1; }
+      .entity-link { color: #007bff; text-decoration: underline; }
+      .entity-link:hover { color: #0056b3; }
+      .comprehensive-content, .entity-rich-content, .contextual-coverage { margin: 2rem 0; padding: 1rem; border: 1px solid #e0e0e0; border-radius: 0.5rem; }
+      .content-sections, .entity-grid, .context-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem; }
+      .section, .entity-card, .context-item { padding: 1rem; background: #f8f9fa; border-radius: 0.25rem; }
+    </style>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/fonts/main.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/css/main.css" as="style" />
+    <link rel="preload" href="/js/main.js" as="script" />
+    
+    <!-- Non-critical CSS -->
+    <link rel="stylesheet" href="/css/main.css" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="/css/main.css" /></noscript>
   </head>
-  <body class={cn(
-    'min-h-screen bg-background font-body antialiased',
-    'font-[--font-cairo] font-[--font-noto-sans-arabic] font-[--font-code]'
-  )}>
-    <SkipLink href="#main-content">تخطي إلى المحتوى الرئيسي</SkipLink>
+  <body>
     <Header />
-    <Breadcrumb />
-    <main><slot /></main>
+    
+    <main>
+      <slot />
+    </main>
+    
     <Footer />
-    <Toaster />
     
-    <!-- WhatsApp Chat Widget -->
-    <WhatsAppChat 
-      phoneNumber={defaultWhatsAppConfig.defaultPhone}
-      defaultMessage={defaultWhatsAppConfig.defaultMessage}
-      agents={defaultWhatsAppConfig.agents}
-      showForm={defaultWhatsAppConfig.settings.showForm}
-      showAvailability={defaultWhatsAppConfig.settings.showAvailability}
-      gdprCompliant={defaultWhatsAppConfig.settings.gdprCompliant}
-      deviceSpecific={defaultWhatsAppConfig.settings.deviceSpecific}
-      animation={defaultWhatsAppConfig.settings.animation}
-      position={defaultWhatsAppConfig.settings.position}
-      client:load
-    />
+    <!-- WhatsApp Chat -->
+    <WhatsAppChat client:load />
     
-    <!-- Performance Monitor (Development Only) -->
-    {import.meta.env.DEV && <PerformanceMonitor client:load />}
+    <!-- Autopilot Optimizer Script -->
+    <script>
+      // Initialize autopilot optimizer
+      import('/src/lib/autopilot-optimizer.ts').then(module => {
+        window.autopilotOptimizer = module.autopilotOptimizer;
+        console.log('🚀 Autopilot Optimizer initialized');
+      }).catch(error => {
+        console.error('Failed to initialize autopilot optimizer:', error);
+      });
+    </script>
+    
+    <!-- Performance Monitoring Script -->
+    <script>
+      // Performance monitoring
+      window.addEventListener('load', function() {
+        const loadTime = performance.now();
+        console.log(`Page loaded in ${loadTime.toFixed(2)}ms`);
+        
+        // Measure Core Web Vitals
+        const navigation = performance.getEntriesByType('navigation')[0];
+        const paint = performance.getEntriesByType('paint');
+        
+        const firstContentfulPaint = paint.find(entry => entry.name === 'first-contentful-paint')?.startTime || 0;
+        console.log(`First Contentful Paint: ${firstContentfulPaint.toFixed(2)}ms`);
+        
+        // Log performance metrics
+        console.log('Performance Metrics:', {
+          loadTime: loadTime.toFixed(2) + 'ms',
+          firstContentfulPaint: firstContentfulPaint.toFixed(2) + 'ms',
+          domContentLoaded: navigation.domContentLoadedEventEnd - navigation.navigationStart + 'ms',
+          totalResources: performance.getEntriesByType('resource').length
+        });
+      });
+    </script>
+    
+    <!-- Lazy loading script -->
+    <script>
+      // Lazy loading implementation
+      document.addEventListener('DOMContentLoaded', function() {
+        const lazyImages = document.querySelectorAll('img[data-src]');
+        const lazyComponents = document.querySelectorAll('[data-lazy]');
+        
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              img.src = img.dataset.src;
+              img.classList.remove('lazy');
+              img.classList.add('loaded');
+              observer.unobserve(img);
+            }
+          });
+        });
+        
+        const componentObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const component = entry.target;
+              if (component.dataset.lazy) {
+                import(component.dataset.lazy).then(module => {
+                  component.innerHTML = module.default;
+                  component.classList.add('loaded');
+                });
+              }
+              observer.unobserve(component);
+            }
+          });
+        });
+        
+        lazyImages.forEach(img => imageObserver.observe(img));
+        lazyComponents.forEach(component => componentObserver.observe(component));
+      });
+    </script>
+    
+    <!-- Non-critical JavaScript -->
+    <script src="/js/main.js" defer></script>
   </body>
 </html>
-
-<style is:global>
-  :root {
-    --font-cairo: 'Cairo', sans-serif;
-    --font-noto-sans-arabic: 'Noto Sans Arabic', sans-serif;
-    --font-code: 'JetBrains Mono', monospace;
-  }
-  
-  .font-headline {
-    font-family: var(--font-cairo);
-  }
-  
-  .font-body {
-    font-family: var(--font-noto-sans-arabic);
-  }
-  
-  .font-code {
-    font-family: var(--font-code);
-  }
-</style>

@@ -1,0 +1,214 @@
+---
+// Performance Dashboard Page
+// Comprehensive performance monitoring and optimization tools
+
+import Layout from '../layouts/Layout.astro';
+import PerformanceMonitor from '../components/performance/PerformanceMonitor';
+import ResourceOptimizer from '../components/performance/ResourceOptimizer';
+import CriticalRenderingOptimizer from '../components/performance/CriticalRenderingOptimizer';
+---
+
+<Layout title="Performance Dashboard - Advanced Optimization Tools">
+  <main class="min-h-screen bg-gray-50">
+    <div class="container mx-auto px-4 py-8">
+      <div class="text-center mb-8">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">
+          Performance Dashboard
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Advanced JavaScript and performance optimization tools for maximum speed and efficiency.
+          Monitor Core Web Vitals, optimize resource loading, and enhance critical rendering path.
+        </p>
+      </div>
+
+      <div class="grid-dashboard mb-8">
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <h3 class="text-xl font-semibold mb-4 text-blue-600">
+            JavaScript Management
+          </h3>
+          <p class="text-gray-600 mb-4">
+            Strategic use of defer/async attributes, tree-shaking, and code optimization
+            to prevent DOM blocking and improve performance.
+          </p>
+          <ul class="text-sm text-gray-600 space-y-2">
+            <li>• Defer/async attribute optimization</li>
+            <li>• Tree-shaking for dead code removal</li>
+            <li>• Arrow functions and ternary operators</li>
+            <li>• Variable and function elimination</li>
+          </ul>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <h3 class="text-xl font-semibold mb-4 text-green-600">
+            Resource Loading Strategy
+          </h3>
+          <p class="text-gray-600 mb-4">
+            Preload critical resources, preconnect to external domains, and implement
+            strategic prefetching for optimal loading performance.
+          </p>
+          <ul class="text-sm text-gray-600 space-y-2">
+            <li>• Preload critical above-fold resources</li>
+            <li>• Preconnect for external domains</li>
+            <li>• Strategic prefetch for user journeys</li>
+            <li>• Dynamic rendering for crawlers</li>
+          </ul>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <h3 class="text-xl font-semibold mb-4 text-purple-600">
+            Critical Rendering Path
+          </h3>
+          <p class="text-gray-600 mb-4">
+            Optimize above-fold content loading, minimize render-blocking resources,
+            and implement TCP Slow Start optimization.
+          </p>
+          <ul class="text-sm text-gray-600 space-y-2">
+            <li>• Prioritize above-fold content</li>
+            <li>• Optimize DOM size and structure</li>
+            <li>• Strategic CSS/JS placement</li>
+            <li>• TCP Slow Start optimization</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+        <h2 class="text-2xl font-semibold mb-4">Performance Optimization Features</h2>
+        <div class="grid-stats">
+          <div class="text-center">
+            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+              <span class="text-blue-600 font-bold">15</span>
+            </div>
+            <h4 class="font-medium">Max Links</h4>
+            <p class="text-sm text-gray-600">Per page limit</p>
+          </div>
+          <div class="text-center">
+            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
+              <span class="text-green-600 font-bold">1460</span>
+            </div>
+            <h4 class="font-medium">First Bytes</h4>
+            <p class="text-sm text-gray-600">TCP optimization</p>
+          </div>
+          <div class="text-center">
+            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
+              <span class="text-purple-600 font-bold">100%</span>
+            </div>
+            <h4 class="font-medium">Tree Shaking</h4>
+            <p class="text-sm text-gray-600">Dead code removal</p>
+          </div>
+          <div class="text-center">
+            <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-2">
+              <span class="text-orange-600 font-bold">LCP</span>
+            </div>
+            <h4 class="font-medium">Core Vitals</h4>
+            <p class="text-sm text-gray-600">Real-time monitoring</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-8">
+        <!-- Performance Monitor -->
+        <div>
+          <h2 class="text-2xl font-semibold mb-4">Real-Time Performance Monitor</h2>
+          <div id="performance-monitor">
+            <!-- Performance Monitor will be rendered here by React -->
+          </div>
+        </div>
+
+        <!-- Resource Optimizer -->
+        <div>
+          <h2 class="text-2xl font-semibold mb-4">Resource Loading Optimizer</h2>
+          <div id="resource-optimizer">
+            <!-- Resource Optimizer will be rendered here by React -->
+          </div>
+        </div>
+
+        <!-- Critical Rendering Path Optimizer -->
+        <div>
+          <h2 class="text-2xl font-semibold mb-4">Critical Rendering Path Optimizer</h2>
+          <div id="critical-rendering-optimizer">
+            <!-- Critical Rendering Optimizer will be rendered here by React -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Performance Tips -->
+      <div class="mt-8 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-6">
+        <h3 class="text-xl font-semibold mb-4 text-gray-900">Performance Optimization Tips</h3>
+        <div class="grid-content">
+          <div>
+            <h4 class="font-medium text-gray-900 mb-2">JavaScript Optimization</h4>
+            <ul class="text-sm text-gray-600 space-y-1">
+              <li>• Use <code class="bg-gray-200 px-1 rounded">defer</code> for non-critical scripts</li>
+              <li>• Use <code class="bg-gray-200 px-1 rounded">async</code> for independent scripts</li>
+              <li>• Implement tree-shaking to remove dead code</li>
+              <li>• Use arrow functions and ternary operators</li>
+              <li>• Minimize variable declarations</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-medium text-gray-900 mb-2">Resource Loading</h4>
+            <ul class="text-sm text-gray-600 space-y-1">
+              <li>• Preload critical above-fold resources</li>
+              <li>• Preconnect to external domains early</li>
+              <li>• Use prefetch for predicted user journeys</li>
+              <li>• Implement lazy loading for below-fold content</li>
+              <li>• Optimize image formats and sizes</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-medium text-gray-900 mb-2">Critical Rendering Path</h4>
+            <ul class="text-sm text-gray-600 space-y-1">
+              <li>• Inline critical CSS in the HTML head</li>
+              <li>• Defer non-critical CSS loading</li>
+              <li>• Minimize DOM size and complexity</li>
+              <li>• Optimize first 1460 bytes for TCP Slow Start</li>
+              <li>• Use efficient CSS selectors</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-medium text-gray-900 mb-2">Core Web Vitals</h4>
+            <ul class="text-sm text-gray-600 space-y-1">
+              <li>• Target FCP &lt; 1.8s</li>
+              <li>• Target LCP &lt; 2.5s</li>
+              <li>• Target FID &lt; 100ms</li>
+              <li>• Target CLS &lt; 0.1</li>
+              <li>• Monitor and optimize continuously</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  // Performance Dashboard Script
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize performance monitoring
+    console.log('Performance Dashboard initialized');
+    
+    // Add performance measurement
+    if (typeof window !== 'undefined') {
+      // Measure page load time
+      window.addEventListener('load', function() {
+        const loadTime = performance.now();
+        console.log(`Page loaded in ${loadTime.toFixed(2)}ms`);
+        
+        // Measure Core Web Vitals
+        const navigation = performance.getEntriesByType('navigation')[0];
+        const paint = performance.getEntriesByType('paint');
+        
+        const firstContentfulPaint = paint.find(entry => entry.name === 'first-contentful-paint')?.startTime || 0;
+        console.log(`First Contentful Paint: ${firstContentfulPaint.toFixed(2)}ms`);
+        
+        // Log performance metrics
+        console.log('Performance Metrics:', {
+          loadTime: loadTime.toFixed(2) + 'ms',
+          firstContentfulPaint: firstContentfulPaint.toFixed(2) + 'ms',
+          domContentLoaded: navigation.domContentLoadedEventEnd - navigation.navigationStart + 'ms',
+          totalResources: performance.getEntriesByType('resource').length
+        });
+      });
+    }
+  });
+</script>
