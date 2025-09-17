@@ -1,0 +1,236 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getAllServices } from '../../../lib/services';
+import FAQSchema from '../../../components/seo/FAQSchema.astro';
+import BreadcrumbSchema from '../../../components/seo/BreadcrumbSchema.astro';
+
+// Get specialized services
+const allServices = getAllServices();
+const specializedServices = allServices.filter(s => 
+  ['swimming-pool-services', 'landscaping-gardening', 'marble-tiling-services', 'painting-decor', 'security-services'].includes(s.id)
+);
+
+// SEO data
+const pageTitle = 'الخدمات المتخصصة | مسابح، حدائق، رخام - إنقاذ';
+const pageDescription = 'خدمات متخصصة احترافية: صيانة مسابح، تنسيق حدائق، تركيب رخام، دهانات وديكور، أنظمة أمنية. خبراء متخصصون بأعلى معايير الجودة';
+
+// Category-specific FAQs
+const categoryFAQs = [
+  {
+    question: 'ما هي الخدمات المتخصصة المتوفرة؟',
+    answer: 'نوفر خدمات متخصصة تشمل: صيانة وتنظيف المسابح، تنسيق وصيانة الحدائق، تركيب وتلميع الرخام والبلاط، أعمال الدهانات والديكور، وتركيب الأنظمة الأمنية المتقدمة.'
+  },
+  {
+    question: 'هل الفنيون المتخصصون مدربون على أحدث التقنيات؟',
+    answer: 'نعم، جميع الفنيين المتخصصين لدينا مدربون على أحدث التقنيات والمعدات في مجالاتهم. يخضعون لدورات تدريبية دورية ويحملون شهادات معتمدة في تخصصاتهم.'
+  },
+  {
+    question: 'كم تكلف الخدمات المتخصصة؟',
+    answer: 'تختلف أسعار الخدمات المتخصصة حسب نوع الخدمة وحجم العمل. مثلاً: صيانة المسابح تبدأ من 200 ريال، تنسيق الحدائق من 300 ريال، تركيب الرخام من 150 ريال للمتر. نوفر معاينة مجانية وعروض أسعار مفصلة.'
+  },
+  {
+    question: 'هل تتطلب الخدمات المتخصصة معدات خاصة؟',
+    answer: 'نعم، معظم الخدمات المتخصصة تتطلب معدات وأدوات احترافية. فنيونا مجهزون بأحدث المعدات المتخصصة لضمان أفضل النتائج وأعلى معايير السلامة.'
+  },
+  {
+    question: 'ما مدة الضمان على الخدمات المتخصصة؟',
+    answer: 'نوفر ضمانات ممتدة على الخدمات المتخصصة: 6 أشهر لأعمال المسابح، 3 أشهر للحدائق، سنة كاملة لتركيب الرخام، 6 أشهر للدهانات، وسنتين للأنظمة الأمنية.'
+  }
+];
+
+// Breadcrumb data
+const breadcrumbItems = [
+  { name: 'الرئيسية', path: '/' },
+  { name: 'الخدمات', path: '/services' },
+  { name: 'الخدمات المتخصصة', path: '/services/category/specialized' }
+];
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <!-- Schema Markup -->
+  <FAQSchema faqs={categoryFAQs} />
+  <BreadcrumbSchema items={breadcrumbItems} />
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-b from-purple-50 to-white py-16 px-4">
+    <div class="container mx-auto text-center">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+        الخدمات المتخصصة الاحترافية
+      </h1>
+      
+      <p class="text-xl text-gray-700 mb-8 max-w-3xl mx-auto">
+        ارتقِ بمنزلك مع خدماتنا المتخصصة. خبراء محترفون في المسابح، الحدائق، الرخام، والمزيد
+      </p>
+
+      <!-- Service Icons -->
+      <div class="flex justify-center gap-8 mb-8">
+        <div class="text-center">
+          <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+            <span class="text-3xl">🏊</span>
+          </div>
+          <span class="text-sm">مسابح</span>
+        </div>
+        <div class="text-center">
+          <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
+            <span class="text-3xl">🌿</span>
+          </div>
+          <span class="text-sm">حدائق</span>
+        </div>
+        <div class="text-center">
+          <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-2">
+            <span class="text-3xl">🏛️</span>
+          </div>
+          <span class="text-sm">رخام</span>
+        </div>
+        <div class="text-center">
+          <div class="w-20 h-20 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-2">
+            <span class="text-3xl">🎨</span>
+          </div>
+          <span class="text-sm">دهانات</span>
+        </div>
+        <div class="text-center">
+          <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-2">
+            <span class="text-3xl">🔒</span>
+          </div>
+          <span class="text-sm">أمن</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Specialized Services Grid -->
+  <section class="py-16 px-4">
+    <div class="container mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {specializedServices.map((service) => (
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
+            <div class="h-48 bg-gradient-to-r from-purple-400 to-pink-400 flex items-center justify-center">
+              <span class="text-6xl">{service.icon}</span>
+            </div>
+            <div class="p-6">
+              <h3 class="text-2xl font-bold mb-2">
+                <a href={`/services/${service.id}`} class="hover:text-purple-600 transition">
+                  {service.name}
+                </a>
+              </h3>
+              
+              <p class="text-gray-600 mb-4">
+                {service.description}
+              </p>
+              
+              <div class="space-y-2 mb-4">
+                <div class="flex items-center text-sm text-gray-600">
+                  <svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  فنيون متخصصون معتمدون
+                </div>
+                <div class="flex items-center text-sm text-gray-600">
+                  <svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  معدات احترافية حديثة
+                </div>
+                <div class="flex items-center text-sm text-gray-600">
+                  <svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                  </svg>
+                  ضمان ممتد على الخدمة
+                </div>
+              </div>
+              
+              <div class="flex justify-between items-center pt-4 border-t">
+                <a 
+                  href={`/services/${service.id}`} 
+                  class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition"
+                >
+                  احجز الآن
+                </a>
+                <span class="text-purple-600 font-semibold">
+                  {service.technicians} خبير
+                </span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Specialized Services -->
+  <section class="py-12 px-4 bg-purple-50">
+    <div class="container mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-12">لماذا تختار خدماتنا المتخصصة؟</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+        <div class="text-center">
+          <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+            <span class="text-3xl">👨‍🔧</span>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">خبراء متخصصون</h3>
+          <p class="text-gray-600">فنيون ذوو خبرة عالية ومدربون على أحدث التقنيات</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+            <span class="text-3xl">🛠️</span>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">معدات احترافية</h3>
+          <p class="text-gray-600">أحدث المعدات والأدوات المتخصصة لنتائج مثالية</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+            <span class="text-3xl">✨</span>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">نتائج مضمونة</h3>
+          <p class="text-gray-600">ضمان ممتد وخدمة ما بعد البيع المتميزة</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-16 px-4">
+    <div class="container mx-auto max-w-4xl">
+      <h2 class="text-3xl font-bold text-center mb-12">الأسئلة الشائعة</h2>
+      
+      <div class="space-y-4">
+        {categoryFAQs.map((faq) => (
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <details class="group">
+              <summary class="cursor-pointer p-6 flex justify-between items-center hover:bg-gray-50 transition">
+                <h3 class="text-lg font-semibold text-gray-900 pr-4">
+                  {faq.question}
+                </h3>
+                <svg class="w-6 h-6 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </summary>
+              <div class="px-6 pb-6">
+                <p class="text-gray-600 leading-relaxed">
+                  {faq.answer}
+                </p>
+              </div>
+            </details>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="bg-gradient-to-r from-purple-600 to-pink-600 text-white py-16 px-4">
+    <div class="container mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-4">
+        حوّل منزلك إلى تحفة فنية
+      </h2>
+      <p class="text-xl mb-8 opacity-90">
+        احجز خدمتك المتخصصة اليوم واحصل على استشارة مجانية
+      </p>
+      <a href="/search" class="bg-white text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition inline-block">
+        ابدأ الآن
+      </a>
+    </div>
+  </section>
+</Layout>

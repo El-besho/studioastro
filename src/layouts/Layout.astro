@@ -3,6 +3,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import WhatsAppChat from '../components/WhatsAppChat.tsx';
 import AutopilotDashboard from '../components/autopilot/AutopilotDashboard.tsx';
+import OrganizationSchema from '../components/seo/OrganizationSchema.astro';
 
 export interface Props {
   title: string;
@@ -54,36 +55,119 @@ const siteDescription = description || 'خدمات منزلية متكاملة �
     <!-- Canonical URL -->
     <link rel="canonical" href={Astro.url} />
     
-    <!-- Preconnect to external domains -->
+    <!-- Resource hints for better performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="https://fonts.gstatic.com/s/notosansarabic/v18/nwpxtLGrOAZMl5nJ_wfgRg3DrWFZWsnVBJ_sS6tlqHHFlhQ5l3sQWIHPqzCfyGyvu3CBFQLaig.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
     
     <!-- Critical CSS -->
     <style>
-      /* Critical CSS for above-fold content */
-      body { margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
-      .header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
-      .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+      /* Critical CSS for above-fold content - Optimized for CWV */
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      :root {
+        --primary: #007bff;
+        --primary-hover: #0056b3;
+        --bg-light: #f8f9fa;
+        --border: #e0e0e0;
+        --radius: 0.25rem;
+      }
+      html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+      body { 
+        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        line-height: 1.5;
+        color: #212529;
+        background: #fff;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+      /* Prevent CLS with fixed heights */
+      .header { 
+        position: fixed; 
+        top: 0; 
+        left: 0; 
+        right: 0; 
+        z-index: 1000;
+        height: 64px;
+        background: #fff;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      main { padding-top: 64px; min-height: calc(100vh - 64px); }
+      .hero { min-height: 50vh; display: flex; align-items: center; justify-content: center; }
       .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
-      .btn { display: inline-block; padding: 0.75rem 1.5rem; background: #007bff; color: white; text-decoration: none; border-radius: 0.25rem; }
-      .btn:hover { background: #0056b3; }
-      .loading { opacity: 0; transition: opacity 0.3s ease; }
-      .loaded { opacity: 1; }
-      .entity-link { color: #007bff; text-decoration: underline; }
-      .entity-link:hover { color: #0056b3; }
-      .comprehensive-content, .entity-rich-content, .contextual-coverage { margin: 2rem 0; padding: 1rem; border: 1px solid #e0e0e0; border-radius: 0.5rem; }
-      .content-sections, .entity-grid, .context-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem; }
-      .section, .entity-card, .context-item { padding: 1rem; background: #f8f9fa; border-radius: 0.25rem; }
+      /* Optimize button styles */
+      .btn { 
+        display: inline-block; 
+        padding: 0.75rem 1.5rem; 
+        background: var(--primary); 
+        color: white; 
+        text-decoration: none; 
+        border-radius: var(--radius);
+        font-weight: 500;
+        transition: background-color 0.2s ease;
+        will-change: background-color;
+      }
+      .btn:hover { background: var(--primary-hover); }
+      .btn:active { transform: translateY(1px); }
+      /* Image optimization */
+      img { max-width: 100%; height: auto; display: block; }
+      /* Font loading optimization */
+      .font-loaded body { font-family: 'Custom Font', system-ui, sans-serif; }
+      /* Loading states */
+      .loading { opacity: 0; }
+      .loaded { opacity: 1; transition: opacity 0.3s ease; }
+      /* Links */
+      a { color: var(--primary); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      /* Content blocks */
+      .content-block { 
+        margin: 2rem 0; 
+        padding: 1rem; 
+        border: 1px solid var(--border); 
+        border-radius: 0.5rem;
+      }
+      /* Grid layouts */
+      .grid { 
+        display: grid; 
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+        gap: 1rem; 
+        margin-top: 1rem;
+      }
+      .grid-item { 
+        padding: 1rem; 
+        background: var(--bg-light); 
+        border-radius: var(--radius);
+      }
+      /* Skeleton screens for CLS prevention */
+      .skeleton { 
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s infinite;
+      }
+      @keyframes loading {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+      /* Mobile optimizations */
+      @media (max-width: 768px) {
+        .container { padding: 0 0.75rem; }
+        .grid { grid-template-columns: 1fr; }
+      }
     </style>
     
     <!-- Preload critical resources -->
-    <link rel="preload" href="/fonts/main.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/css/main.css" as="style" />
     <link rel="preload" href="/js/main.js" as="script" />
     
     <!-- Non-critical CSS -->
     <link rel="stylesheet" href="/css/main.css" media="print" onload="this.media='all'" />
     <noscript><link rel="stylesheet" href="/css/main.css" /></noscript>
+    
+    <!-- Schema.org markup -->
+    <OrganizationSchema />
   </head>
   <body>
     <Header />
@@ -108,28 +192,30 @@ const siteDescription = description || 'خدمات منزلية متكاملة �
       });
     </script>
     
-    <!-- Performance Monitoring Script -->
-    <script>
-      // Performance monitoring
-      window.addEventListener('load', function() {
-        const loadTime = performance.now();
-        console.log(`Page loaded in ${loadTime.toFixed(2)}ms`);
-        
-        // Measure Core Web Vitals
-        const navigation = performance.getEntriesByType('navigation')[0];
-        const paint = performance.getEntriesByType('paint');
-        
-        const firstContentfulPaint = paint.find(entry => entry.name === 'first-contentful-paint')?.startTime || 0;
-        console.log(`First Contentful Paint: ${firstContentfulPaint.toFixed(2)}ms`);
-        
-        // Log performance metrics
-        console.log('Performance Metrics:', {
-          loadTime: loadTime.toFixed(2) + 'ms',
-          firstContentfulPaint: firstContentfulPaint.toFixed(2) + 'ms',
-          domContentLoaded: navigation.domContentLoadedEventEnd - navigation.navigationStart + 'ms',
-          totalResources: performance.getEntriesByType('resource').length
-        });
-      });
+    <!-- Web Vitals Monitoring -->
+    <script type="module">
+      // Import Web Vitals library
+      import {onLCP, onFID, onCLS, onFCP, onTTFB} from 'https://unpkg.com/web-vitals@3/dist/web-vitals.js?module';
+      
+      function sendToAnalytics({name, value, id}) {
+        // Send to Google Analytics if available
+        if (typeof gtag !== 'undefined') {
+          gtag('event', name, {
+            value: Math.round(name === 'CLS' ? value * 1000 : value),
+            metric_id: id,
+            metric_value: value,
+            metric_delta: value,
+          });
+        }
+        console.log(`${name}: ${value}`);
+      }
+      
+      // Measure all Web Vitals
+      onCLS(sendToAnalytics);
+      onFID(sendToAnalytics);
+      onLCP(sendToAnalytics);
+      onFCP(sendToAnalytics);
+      onTTFB(sendToAnalytics);
     </script>
     
     <!-- Lazy loading script -->
@@ -156,7 +242,7 @@ const siteDescription = description || 'خدمات منزلية متكاملة �
             if (entry.isIntersecting) {
               const component = entry.target;
               if (component.dataset.lazy) {
-                import(component.dataset.lazy).then(module => {
+                import(/* @vite-ignore */ component.dataset.lazy).then(module => {
                   component.innerHTML = module.default;
                   component.classList.add('loaded');
                 });

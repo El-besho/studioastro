@@ -1,4 +1,15 @@
 User-agent: *
 Allow: /
+Crawl-delay: 1
+
+# Disallow admin and API routes
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_astro/
+
+# Allow search engines to access everything else
+Allow: /services/
+Allow: /locations/
+Allow: /blog/
 
 Sitemap: https://enqaz.org/sitemap.xml

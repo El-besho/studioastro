@@ -1,0 +1,274 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getAllServices } from '../../../lib/services';
+import FAQSchema from '../../../components/seo/FAQSchema.astro';
+import BreadcrumbSchema from '../../../components/seo/BreadcrumbSchema.astro';
+import ServiceCard from '../../../components/service-card';
+import { seoConfig } from '../../../config/seo';
+
+// Get essential services
+const allServices = getAllServices();
+const essentialServices = allServices.filter(s => 
+  ['air-conditioning-hvac', 'plumbing-services', 'electrical-services', 'cleaning-services', 'home-maintenance-repair'].includes(s.id)
+);
+
+// SEO data
+const pageTitle = 'الخدمات الأساسية | تكييف، سباكة، كهرباء - إنقاذ';
+const pageDescription = 'جميع الخدمات المنزلية الأساسية في مكان واحد. تكييف، سباكة، كهرباء، تنظيف، وصيانة عامة. فنيون معتمدون، أسعار شفافة، خدمة 24/7';
+
+// Category-specific FAQs
+const categoryFAQs = [
+  {
+    question: 'ما هي الخدمات الأساسية التي توفرها منصة إنقاذ؟',
+    answer: 'نوفر جميع الخدمات المنزلية الأساسية: تكييف وتبريد، سباكة وصرف صحي، كهرباء وإنارة، تنظيف شامل، وصيانة عامة. جميع الخدمات متوفرة 24/7 مع فنيين معتمدين.'
+  },
+  {
+    question: 'كيف أختار بين مقدمي الخدمات المختلفين؟',
+    answer: 'يمكنك المقارنة بين مقدمي الخدمات بناءً على: التقييمات من العملاء السابقين، الأسعار والعروض، سرعة الاستجابة، الخبرة والشهادات، والضمان المقدم على الخدمة.'
+  },
+  {
+    question: 'هل جميع الفنيين معتمدون ومؤهلون؟',
+    answer: 'نعم، جميع الفنيين على منصة إنقاذ معتمدون ومؤهلون. نتحقق من الشهادات المهنية، الخبرة العملية، السجل الجنائي، والتأمينات قبل الموافقة على انضمامهم للمنصة.'
+  },
+  {
+    question: 'ما هي أسعار الخدمات الأساسية؟',
+    answer: 'تبدأ أسعار الخدمات الأساسية من: تكييف (80 ريال للكشف)، سباكة (60 ريال للإصلاحات البسيطة)، كهرباء (70 ريال للأعمال الأساسية)، تنظيف (150 ريال للشقق). الأسعار النهائية تعتمد على حجم العمل المطلوب.'
+  },
+  {
+    question: 'هل يوجد ضمان على الخدمات الأساسية؟',
+    answer: 'نعم، جميع الخدمات الأساسية مغطاة بضمان يتراوح من 30-90 يوماً حسب نوع الخدمة. الضمان يشمل جودة العمل والقطع المستبدلة. في حالة عدم الرضا، نوفر إعادة الخدمة مجاناً.'
+  }
+];
+
+// Breadcrumb data
+const breadcrumbItems = [
+  { name: 'الرئيسية', path: '/' },
+  { name: 'الخدمات', path: '/services' },
+  { name: 'الخدمات الأساسية', path: '/services/category/essential' }
+];
+
+// Benefits of essential services
+const benefits = [
+  {
+    icon: '🏆',
+    title: 'جودة مضمونة',
+    description: 'فنيون معتمدون مع ضمان على جميع الأعمال'
+  },
+  {
+    icon: '💰',
+    title: 'أسعار تنافسية',
+    description: 'أفضل الأسعار مع شفافية كاملة'
+  },
+  {
+    icon: '⚡',
+    title: 'خدمة سريعة',
+    description: 'استجابة فورية ووصول في الوقت المحدد'
+  },
+  {
+    icon: '🔧',
+    title: 'حلول شاملة',
+    description: 'جميع الخدمات المنزلية في مكان واحد'
+  }
+];
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <!-- Schema Markup -->
+  <FAQSchema faqs={categoryFAQs} />
+  <BreadcrumbSchema items={breadcrumbItems} />
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-b from-blue-50 to-white py-16 px-4">
+    <div class="container mx-auto text-center">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+        الخدمات المنزلية الأساسية
+      </h1>
+      
+      <p class="text-xl text-gray-700 mb-8 max-w-3xl mx-auto">
+        كل ما تحتاجه لمنزلك من خدمات أساسية في مكان واحد. 
+        فنيون محترفون، أسعار عادلة، وضمان على جميع الأعمال.
+      </p>
+
+      <!-- Quick Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-12">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="text-3xl font-bold text-blue-600">2500+</div>
+          <div class="text-gray-600">فني معتمد</div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="text-3xl font-bold text-green-600">100k+</div>
+          <div class="text-gray-600">خدمة منجزة</div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="text-3xl font-bold text-purple-600">4.8/5</div>
+          <div class="text-gray-600">تقييم العملاء</div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="text-3xl font-bold text-orange-600">24/7</div>
+          <div class="text-gray-600">خدمة متاحة</div>
+        </div>
+      </div>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/search" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+          ابحث عن خدمة
+        </a>
+        <a href="/emergency" class="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 transition">
+          خدمة طوارئ
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="py-12 px-4 bg-gray-50">
+    <div class="container mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-12">لماذا تختار خدماتنا الأساسية؟</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {benefits.map((benefit) => (
+          <div class="bg-white p-6 rounded-lg shadow-md text-center hover:shadow-lg transition">
+            <div class="text-4xl mb-4">{benefit.icon}</div>
+            <h3 class="text-xl font-semibold mb-2">{benefit.title}</h3>
+            <p class="text-gray-600">{benefit.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Essential Services Grid -->
+  <section class="py-16 px-4">
+    <div class="container mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-4">تصفح الخدمات الأساسية</h2>
+      <p class="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+        اختر من بين مجموعة واسعة من الخدمات المنزلية الأساسية
+      </p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {essentialServices.map((service) => (
+          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition">
+            <div class="p-6">
+              <div class="flex items-center gap-4 mb-4">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+                  <span class="text-2xl">{service.icon}</span>
+                </div>
+                <div>
+                  <h3 class="text-xl font-semibold">
+                    <a href={`/services/${service.id}`} class="hover:text-blue-600 transition">
+                      {service.name}
+                    </a>
+                  </h3>
+                  <div class="flex items-center gap-2 text-sm text-gray-600">
+                    <span>{service.technicians} فني</span>
+                    <span>•</span>
+                    <span>{service.subServices?.length || 0} خدمة فرعية</span>
+                  </div>
+                </div>
+              </div>
+              
+              <p class="text-gray-600 mb-4 line-clamp-2">
+                {service.description}
+              </p>
+              
+              <div class="flex flex-wrap gap-2 mb-4">
+                {service.popularServices?.slice(0, 3).map((subService) => (
+                  <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">
+                    {subService}
+                  </span>
+                ))}
+              </div>
+              
+              <div class="flex justify-between items-center">
+                <a 
+                  href={`/services/${service.id}`} 
+                  class="text-blue-600 hover:text-blue-700 font-semibold"
+                >
+                  عرض التفاصيل ←
+                </a>
+                <span class="text-gray-500 text-sm">
+                  24/7 متاح
+                </span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Searches Section -->
+  <section class="py-12 px-4 bg-blue-50">
+    <div class="container mx-auto">
+      <h2 class="text-2xl font-bold text-center mb-8">عمليات البحث الشائعة</h2>
+      
+      <div class="flex flex-wrap justify-center gap-3">
+        <a href="/services/air-conditioning-hvac/ac-installation" class="bg-white px-4 py-2 rounded-full hover:bg-blue-100 transition">
+          تركيب مكيف سبليت
+        </a>
+        <a href="/services/plumbing-services/water-leak-detection" class="bg-white px-4 py-2 rounded-full hover:bg-blue-100 transition">
+          كشف تسربات المياه
+        </a>
+        <a href="/services/electrical-services/electrical-wiring" class="bg-white px-4 py-2 rounded-full hover:bg-blue-100 transition">
+          تمديدات كهربائية
+        </a>
+        <a href="/services/cleaning-services/deep-cleaning" class="bg-white px-4 py-2 rounded-full hover:bg-blue-100 transition">
+          تنظيف عميق
+        </a>
+        <a href="/services/home-maintenance-repair" class="bg-white px-4 py-2 rounded-full hover:bg-blue-100 transition">
+          صيانة عامة
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-16 px-4">
+    <div class="container mx-auto max-w-4xl">
+      <h2 class="text-3xl font-bold text-center mb-12">الأسئلة الشائعة عن الخدمات الأساسية</h2>
+      
+      <div class="space-y-4">
+        {categoryFAQs.map((faq, index) => (
+          <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <details class="group">
+              <summary class="cursor-pointer p-6 flex justify-between items-center hover:bg-gray-50 transition">
+                <h3 class="text-lg font-semibold text-gray-900 pr-4">
+                  {faq.question}
+                </h3>
+                <svg class="w-6 h-6 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </summary>
+              <div class="px-6 pb-6">
+                <p class="text-gray-600 leading-relaxed">
+                  {faq.answer}
+                </p>
+              </div>
+            </details>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16 px-4">
+    <div class="container mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-4">
+        ابدأ الآن مع خدماتنا الأساسية
+      </h2>
+      <p class="text-xl mb-8 opacity-90">
+        أكثر من 100,000 عميل يثقون بنا لخدمات منازلهم
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/search" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+          ابحث عن خدمة
+        </a>
+        <a href="/join-provider" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition">
+          انضم كمقدم خدمة
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

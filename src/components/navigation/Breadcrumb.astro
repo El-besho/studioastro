@@ -1,0 +1,133 @@
+---
+// Enhanced Breadcrumb Navigation Component
+export interface Props {
+  items?: Array<{
+    name: string;
+    path: string;
+  }>;
+  className?: string;
+}
+
+const { items: propItems, className = '' } = Astro.props;
+
+// Auto-generate breadcrumbs from URL if not provided
+function generateBreadcrumbs() {
+  const pathname = Astro.url.pathname;
+  const segments = pathname.split('/').filter(Boolean);
+  const items = [{ name: 'الرئيسية', path: '/' }];
+  
+  if (segments.length === 0) return items;
+  
+  let currentPath = '';
+  
+  segments.forEach((segment, index) => {
+    currentPath += `/${segment}`;
+    
+    // Handle special segments
+    let name = segment;
+    
+    // Service category pages
+    if (segment === 'services' && index === 0) {
+      name = 'الخدمات';
+    } else if (segment === 'locations' && index === 0) {
+      name = 'المواقع';
+    } else if (segment === 'category' && segments[index - 1] === 'services') {
+      return; // Skip 'category' segment
+    } else if (segment === 'essential') {
+      name = 'الخدمات الأساسية';
+    } else if (segment === 'specialized') {
+      name = 'الخدمات المتخصصة';
+    } else if (segment === 'emergency') {
+      name = 'خدمات الطوارئ';
+    } else if (segment === 'blog') {
+      name = 'المدونة';
+    } else if (segment === 'about') {
+      name = 'من نحن';
+    } else if (segment === 'contact') {
+      name = 'تواصل معنا';
+    } else {
+      // Try to get proper names from services/cities data
+      // This would need to be imported and handled properly
+      name = segment.replace(/-/g, ' ');
+    }
+    
+    items.push({ name, path: currentPath });
+  });
+  
+  return items;
+}
+
+const items = propItems || generateBreadcrumbs();
+const lastIndex = items.length - 1;
+---
+
+<nav 
+  class={`flex items-center space-x-2 text-sm mb-6 ${className}`}
+  aria-label="Breadcrumb"
+>
+  <ol class="flex items-center space-x-2 flex-wrap">
+    {items.map((item, index) => (
+      <li class="flex items-center">
+        {index > 0 && (
+          <svg 
+            class="w-4 h-4 text-gray-400 mx-2 transform rotate-180" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+          >
+            <path 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              stroke-width="2" 
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+        )}
+        
+        {index === lastIndex ? (
+          <span 
+            class="text-gray-700 font-medium"
+            aria-current="page"
+          >
+            {item.name}
+          </span>
+        ) : (
+          <a 
+            href={item.path}
+            class="text-blue-600 hover:text-blue-800 hover:underline transition"
+          >
+            {index === 0 && (
+              <svg 
+                class="w-4 h-4 inline-block ml-1" 
+                fill="currentColor" 
+                viewBox="0 0 20 20"
+              >
+                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+              </svg>
+            )}
+            {item.name}
+          </a>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<style>
+  nav {
+    background-color: #f8f9fa;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #e9ecef;
+  }
+  
+  @media (max-width: 640px) {
+    nav {
+      padding: 0.5rem 0.75rem;
+    }
+    
+    ol {
+      font-size: 0.875rem;
+    }
+  }
+</style>

@@ -28,7 +28,9 @@ import ServicesLocationsMenu from './ServicesLocationsMenu.tsx';
           <a
             key={link.href}
             href={link.href}
-            class="font-headline font-medium text-foreground/70 transition-colors hover:text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-2 py-1"
+            class={`font-headline font-medium transition-colors hover:text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-2 py-1 ${
+              link.className || 'text-foreground/70'
+            }`}
             aria-label={link.label}
           >
             {link.label}

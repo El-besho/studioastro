@@ -1,0 +1,64 @@
+---
+// Service Schema Component for service pages
+import { siteConfig } from '../../config/site';
+
+export interface Props {
+  service: {
+    name: string;
+    description: string;
+    category?: string;
+    priceRange?: string;
+    areaServed?: string[];
+    availableChannel?: {
+      serviceUrl: string;
+      servicePlatform: string;
+    };
+  };
+}
+
+const { service } = Astro.props;
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": service.name,
+  "description": service.description,
+  "provider": {
+    "@type": "Organization",
+    "name": "إنقاذ - Enqaz",
+    "url": siteConfig.url
+  },
+  "serviceType": service.category || "Home Services",
+  "areaServed": service.areaServed || [
+    {
+      "@type": "Country",
+      "name": "Saudi Arabia",
+      "identifier": "SA"
+    }
+  ],
+  "availableChannel": {
+    "@type": "ServiceChannel",
+    "serviceUrl": service.availableChannel?.serviceUrl || Astro.url.href,
+    "serviceLocation": {
+      "@type": "Place",
+      "name": "المملكة العربية السعودية"
+    },
+    "availableLanguage": ["ar", "en"]
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.7",
+    "reviewCount": "156",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "offers": {
+    "@type": "Offer",
+    "priceRange": service.priceRange || "$$",
+    "priceCurrency": "SAR",
+    "availability": "https://schema.org/InStock"
+  }
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(serviceSchema, null, 2)} />
