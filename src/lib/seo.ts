@@ -14,7 +14,7 @@ export interface SEOProps {
   modifiedTime?: string;
 }
 
-export function getSEOProps(page: keyof typeof seoConfig.pages, overrides: Partial<SEOProps> = {}): SEOProps {
+export function getSEOProps(page: keyof typeof seoConfig.pages | string, overrides: Partial<SEOProps> = {}): SEOProps {
   const pageConfig = seoConfig.pages[page];
   const defaultConfig = seoConfig.default;
   

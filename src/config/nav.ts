@@ -1,7 +1,8 @@
 
-import { Building, Info, Rss, Newspaper, Users, MapPin, Search } from "lucide-react"
+import { Building, Info, Rss, Newspaper, Users, MapPin, Search, AlertTriangle } from "lucide-react"
 
 export const navLinks = [
+    { href: '/emergency', label: 'طوارئ 24/7', icon: AlertTriangle, className: 'text-red-600 font-bold' },
     { href: '/services', label: 'الخدمات', icon: Building },
     { href: '/locations', label: 'المواقع', icon: MapPin },
     { href: '/blog', label: 'المدونة', icon: Newspaper },

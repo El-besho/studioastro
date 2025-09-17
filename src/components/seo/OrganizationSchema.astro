@@ -1,0 +1,43 @@
+---
+// Organization Schema Component
+import { siteConfig } from '../../config/site';
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "إنقاذ - Enqaz",
+  "alternateName": "Enqaz Platform",
+  "url": siteConfig.url,
+  "logo": `${siteConfig.url}/logo.png`,
+  "description": "منصة إنقاذ - وجهتك الأولى للحصول على أفضل خدمات الصيانة المنزلية في المملكة العربية السعودية",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "SA",
+    "addressRegion": "المملكة العربية السعودية"
+  },
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+966-50-XXXX-XXX",
+      "contactType": "customer service",
+      "areaServed": "SA",
+      "availableLanguage": ["ar", "en"]
+    }
+  ],
+  "sameAs": [
+    "https://www.facebook.com/enqazsa",
+    "https://twitter.com/enqazsa",
+    "https://www.instagram.com/enqazsa",
+    "https://www.linkedin.com/company/enqazsa"
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "2543",
+    "bestRating": "5",
+    "worstRating": "1"
+  }
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(organizationSchema, null, 2)} />
