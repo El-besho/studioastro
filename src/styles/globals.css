@@ -399,6 +399,37 @@
       min-height: 44px;
       min-width: 44px;
     }
+    
+    /* Improved mobile spacing */
+    .container {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    
+    /* Better mobile typography */
+    h1 {
+      font-size: 2rem;
+      line-height: 2.5rem;
+    }
+    
+    h2 {
+      font-size: 1.75rem;
+      line-height: 2.25rem;
+    }
+    
+    /* Mobile-optimized buttons */
+    .btn-mobile {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      min-height: 48px;
+    }
+    
+    /* Better mobile navigation */
+    .mobile-nav-item {
+      padding: 1rem;
+      font-size: 1.125rem;
+      min-height: 56px;
+    }
   }
 
   /* Line clamp utilities for text truncation */
@@ -491,5 +522,192 @@
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
+  }
+
+  /* Mobile-specific improvements */
+  @media (max-width: 640px) {
+    /* Better mobile header */
+    .mobile-header {
+      height: 60px;
+      padding: 0 1rem;
+    }
+    
+    /* Improved mobile search */
+    .mobile-search {
+      margin: 1rem 0;
+      padding: 0.75rem;
+    }
+    
+    /* Better mobile cards */
+    .mobile-card {
+      margin: 0.5rem 0;
+      padding: 1rem;
+      border-radius: 0.75rem;
+    }
+    
+    /* Mobile-optimized forms */
+    .mobile-form input,
+    .mobile-form textarea,
+    .mobile-form select {
+      font-size: 16px; /* Prevents zoom on iOS */
+      padding: 0.875rem;
+      min-height: 48px;
+    }
+    
+    /* Better mobile buttons */
+    .mobile-btn {
+      min-height: 48px;
+      padding: 0.875rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 0.75rem;
+    }
+    
+    /* Improved mobile spacing */
+    .mobile-spacing {
+      padding: 1rem;
+      margin: 0.5rem 0;
+    }
+    
+    /* Better mobile text */
+    .mobile-text {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    
+    /* Mobile-optimized images */
+    .mobile-img {
+      width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+    }
+  }
+
+  /* Tablet optimizations */
+  @media (min-width: 641px) and (max-width: 1024px) {
+    .tablet-container {
+      padding: 0 2rem;
+    }
+    
+    .tablet-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+  }
+
+  /* Improved focus indicators for mobile */
+  @media (max-width: 768px) {
+    .focus-ring-enhanced:focus {
+      transform: none; /* Disable scale on mobile */
+      outline: 3px solid hsl(var(--primary));
+      outline-offset: 2px;
+    }
+  }
+
+  /* Better mobile scrolling */
+  @media (max-width: 768px) {
+    .mobile-scroll {
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+    }
+    
+    /* Prevent horizontal scroll on mobile */
+    body {
+      overflow-x: hidden;
+    }
+  }
+
+  /* Performance optimizations */
+  .will-change-transform {
+    will-change: transform;
+  }
+
+  .will-change-opacity {
+    will-change: opacity;
+  }
+
+  .will-change-scroll {
+    will-change: scroll-position;
+  }
+
+  /* GPU acceleration for animations */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  /* Optimized animations */
+  .animate-optimized {
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Lazy loading placeholder */
+  .lazy-placeholder {
+    background: linear-gradient(90deg, hsl(var(--muted)) 25%, hsl(var(--muted-foreground) / 0.1) 50%, hsl(var(--muted)) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  /* Optimized images */
+  .optimized-img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+
+  /* Better font loading */
+  .font-optimized {
+    font-display: swap;
+    font-feature-settings: "kern" 1;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Reduced layout shifts */
+  .stable-layout {
+    contain: layout style paint;
+  }
+
+  /* Optimized scrolling */
+  .smooth-scroll {
+    scroll-behavior: smooth;
+    scroll-padding-top: 2rem;
+  }
+
+  /* Performance monitoring */
+  .perf-monitor {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.5rem;
+    font-size: 0.75rem;
+    z-index: 9999;
+    display: none;
+  }
+
+  /* Critical resource hints */
+  .preload-hint {
+    display: none;
+  }
+
+  /* Optimized transitions */
+  .transition-optimized {
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Better focus management */
+  .focus-trap {
+    contain: layout style;
+  }
+
+  /* Optimized shadows */
+  .shadow-optimized {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  }
+
+  .shadow-optimized-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   }
 }

@@ -9,9 +9,9 @@ export interface InputProps extends React.ComponentProps<"input"> {
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, variant = "default", ...props }, ref) => {
     const variantClasses = {
-      default: "border-input bg-background",
-      enhanced: "input-enhanced",
-      glass: "glass-effect border-white/20 bg-white/10 backdrop-blur-sm"
+      default: "border-input bg-background hover:border-primary/50 focus:border-primary focus:ring-2 focus:ring-primary/20",
+      enhanced: "input-enhanced hover:border-primary/50 focus:border-primary focus:ring-2 focus:ring-primary/20",
+      glass: "glass-effect border-white/20 bg-white/10 backdrop-blur-sm hover:border-white/30 focus:border-white/40 focus:ring-2 focus:ring-white/20"
     }
 
     return (

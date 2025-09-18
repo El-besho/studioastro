@@ -91,14 +91,21 @@ export default function HeaderClient() {
           <Button 
             variant="outline" 
             size="icon"
-            className="hover:bg-primary/10 hover:border-primary/20 transition-colors"
+            className="hover:bg-primary/10 hover:border-primary/20 transition-colors touch-target md:hidden"
             aria-label="فتح قائمة التنقل"
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-navigation"
           >
             <Menu className="h-6 w-6" />
             <span className="sr-only">فتح قائمة التنقل</span>
           </Button>
         </SheetTrigger>
-        <SheetContent side="right" className="p-0 flex flex-col w-full sm:w-80 glass-effect">
+        <SheetContent 
+          side="right" 
+          className="p-0 flex flex-col w-full sm:w-80 glass-effect"
+          id="mobile-navigation"
+          aria-label="قائمة التنقل المحمولة"
+        >
           <SheetHeader className="border-b p-4 bg-gradient-to-r from-primary/5 to-primary/10">
             <div className="flex items-center gap-2">
               <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center pulse-glow">
@@ -107,7 +114,7 @@ export default function HeaderClient() {
               <span className="font-headline text-lg font-bold">إنقاذ</span>
             </div>
           </SheetHeader>
-          <div className="p-4 flex-grow">
+          <div className="p-4 flex-grow overflow-y-auto">
             <nav className="flex flex-col gap-2" role="navigation" aria-label="قائمة التنقل المحمولة">
               {navLinks.map((link) => (
                 <a 
