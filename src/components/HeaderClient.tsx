@@ -14,6 +14,7 @@ import { getAllCities, getCityBySlug, getServiceBySlug } from '../lib/services';
 import { CommandDialog } from './command-dialog';
 import { Sheet, SheetContent, SheetHeader, SheetTrigger, SheetFooter } from './ui/sheet';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu';
+import { ThemeToggle } from './ui/theme-toggle';
 
 export default function HeaderClient() {
   const cities = getAllCities();
@@ -183,6 +184,9 @@ export default function HeaderClient() {
           ))}
         </DropdownMenuContent>
       </DropdownMenu>
+
+      {/* Theme Toggle */}
+      <ThemeToggle />
 
       {/* Search Button */}
       {isMounted && (

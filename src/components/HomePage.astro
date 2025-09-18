@@ -102,11 +102,11 @@ const popularQueries = [
     
     <div class="container px-4 md:px-6 relative z-10">
       <div class="flex flex-col items-center space-y-6 text-center">
-        <div class="space-y-4 animate-fade-in-up">
-          <h1 class="font-headline text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl/none bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+        <div class="space-y-6 animate-fade-in-up">
+          <h1 class="text-hero bg-gradient-to-r from-foreground via-primary to-accent bg-clip-text text-transparent">
             أفضل الخدمات لمنزلك وعملك في السعودية
           </h1>
-          <p class="mx-auto max-w-[700px] text-foreground/80 md:text-xl leading-relaxed">
+          <p class="text-lead mx-auto max-w-[700px]">
             من التكييف والسباكة إلى الصيانة العامة، احصل على عروض أسعار
             مجانية من أفضل المحترفين المعتمدين.
           </p>
@@ -116,14 +116,14 @@ const popularQueries = [
             <SearchForm client:load />
             <div class="absolute -inset-1 bg-gradient-to-r from-primary/20 to-accent/20 rounded-xl blur opacity-30 group-hover:opacity-50 transition duration-1000 group-hover:duration-200" aria-hidden="true"></div>
           </div>
-          <div class="mt-6 flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a href="/emergency" class="flex items-center gap-2 bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition animate-pulse touch-target focus-ring-enhanced" aria-label="خدمات الطوارئ المتاحة على مدار الساعة">
-              <span aria-hidden="true">🚨</span>
+          <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a href="/emergency" class="flex items-center gap-3 bg-gradient-to-r from-red-600 to-red-700 text-white px-8 py-4 rounded-xl font-semibold hover:from-red-700 hover:to-red-800 transition-all duration-300 animate-pulse touch-target focus-ring-enhanced shadow-lg hover:shadow-xl" aria-label="خدمات الطوارئ المتاحة على مدار الساعة">
+              <span class="text-xl" aria-hidden="true">🚨</span>
               خدمات طوارئ 24/7
             </a>
-            <a href="/services/category/essential" class="flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium touch-target focus-ring-enhanced" aria-label="عرض الخدمات الأساسية">
+            <a href="/services/category/essential" class="flex items-center gap-3 text-primary hover:text-accent font-semibold touch-target focus-ring-enhanced transition-colors duration-200" aria-label="عرض الخدمات الأساسية">
               الخدمات الأساسية
-              <ArrowRight class="w-4 h-4" aria-hidden="true" />
+              <ArrowRight class="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
             </a>
           </div>
         </div>
@@ -134,15 +134,15 @@ const popularQueries = [
   <!-- Services Section -->
   <section id="services" class="w-full py-12 md:py-24 bg-muted/50" aria-labelledby="services-heading">
     <div class="container px-4 md:px-6">
-      <div class="flex flex-col items-center justify-center space-y-4 text-center">
-        <div class="space-y-2 animate-fade-in-up">
-          <Badge class="font-headline bg-primary/10 text-primary hover:bg-primary/20">
+      <div class="flex flex-col items-center justify-center space-y-6 text-center">
+        <div class="space-y-4 animate-fade-in-up">
+          <Badge class="font-headline bg-gradient-to-r from-primary/10 to-accent/10 text-primary hover:from-primary/20 hover:to-accent/20 border border-primary/20 px-4 py-2 text-sm font-semibold">
             خدماتنا المتاحة
           </Badge>
-          <h2 id="services-heading" class="font-headline text-3xl font-bold tracking-tighter sm:text-5xl">
+          <h2 id="services-heading" class="text-4xl md:text-5xl lg:text-6xl font-headline font-bold tracking-tight">
             خدماتنا الأساسية
           </h2>
-          <p class="max-w-[900px] text-foreground/80 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+          <p class="text-lead max-w-[900px]">
             اكتشف مجموعة واسعة من الخدمات المنزلية التي يقدمها أفضل
             المحترفين في المملكة.
           </p>
@@ -152,7 +152,7 @@ const popularQueries = [
         <ServiceGrid services={services} />
       </div>
        <div class="text-center animate-fade-in-up animation-delay-400">
-        <Button variant="outline" asChild class="btn-hover-lift touch-target">
+        <Button variant="premium" size="lg" asChild class="touch-target">
           <a href="/services" aria-label={`عرض جميع الخدمات المتاحة (${allServicesCount}+ خدمة)`}>
             عرض جميع الخدمات ({allServicesCount}+)
           </a>
@@ -164,15 +164,15 @@ const popularQueries = [
   <!-- How It Works Section -->
   <section id="how-it-works" class="w-full py-12 md:py-24" aria-labelledby="how-it-works-heading">
     <div class="container px-4 md:px-6">
-      <div class="flex flex-col items-center justify-center space-y-4 text-center">
-        <div class="space-y-3 animate-fade-in-up">
-          <Badge class="font-headline bg-primary/10 text-primary hover:bg-primary/20">
+      <div class="flex flex-col items-center justify-center space-y-6 text-center">
+        <div class="space-y-4 animate-fade-in-up">
+          <Badge class="font-headline bg-gradient-to-r from-accent/10 to-primary/10 text-accent hover:from-accent/20 hover:to-primary/20 border border-accent/20 px-4 py-2 text-sm font-semibold">
             كيف نعمل
           </Badge>
-          <h2 id="how-it-works-heading" class="font-headline text-3xl font-bold tracking-tighter md:text-4xl/tight">
+          <h2 id="how-it-works-heading" class="text-3xl md:text-4xl lg:text-5xl font-headline font-bold tracking-tight">
             احصل على الخدمة في 3 خطوات بسيطة
           </h2>
-          <p class="mx-auto max-w-[600px] text-foreground/80 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+          <p class="text-lead mx-auto max-w-[600px]">
             طلب الخدمة أصبح أسهل وأسرع من أي وقت مضى.
           </p>
         </div>
@@ -181,13 +181,13 @@ const popularQueries = [
             <ol class="timeline" role="list" aria-label="خطوات طلب الخدمة">
                 {howItWorksSteps.map((step, index) => (
                      <li key={index} data-step={index + 1} class="animate-fade-in-up" style={`animation-delay: ${index * 0.2}s; opacity: 0;`} role="listitem">
-                        <div class='flex items-center gap-4 mb-2'>
-                            <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-muted text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300" aria-hidden="true">
-                                <step.icon class="w-6 h-6" />
+                        <div class='flex items-center gap-6 mb-4'>
+                            <div class="flex items-center justify-center h-16 w-16 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 text-primary group-hover:from-primary group-hover:to-accent group-hover:text-primary-foreground transition-all duration-300 shadow-lg group-hover:shadow-xl" aria-hidden="true">
+                                <step.icon class="w-8 h-8" />
                             </div>
-                            <h3 class="font-bold text-lg font-headline m-0">{step.title}</h3>
+                            <h3 class="font-bold text-xl font-headline m-0 text-foreground">{step.title}</h3>
                         </div>
-                        <p class="text-muted-foreground">{step.description}</p>
+                        <p class="text-body text-muted-foreground ml-20">{step.description}</p>
                     </li>
                 ))}
             </ol>
@@ -198,29 +198,29 @@ const popularQueries = [
   <!-- Stats Section -->
   <section id="stats" class="w-full py-12 md:py-24 bg-muted/50" aria-labelledby="stats-heading">
     <div class="container px-4 md:px-6">
-       <div class="flex flex-col items-center justify-center space-y-4 text-center">
-        <div class="space-y-3">
-          <Badge class="font-headline bg-primary/10 text-primary hover:bg-primary/20">
+       <div class="flex flex-col items-center justify-center space-y-6 text-center">
+        <div class="space-y-4">
+          <Badge class="font-headline bg-gradient-to-r from-success/10 to-primary/10 text-success hover:from-success/20 hover:to-primary/20 border border-success/20 px-4 py-2 text-sm font-semibold">
             لماذا تختارنا؟
           </Badge>
-          <h2 id="stats-heading" class="font-headline text-3xl font-bold tracking-tighter md:text-4xl/tight">
+          <h2 id="stats-heading" class="text-3xl md:text-4xl lg:text-5xl font-headline font-bold tracking-tight">
             أرقامنا تتحدث عنا
           </h2>
-          <p class="mx-auto max-w-[600px] text-foreground/80 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+          <p class="text-lead mx-auto max-w-[600px]">
             نحن نفخر ببناء شبكة واسعة من الثقة والاحترافية في جميع أنحاء المملكة.
           </p>
         </div>
       </div>
       <div class="mx-auto grid-features max-w-5xl items-start py-12" role="list" aria-label="إحصائيات المنصة">
         {stats.map((stat, index) => (
-            <div key={index} class="grid gap-2 text-center" role="listitem">
+            <div key={index} class="grid gap-4 text-center p-6 rounded-2xl bg-card/50 hover:bg-card/80 transition-all duration-300 hover:shadow-lg" role="listitem">
             <div class="flex justify-center">
-              <div class="flex items-center justify-center rounded-full bg-primary/10 text-primary h-20 w-20 mb-4" aria-hidden="true">
+              <div class="flex items-center justify-center rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 text-primary h-20 w-20 mb-4 shadow-lg hover:shadow-xl transition-all duration-300" aria-hidden="true">
                 <stat.icon class="h-10 w-10" />
               </div>
             </div>
-            <h3 class="font-headline text-3xl font-bold" aria-label={`${stat.value} ${stat.label}`}>{stat.value}</h3>
-            <p class="text-muted-foreground">{stat.label}</p>
+            <h3 class="font-headline text-4xl font-bold text-foreground" aria-label={`${stat.value} ${stat.label}`}>{stat.value}</h3>
+            <p class="text-body text-muted-foreground font-medium">{stat.label}</p>
           </div>
         ))}
       </div>
@@ -233,28 +233,29 @@ const popularQueries = [
 
   <!-- CTA Section -->
   <section class="w-full py-12 md-py-24 lg:py-32" aria-labelledby="cta-heading">
-    <div class="container grid items-center justify-center gap-4 px-4 text-center md:px-6">
-      <div class="space-y-3">
-        <h2 id="cta-heading" class="font-headline text-3xl font-bold tracking-tighter md:text-4xl/tight">
+    <div class="container grid items-center justify-center gap-8 px-4 text-center md:px-6">
+      <div class="space-y-6">
+        <h2 id="cta-heading" class="text-3xl md:text-4xl lg:text-5xl font-headline font-bold tracking-tight">
           هل أنت جاهز لطلب خدمتك الأولى؟
         </h2>
-        <p class="mx-auto max-w-[600px] text-foreground/80 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+        <p class="text-lead mx-auto max-w-[600px]">
           احصل على عروض أسعار مجانية من أفضل المحترفين في مدينتك. العملية
           سريعة، مجانية، وبدون أي التزام.
         </p>
       </div>
-      <div class="mx-auto w-full max-w-sm space-y-2">
+      <div class="mx-auto w-full max-w-md space-y-4">
         <Button
           type="submit"
-          size="lg"
-          class="w-full font-headline btn-hover-lift touch-target"
-          variant="gradient"
+          size="2xl"
+          class="w-full font-headline touch-target"
+          variant="premium"
           asChild
         >
           <a href="/services" aria-label="اطلب عرض سعر مجاني لخدمتك">اطلب عرض سعر مجاني</a>
         </Button>
-        <p class="text-xs text-muted-foreground">
-          بياناتك في أمان تام معنا.
+        <p class="text-small flex items-center justify-center gap-2">
+          <span class="text-success">🔒</span>
+          بياناتك في أمان تام معنا
         </p>
       </div>
     </div>
