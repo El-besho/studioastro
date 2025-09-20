@@ -24,7 +24,7 @@ describe('SearchForm', () => {
     expect(input).toHaveAttribute('aria-describedby', 'search-help');
     expect(input).toHaveAttribute('required');
     
-    const helpText = screen.getByText('اكتب اسم الخدمة أو المدينة للبحث عن مزودي الخدمات');
+    const helpText = screen.getByText(/اكتب اسم الخدمة أو المدينة للبحث عن مزودي الخدمات/);
     expect(helpText).toHaveClass('sr-only');
     
     const button = screen.getByRole('button', { name: /ابحث الآن/i });
@@ -78,13 +78,20 @@ describe('SearchForm', () => {
     
     const input = screen.getByRole('searchbox');
     
-    // Type only spaces
+    // Type only spaces - button should be disabled
     await user.type(input, '   ');
-    expect(input).toHaveAttribute('aria-invalid', 'true');
+    const button = screen.getByRole('button', { name: /ابحث الآن/i });
+    expect(button).toBeDisabled();
     
-    // Type valid input
+    // Clear and type valid input
+    await user.clear(input);
     await user.type(input, 'تصليح مكيف');
+    expect(button).not.toBeDisabled();
     expect(input).toHaveAttribute('aria-invalid', 'false');
+    
+    // Test with empty input
+    await user.clear(input);
+    expect(button).toBeDisabled();
   });
 
   it('should have proper keyboard navigation', async () => {

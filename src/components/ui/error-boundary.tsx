@@ -37,16 +37,30 @@ export class ErrorBoundary extends Component<Props, State> {
       }
 
       return (
-        <div className="flex flex-col items-center justify-center p-8 text-center">
-          <div className="mb-4 rounded-full bg-destructive/10 p-4">
+        <div 
+          className="flex flex-col items-center justify-center p-8 text-center"
+          role="alert"
+          aria-live="polite"
+          aria-labelledby="error-heading"
+          aria-describedby="error-description"
+        >
+          <div className="mb-4 rounded-full bg-destructive/10 p-4" aria-hidden="true">
             <AlertTriangle className="h-8 w-8 text-destructive" />
           </div>
-          <h2 className="mb-2 text-lg font-semibold">حدث خطأ غير متوقع</h2>
-          <p className="mb-4 text-sm text-muted-foreground">
+          <h2 id="error-heading" className="mb-2 text-lg font-semibold">
+            حدث خطأ غير متوقع
+          </h2>
+          <p id="error-description" className="mb-4 text-sm text-muted-foreground">
             نعتذر عن هذا الخطأ. يرجى المحاولة مرة أخرى.
           </p>
-          <Button onClick={this.handleRetry} variant="outline" size="sm">
-            <RefreshCw className="mr-2 h-4 w-4" />
+          <Button 
+            onClick={this.handleRetry} 
+            variant="outline" 
+            size="sm"
+            className="touch-target"
+            aria-label="إعادة المحاولة لحل المشكلة"
+          >
+            <RefreshCw className="mr-2 h-4 w-4" aria-hidden="true" />
             إعادة المحاولة
           </Button>
         </div>

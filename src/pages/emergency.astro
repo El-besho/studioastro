@@ -10,8 +10,8 @@ import ImageOptimized from '../components/ImageOptimized.astro';
 const allServices = getAllServices();
 const emergencyServices = allServices.filter(s => 
   s.category === 'emergency' || 
-  s.keywords?.includes('طوارئ') ||
-  s.name.includes('طوارئ') ||
+  (s.keywords && s.keywords.includes('طوارئ')) ||
+  s.ar_name.includes('طوارئ') ||
   ['plumbing-services', 'electrical-services', 'air-conditioning-hvac'].includes(s.id)
 );
 

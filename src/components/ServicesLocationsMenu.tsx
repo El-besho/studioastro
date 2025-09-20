@@ -114,15 +114,22 @@ export default function ServicesLocationsMenu() {
         <Button 
           variant="outline" 
           size="sm"
-          className="flex items-center gap-2 hover:bg-primary/10 hover:border-primary/20 transition-colors"
+          className="flex items-center gap-2 hover:bg-primary/10 hover:border-primary/20 transition-colors touch-target"
           aria-label="فتح قائمة الخدمات والمواقع"
+          aria-expanded={isOpen}
+          aria-controls="services-locations-menu"
         >
           <Menu className="h-4 w-4" />
           <span className="hidden sm:inline">الخدمات والمواقع</span>
           <span className="sm:hidden">القائمة</span>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="p-0 flex flex-col w-full sm:w-80 glass-effect">
+      <SheetContent 
+        side="left" 
+        className="p-0 flex flex-col w-full sm:w-80 glass-effect"
+        id="services-locations-menu"
+        aria-label="قائمة الخدمات والمواقع"
+      >
         <SheetHeader className="border-b p-4 bg-gradient-to-r from-primary/5 to-primary/10">
           <SheetTitle className="flex items-center gap-2 text-right">
             <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center pulse-glow">
@@ -135,27 +142,38 @@ export default function ServicesLocationsMenu() {
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
           {/* Search Section */}
           <div className="space-y-2">
+            <label htmlFor="services-search" className="sr-only">
+              البحث في الخدمات
+            </label>
             <div className="relative">
               <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
+                id="services-search"
                 type="text"
                 placeholder="ابحث في الخدمات..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pr-10 text-right"
+                className="pr-10 text-right touch-target"
                 variant="enhanced"
+                aria-describedby="search-results-count"
               />
               {searchQuery && (
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="absolute left-2 top-1/2 -translate-y-1/2 h-6 w-6 p-0"
+                  className="absolute left-2 top-1/2 -translate-y-1/2 h-6 w-6 p-0 touch-target"
                   onClick={() => setSearchQuery('')}
+                  aria-label="مسح البحث"
                 >
                   <X className="h-4 w-4" />
                 </Button>
               )}
             </div>
+            {searchQuery && (
+              <div id="search-results-count" className="text-xs text-muted-foreground">
+                {filteredServices.length} خدمة متاحة
+              </div>
+            )}
           </div>
 
           {/* Services Section */}
@@ -210,8 +228,9 @@ export default function ServicesLocationsMenu() {
                           key={service.slug}
                           variant="ghost"
                           size="sm"
-                          className="w-full justify-start text-sm text-muted-foreground hover:text-foreground"
+                          className="w-full justify-start text-sm text-muted-foreground hover:text-foreground touch-target"
                           onClick={() => handleServiceClick(service.slug)}
+                          aria-label={`عرض خدمات ${service.ar_name}`}
                         >
                           {service.ar_name}
                         </Button>
@@ -249,8 +268,9 @@ export default function ServicesLocationsMenu() {
                       key={city.slug}
                       variant="ghost"
                       size="sm"
-                      className="w-full justify-start text-sm text-muted-foreground hover:text-foreground"
+                      className="w-full justify-start text-sm text-muted-foreground hover:text-foreground touch-target"
                       onClick={() => handleLocationClick(city.slug)}
+                      aria-label={`عرض الخدمات في ${city.ar_name}`}
                     >
                       {city.ar_name}
                     </Button>
@@ -272,8 +292,9 @@ export default function ServicesLocationsMenu() {
                   key={service.slug}
                   variant="outline"
                   size="sm"
-                  className="w-full justify-start text-sm"
+                  className="w-full justify-start text-sm touch-target"
                   onClick={() => handleServiceClick(service.slug)}
+                  aria-label={`عرض خدمات ${service.ar_name}`}
                 >
                   {service.ar_name}
                 </Button>
@@ -290,31 +311,34 @@ export default function ServicesLocationsMenu() {
             <div className="space-y-2">
               <Button
                 variant="default"
-                className="w-full font-headline"
+                className="w-full font-headline touch-target"
                 onClick={() => {
                   window.location.href = '/services';
                   setIsOpen(false);
                 }}
+                aria-label="عرض جميع الخدمات المتاحة"
               >
                 عرض جميع الخدمات
               </Button>
               <Button
                 variant="outline"
-                className="w-full font-headline"
+                className="w-full font-headline touch-target"
                 onClick={() => {
                   window.location.href = '/locations';
                   setIsOpen(false);
                 }}
+                aria-label="عرض جميع المواقع المتاحة"
               >
                 عرض جميع المواقع
               </Button>
               <Button
                 variant="outline"
-                className="w-full font-headline"
+                className="w-full font-headline touch-target"
                 onClick={() => {
                   window.location.href = '/search';
                   setIsOpen(false);
                 }}
+                aria-label="البحث المتقدم في الخدمات"
               >
                 البحث المتقدم
               </Button>

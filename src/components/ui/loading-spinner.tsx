@@ -4,9 +4,15 @@ interface LoadingSpinnerProps {
   size?: 'sm' | 'md' | 'lg';
   className?: string;
   variant?: 'default' | 'dots' | 'pulse';
+  label?: string;
 }
 
-export function LoadingSpinner({ size = 'md', className, variant = 'default' }: LoadingSpinnerProps) {
+export function LoadingSpinner({ 
+  size = 'md', 
+  className, 
+  variant = 'default', 
+  label = 'جاري التحميل...' 
+}: LoadingSpinnerProps) {
   const sizeClasses = {
     sm: 'h-4 w-4',
     md: 'h-6 w-6',
@@ -15,7 +21,11 @@ export function LoadingSpinner({ size = 'md', className, variant = 'default' }: 
 
   if (variant === 'dots') {
     return (
-      <div className={cn('flex space-x-1', className)}>
+      <div 
+        className={cn('flex space-x-1', className)}
+        role="status"
+        aria-label={label}
+      >
         {[0, 1, 2].map((i) => (
           <div
             key={i}
@@ -27,8 +37,10 @@ export function LoadingSpinner({ size = 'md', className, variant = 'default' }: 
               animationDelay: `${i * 0.2}s`,
               animationDuration: '1s'
             }}
+            aria-hidden="true"
           />
         ))}
+        <span className="sr-only">{label}</span>
       </div>
     );
   }
@@ -41,7 +53,11 @@ export function LoadingSpinner({ size = 'md', className, variant = 'default' }: 
           sizeClasses[size],
           className
         )}
-      />
+        role="status"
+        aria-label={label}
+      >
+        <span className="sr-only">{label}</span>
+      </div>
     );
   }
 
@@ -52,6 +68,10 @@ export function LoadingSpinner({ size = 'md', className, variant = 'default' }: 
         sizeClasses[size],
         className
       )}
-    />
+      role="status"
+      aria-label={label}
+    >
+      <span className="sr-only">{label}</span>
+    </div>
   );
 }

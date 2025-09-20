@@ -17,6 +17,9 @@ interface ValidationState<T> {
   isValid: boolean;
   isSubmitting: boolean;
   isSubmitted: boolean;
+  isDirty: boolean;
+  touched: Record<string, boolean>;
+  fieldStates: Record<string, 'idle' | 'validating' | 'valid' | 'invalid'>;
 }
 
 interface UseFormValidationOptions {
@@ -41,6 +44,9 @@ export function useFormValidation<T extends SearchInput | ContactInput | Service
     isValid: false,
     isSubmitting: false,
     isSubmitted: false,
+    isDirty: false,
+    touched: {},
+    fieldStates: {},
   });
 
   const debounceTimeoutRef = useRef<NodeJS.Timeout>();
@@ -197,12 +203,84 @@ export function useFormValidation<T extends SearchInput | ContactInput | Service
     setState(prev => ({ ...prev, errors: {} }));
   }, []);
 
+  const setFieldTouched = useCallback((fieldName: string, touched: boolean = true) => {
+    setState(prev => ({
+      ...prev,
+      touched: { ...prev.touched, [fieldName]: touched }
+    }));
+  }, []);
+
+  const setFieldState = useCallback((fieldName: string, fieldState: 'idle' | 'validating' | 'valid' | 'invalid') => {
+    setState(prev => ({
+      ...prev,
+      fieldStates: { ...prev.fieldStates, [fieldName]: fieldState }
+    }));
+  }, []);
+
+  const validateField = useCallback((fieldName: string, value: any) => {
+    setFieldState(fieldName, 'validating');
+    
+    // Debounced field validation
+    setTimeout(() => {
+      try {
+        const sanitizedValue = sanitizeInput ? sanitizeString(value) : value;
+        const result = validationFn({ [fieldName]: sanitizedValue });
+        
+        if (result.success) {
+          setFieldState(fieldName, 'valid');
+          setState(prev => ({
+            ...prev,
+            errors: { ...prev.errors, [fieldName]: '' }
+          }));
+        } else {
+          setFieldState(fieldName, 'invalid');
+          const error = result.error?.errors?.find((err: any) => err.field === fieldName);
+          if (error) {
+            setState(prev => ({
+              ...prev,
+              errors: { ...prev.errors, [fieldName]: error.message }
+            }));
+          }
+        }
+      } catch (error) {
+        setFieldState(fieldName, 'invalid');
+        setState(prev => ({
+          ...prev,
+          errors: { ...prev.errors, [fieldName]: 'خطأ في التحقق من الحقل' }
+        }));
+      }
+    }, debounceMs);
+  }, [validationFn, sanitizeInput, debounceMs, setFieldState]);
+
+  const getFieldError = useCallback((fieldName: string) => {
+    return state.errors[fieldName] || '';
+  }, [state.errors]);
+
+  const isFieldValid = useCallback((fieldName: string) => {
+    return state.fieldStates[fieldName] === 'valid';
+  }, [state.fieldStates]);
+
+  const isFieldInvalid = useCallback((fieldName: string) => {
+    return state.fieldStates[fieldName] === 'invalid';
+  }, [state.fieldStates]);
+
+  const isFieldTouched = useCallback((fieldName: string) => {
+    return state.touched[fieldName] || false;
+  }, [state.touched]);
+
   return {
     ...state,
     validate,
     submit,
     reset,
     clearErrors,
+    setFieldTouched,
+    setFieldState,
+    validateField,
+    getFieldError,
+    isFieldValid,
+    isFieldInvalid,
+    isFieldTouched,
   };
 }
 
